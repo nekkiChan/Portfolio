@@ -2,7 +2,7 @@
 
 | バージョン | 更新日     | 更新者                                    |
 | ---------- | ---------- | ----------------------------------------- |
-| 1.00       | 2023/07/03 | [nekkiChan](https://github.com/nekkiChan) |
+| 1.01       | 2023/07/04 | [nekkiChan](https://github.com/nekkiChan) |
 
 ---
 
@@ -72,3 +72,4 @@
 | 0.02       | 2023/07/02  | ~~他ページへの項目を作成~~<br>[他ページへ](#他のページへ) | ~~ドラフト~~<br>[他ページへ](#他のページへ)を作成 | [nekkiChan](https://github.com/nekkiChan) |
 | 0.03       | 2023/07/03  | [更新履歴](#更新履歴)                                     | バージョン 0.02 の修正                            | [nekkiChan](https://github.com/nekkiChan) |
 | 1.00       | 2023/07/04  | [目次](#目次)、[基本設計](#基本設計)                      | [目次](#目次)、[基本設計](#基本設計)を作成        | [nekkiChan](https://github.com/nekkiChan) |
+| 1.01       | 2023/07/05  | 更新日                                                    | 更新日が誤っていたので修正                        | [nekkiChan](https://github.com/nekkiChan) |
