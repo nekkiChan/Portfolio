@@ -5,19 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Information extends Model
+class Home extends Model
 {
     use HasFactory;
 
     public function getData()
     {
-        $data = [
-                'id' => 1,
-                'name' => 'taro is jiro!!',
-                'body' => 'YESYESYES!!!',
+        $home = [
+            'short' =>
+            "よく使用するプログラミング言語：HTML、PHP、CSS、Javascript\n
+            "
         ];
-
-        return $data;
+        return $home;
     }
 }
-

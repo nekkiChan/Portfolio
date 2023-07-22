@@ -1,8 +1,83 @@
+/* デフォルト */
+h2 {
+    font-weight: bold;
+    margin-top: 1em;
+    text-align: center;
+}
+
+p {
+    padding: 1em;
+}
+
+/* ヘッダー */
 .header {
     width: 100%;
     height: 50px;
 }
 
-.site-title {
+.header .site-title {
+    width: 75%;
     font-size: 40px;
+}
+.header .sns-link {
+    width: 25%;
+}
+
+.header .sns-link div {
+    padding-right: 2em;
+}
+
+@media screen and (min-width:1000px) {
+    .header .sns-link div {
+        padding-right: 2.5em;
+    }
+}
+
+@media screen and (min-width:330px) and (max-width: 620px){
+    .header .site-title {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 330px){
+    .header .site-title {
+        font-size: 10px;
+        width: 50%;
+    }
+    .header .sns-link {
+        width: 50%;
+    }
+    /* SNSへのリンクはナビゲーションバーに */
+}
+
+.contents {
+    margin: 1rem;
+    border: solid;
+    border-color: black;
+}
+
+.contents div {
+    margin: 1rem;
+    border: solid;
+    border-color: black;
+}
+
+/* フッター */
+.footer {
+    width: 100%;
+}
+
+/* home */
+.home-area {
+    width: 100%;
+    background-color: rgb(166, 209, 247);
+}
+
+.home-area .top-image {
+    height: 100px;
+}
+
+.home-area h2 {
+    text-align: left;
+    padding: 1rem;
 }
