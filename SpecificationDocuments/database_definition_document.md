@@ -2,7 +2,7 @@
 
 | バージョン | 更新日     | 更新者                                    |
 | ---------- | ---------- | ----------------------------------------- |
-| 1.02       | 2023/07/21 | [nekkiChan](https://github.com/nekkiChan) |
+| 1.03       | 2023/07/21 | [nekkiChan](https://github.com/nekkiChan) |
 
 ---
 
@@ -44,9 +44,9 @@
 ### ER図
 
 ![ER図](draw/img/portfolio-ER.svg)
-| 画像作成者 | 画像作成/更新日                           |
-| ---------- | ----------------------------------------- |
-| 2023/07/16 | [nekkiChan](https://github.com/nekkiChan) |
+| 画像作成/更新日 | 画像作成者                                |
+| --------------- | ----------------------------------------- |
+| 2023/07/16      | [nekkiChan](https://github.com/nekkiChan) |
 
 ### 仕様
 
@@ -160,3 +160,4 @@
 | 1.00       | 2023/07/16  | [データベース定義](#データベース定義)        | [データベース定義](#データベース定義)を作成                         | [nekkiChan](https://github.com/nekkiChan) |
 | 1.01       | 2023/07/18  | [テーブル一覧](#テーブル一覧)、[ER図](#er図) | 一部のテーブルの物理名の変更                                        | [nekkiChan](https://github.com/nekkiChan) |
 | 1.02       | 2023/07/21  | [テーブル一覧](#テーブル一覧)                | laravel環境に伴い、型の表示を変更、作成日と更新日の必須の箇所を変更 | [nekkiChan](https://github.com/nekkiChan) |
+| 1.03       | 2023/07/21  | [ER図](#er図)                                | 表の誤りを修正                                                      | [nekkiChan](https://github.com/nekkiChan) |
