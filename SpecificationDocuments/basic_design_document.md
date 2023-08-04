@@ -2,7 +2,7 @@
 
 | バージョン | 更新日     | 更新者                                    |
 | ---------- | ---------- | ----------------------------------------- |
-| 1.03       | 2023/07/09 | [nekkiChan](https://github.com/nekkiChan) |
+| 1.04       | 2023/08/04 | [nekkiChan](https://github.com/nekkiChan) |
 
 ---
 
@@ -28,11 +28,11 @@
 
 #### システム構成イメージ
 
-![システム構成イメージ](./diagrams/system_configuration_diagram.svg)
+![システム構成イメージ](./draw/img/portfolio-system_configuration_diagram.svg)
 
 | 画像作成者 | 画像作成/更新日                           |
 | ---------- | ----------------------------------------- |
-| 2023/07/09 | [nekkiChan](https://github.com/nekkiChan) |
+| 2023/08/04 | [nekkiChan](https://github.com/nekkiChan) |
 
 #### サーバ構成
 
@@ -79,3 +79,4 @@
 | 1.01       | 2023/07/04  | 更新日                                        | 更新日が誤っていたので修正                                     | [nekkiChan](https://github.com/nekkiChan) |
 | 1.02       | 2023/07/06  | [システム構成イメージ](#システム構成イメージ) | 運営用フォームに関して変更が生じたため、それに伴って画像を変更 | [nekkiChan](https://github.com/nekkiChan) |
 | 1.03       | 2023/07/09  | [システム構成イメージ](#システム構成イメージ) | 画像の作成者/作成日欄の追加                                    | [nekkiChan](https://github.com/nekkiChan) |
+| 1.04       | 2023/08/04  | [システム構成イメージ](#システム構成イメージ) | 画像の変更                                                     | [nekkiChan](https://github.com/nekkiChan) |

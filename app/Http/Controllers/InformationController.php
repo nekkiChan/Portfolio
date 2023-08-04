@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 
+use App\Models\Work;
 use App\Models\Information;
 
 class InformationController extends Controller
@@ -37,6 +38,6 @@ class InformationController extends Controller
      */
     public function viewMore(Request $request)
     {
-        return view('informations.more');
+        return view('informations');
     }
 }

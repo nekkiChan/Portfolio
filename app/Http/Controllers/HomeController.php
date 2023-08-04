@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 
 use App\Models\Home;
+use App\Models\Profile;
+use App\Models\Work;
 use App\Models\Information;
 
 class HomeController extends Controller
@@ -20,12 +22,16 @@ class HomeController extends Controller
     {
         $self = new Home;
         $information = new Information;
+        $profile = new Profile;
+        $work = new Work;
+
         $home = [
-            'short' => $self->getData()['short'],
+            'short_text' => $profile->getData()['short_text'],
             'info' => $information->getData(),
+            'work' => $work->getData()['title'],
         ];
         return view('home.index', [
-            'home' => $home,
+            'home' => $home
         ]);
     }
 }

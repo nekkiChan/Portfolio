@@ -62,8 +62,10 @@
 
         {{-- フッター --}}
         <div class="footer bg-white shadow-sm">
-            <div class="page-link">
-                <div><a href="{{ url('/informations/more') }}">お知らせ詳細</a></div>
+            <div class="page-link d-flex align-items-center justify-content-center">
+                <div class="p-3"><a href="{{ url('/profile') }}" class="text-dark text-decoration-none">プロフィール</a></div>
+                <div class="p-3"><a href="{{ url('/works') }}" class="text-dark text-decoration-none">実績・制作物</a></div>
+                <div class="p-3"><a href="{{ url('/informations') }}" class="text-dark text-decoration-none">お知らせ</a></div>
             </div>
             <div class="d-flex align-items-center justify-content-center">
                 &copy; 2023 nekkiChan

@@ -15,24 +15,27 @@
         {{-- コンテンツ --}}
         <div class="contents">
             {{-- プロフィール --}}
-            <div class="profile">
-                <h2>プロフィール</h2>
+            <div class="content">
+                <h2 class="item">プロフィール</h2>
                 <p>
-                    {{ $home['short'] }}
+                    {{ $home['short_text'] }}
+                    [<a href="{{ url('/profile') }}">more</a>]
                 </p>
-            </div>{{-- ./profile --}}
+            </div>{{-- ./content --}}
             {{-- 実績 --}}
-            <div class="works">
-                <h2>実績・制作物</h2>
-            </div>{{-- ./works --}}
+            <div class="content">
+                <h2 class="item">実績・制作物</h2>
+                    <p>{{ $home['work'] }}</p>
+            </div>{{-- ./content --}}
             {{-- お知らせ --}}
-            <div class="informations">
-                <h2>お知らせ</h2>
+            <div class="content">
+                <h2 class="item">お知らせ</h2>
                 <p>
+                    No.{{ $home['info']['id'] }}:
                     {{ $home['info']['name'] }}
-                    [<a href="{{ url('/informations/more') }}">more</a>]
+                    [<a href="{{ url('/informations') }}">more</a>]
                 </p>
-            </div>{{-- ./informations --}}
+            </div>{{-- ./content --}}
         </div>{{-- ./contents --}}
     </div>
 @endsection

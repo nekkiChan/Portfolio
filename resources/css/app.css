@@ -1,15 +1,12 @@
 /* デフォルト */
-h2 {
+h2.item {
+    color: rgb(240, 240, 240);
     font-weight: bold;
-    margin-top: 1em;
+    background-color: rgb(112, 112, 112);
     text-align: center;
 }
 
-p {
-    padding: 1em;
-}
-
-/* ヘッダー */
+/* header */
 .header {
     width: 100%;
     height: 50px;
@@ -19,6 +16,7 @@ p {
     width: 75%;
     font-size: 40px;
 }
+
 .header .sns-link {
     width: 25%;
 }
@@ -27,42 +25,38 @@ p {
     padding-right: 2em;
 }
 
-@media screen and (min-width:1000px) {
-    .header .sns-link div {
-        padding-right: 2.5em;
-    }
-}
-
-@media screen and (min-width:330px) and (max-width: 620px){
-    .header .site-title {
-        font-size: 20px;
-    }
-}
-
-@media screen and (max-width: 330px){
-    .header .site-title {
-        font-size: 10px;
-        width: 50%;
-    }
-    .header .sns-link {
-        width: 50%;
-    }
-    /* SNSへのリンクはナビゲーションバーに */
+/* main */
+main {
+    width: 750px;
+    margin: auto;
 }
 
 .contents {
-    margin: 1rem;
-    border: solid;
-    border-color: black;
+    margin: 1em;
+    padding: 2em 1em 1em 1em;
+    background-color: rgb(255, 168, 168);
 }
 
-.contents div {
-    margin: 1rem;
-    border: solid;
-    border-color: black;
+.contents .content {
+    background-color: rgb(240, 240, 240);
 }
 
-/* フッター */
+.contents .content p {
+    padding: 2em;
+}
+
+.contents .abstract {
+    display: flex;
+}
+
+.contents .abstract .content {
+    width: 50%;
+    margin: 1em;
+    border: 1px rgb(24, 24, 24) solid;
+    border-radius: 10px;
+}
+
+/* footer */
 .footer {
     width: 100%;
 }
@@ -70,7 +64,6 @@ p {
 /* home */
 .home-area {
     width: 100%;
-    background-color: rgb(166, 209, 247);
 }
 
 .home-area .top-image {
@@ -80,4 +73,57 @@ p {
 .home-area h2 {
     text-align: left;
     padding: 1rem;
+}
+
+/* profile */
+.profile-area .contents .icon {
+    width: 200px;
+    height: 200px;
+    padding: 1em;
+}
+
+.profile-area .contents .icon img {
+    border: 2px rgb(24, 24, 24) solid;
+    border-radius: 135px;
+}
+
+@media screen and (min-width:1200px) {
+
+    /* header */
+    .header .sns-link div {
+        padding-right: 2.5em;
+    }
+
+        /* main */
+        main {
+            width: 1200px;
+            margin: auto;
+        }
+}
+
+@media screen and (min-width:330px) and (max-width: 620px) {
+
+    /* header */
+    .header .site-title {
+        font-size: 20px;
+    }
+
+    /* main */
+    main {
+        width: 400px;
+        margin: auto;
+    }
+}
+
+@media screen and (max-width: 330px) {
+    .header .site-title {
+        font-size: 10px;
+        width: 50%;
+    }
+
+    .header .sns-link {
+        width: 50%;
+    }
+
+    /* SNSへのリンクはナビゲーションバーに */
 }
