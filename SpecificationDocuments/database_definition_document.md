@@ -2,7 +2,7 @@
 
 | バージョン | 更新日     | 更新者                                    |
 | ---------- | ---------- | ----------------------------------------- |
-| 1.03       | 2023/07/21 | [nekkiChan](https://github.com/nekkiChan) |
+| 1.04       | 2023/08/05 | [nekkiChan](https://github.com/nekkiChan) |
 
 ---
 
@@ -22,6 +22,7 @@
     - [お知らせ](#お知らせ)
     - [お知らせ画像](#お知らせ画像)
     - [お知らせタグ](#お知らせタグ)
+    - [管理者情報](#管理者情報)
   - [他のページへ](#他のページへ)
   - [更新履歴](#更新履歴)
 
@@ -40,13 +41,14 @@
 | 5   | お知らせ     | informations       | お知らせテーブル     |
 | 6   | お知らせ画像 | information_images | お知らせ画像テーブル |
 | 7   | お知らせタグ | information_tags   | お知らせタグテーブル |
+| 8   | 管理者情報   | administrator      | 管理者情報テーブル   |
 
 ### ER図
 
 ![ER図](draw/img/portfolio-ER.svg)
 | 画像作成/更新日 | 画像作成者                                |
 | --------------- | ----------------------------------------- |
-| 2023/07/16      | [nekkiChan](https://github.com/nekkiChan) |
+| 2023/08/05      | [nekkiChan](https://github.com/nekkiChan) |
 
 ### 仕様
 
@@ -68,7 +70,7 @@
 | 4   | explanation | text        | Yes     |              | NoData     | 制作物の説明                    |
 | 5   | comment     | text        |         |              | Null       | 説明以外のコメント              |
 | 6   | created_at  | timestamp   |         |              |            | 作成日                          |
-| 7   | updated_at  | timestamp   |         |              |            | 作成日                          |
+| 7   | updated_at  | timestamp   |         |              |            | 更新日                          |
 
 ### 実績画像
 
@@ -79,7 +81,7 @@
 | 3   | work_id    | integer     | Yes     | Yes          |            | 実績ID                          |
 | 4   | image_name | string(100) | Yes     | Yes          |            | 画像名                          |
 | 5   | created_at | timestamp   |         |              |            | 作成日                          |
-| 6   | updated_at | timestamp   |         |              |            | 作成日                          |
+| 6   | updated_at | timestamp   |         |              |            | 更新日                          |
 
 ### 実績リンク
 
@@ -91,7 +93,7 @@
 | 4   | link_url   | string(254) | Yes     | Yes          |            | 制作物URL                       |
 | 5   | link_name  | string(50)  | Yes     | Yes          |            | リンクしているサービス名        |
 | 6   | created_at | timestamp   |         |              |            | 作成日                          |
-| 7   | updated_at | timestamp   |         |              |            | 作成日                          |
+| 7   | updated_at | timestamp   |         |              |            | 更新日                          |
 
 ### 実績タグ
 
@@ -102,7 +104,7 @@
 | 3   | work_id    | integer    | Yes     | Yes          |            | 実績ID                          |
 | 4   | tag_name   | string(50) | Yes     | Yes          |            | タグ名                          |
 | 5   | created_at | timestamp  |         |              |            | 作成日                          |
-| 6   | updated_at | timestamp  |         |              |            | 作成日                          |
+| 6   | updated_at | timestamp  |         |              |            | 更新日                          |
 
 ### お知らせ
 
@@ -114,7 +116,7 @@
 | 4   | explanation | text        | Yes     |              | NoData     | お知らせの内容                  |
 | 5   | work_id     | integer     |         |              | Null       | 実績ID                          |
 | 6   | created_at  | timestamp   |         |              |            | 作成日                          |
-| 7   | updated_at  | timestamp   |         |              |            | 作成日                          |
+| 7   | updated_at  | timestamp   |         |              |            | 更新日                          |
 
 ### お知らせ画像
 
@@ -125,7 +127,7 @@
 | 3   | information_id | integer     | Yes     | Yes          |            | お知らせID                      |
 | 4   | image_name     | string(100) | Yes     | Yes          |            | 画像名                          |
 | 5   | created_at     | timestamp   | Yes     |              |            | 作成日                          |
-| 6   | updated_at     | timestamp   | Yes     |              |            | 作成日                          |
+| 6   | updated_at     | timestamp   | Yes     |              |            | 更新日                          |
 
 ### お知らせタグ
 
@@ -136,7 +138,19 @@
 | 3   | information_id | integer    | Yes     | Yes          |            | お知らせID                      |
 | 4   | tag_name       | string(50) | Yes     | Yes          |            | タグ名                          |
 | 5   | created_at     | timestamp  |         |              |            | 作成日                          |
-| 6   | updated_at     | timestamp  |         |              |            | 作成日                          |
+| 6   | updated_at     | timestamp  |         |              |            | 更新日                          |
+
+### 管理者情報
+
+| No  | カラム名   | 型         | 必須    | インデックス | デフォルト | コメント                        |
+| --- | ---------- | ---------- | ------- | ------------ | ---------- | ------------------------------- |
+| 1   | id         | integer    | Yes(PK) | Yes          |            | FID                              |
+| 2   | status     | string(20) | Yes     | Yes          | active     | ステータス ('active'or'delete') |
+| 3   | name       | string(20) |         | Yes          | User       | ユーザー名                      |
+| 4   | email      | string(50) | Yes     |              |            | メールアドレス                  |
+| 5   | password   | string(50) | Yes     |              |            | パスワード                      |
+| 6   | created_at | timestamp  |         |              |            | 作成日                          |
+| 7   | updated_at | timestamp  |         |              |            | 更新日                          |
 
 ---
 
@@ -161,3 +175,4 @@
 | 1.01       | 2023/07/18  | [テーブル一覧](#テーブル一覧)、[ER図](#er図) | 一部のテーブルの物理名の変更                                        | [nekkiChan](https://github.com/nekkiChan) |
 | 1.02       | 2023/07/21  | [テーブル一覧](#テーブル一覧)                | laravel環境に伴い、型の表示を変更、作成日と更新日の必須の箇所を変更 | [nekkiChan](https://github.com/nekkiChan) |
 | 1.03       | 2023/07/21  | [ER図](#er図)                                | 表の誤りを修正                                                      | [nekkiChan](https://github.com/nekkiChan) |
+| 1.04       | 2023/08/05  | [データベース定義](#データベース定義)        | [管理者情報](#管理者情報)の追加、表の誤りを修正                     | [nekkiChan](https://github.com/nekkiChan) |
