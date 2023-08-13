@@ -18,21 +18,21 @@
             <div class="content">
                 <h2 class="item">プロフィール</h2>
                 <p>
-                    {{ $home['short_text'] }}
+                    {{ $data['short_text'] }}
                     [<a href="{{ url('/profile') }}">more</a>]
                 </p>
             </div>{{-- ./content --}}
             {{-- 実績 --}}
             <div class="content">
                 <h2 class="item">実績・制作物</h2>
-                    <p>{{ $home['work'] }}</p>
+                    <p>{{ $data['work'] }}</p>
             </div>{{-- ./content --}}
             {{-- お知らせ --}}
             <div class="content">
                 <h2 class="item">お知らせ</h2>
                 <p>
-                    No.{{ $home['info']['id'] }}:
-                    {{ $home['info']['name'] }}
+                    No.{{ $data['info']['id'] }}:
+                    {{ $data['info']['name'] }}
                     [<a href="{{ url('/informations') }}">more</a>]
                 </p>
             </div>{{-- ./content --}}

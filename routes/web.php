@@ -24,3 +24,6 @@ Route::get('/works', [App\Http\Controllers\WorkController::class, 'index'])->nam
 
 // informations
 Route::get('/informations', [App\Http\Controllers\InformationController::class, 'index'])->name('informations');
+
+// login
+Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])->name('login');

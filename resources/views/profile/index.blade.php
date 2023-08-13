@@ -13,13 +13,13 @@
                 {{-- 画像 --}}
                 <div class="icon w-50 text-center">
                     <img src="{{ asset($data['image_name']) }}" alt="プロフィール画像" class="h-100">
-                </div>{{-- profile-main-image --}}
+                </div>{{-- ./icon --}}
 
                 {{-- プロフィール（短め） --}}
                 <div class="content">
                     <p><?php echo $data['short_text']; ?></p>
-                </div>{{-- short --}}
-            </div>
+                </div>{{-- ./content --}}
+            </div>{{-- ./abstract --}}
 
             {{-- プロフィール（長め） --}}
             <div class="content">

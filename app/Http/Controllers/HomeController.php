@@ -25,13 +25,13 @@ class HomeController extends Controller
         $profile = new Profile;
         $work = new Work;
 
-        $home = [
+        $data = [
             'short_text' => $profile->getData()['short_text'],
             'info' => $information->getData(),
             'work' => $work->getData()['title'],
         ];
         return view('home.index', [
-            'home' => $home
+            'data' => $data
         ]);
     }
 }

@@ -11,11 +11,11 @@ class Home extends Model
 
     public function getData()
     {
-        $home = [
+        $data = [
             'short' =>
             "よく使用するプログラミング言語：HTML、PHP、CSS、Javascript\n
             "
         ];
-        return $home;
+        return $data;
     }
 }

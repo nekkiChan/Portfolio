@@ -1,5 +1,6 @@
 /* デフォルト */
 h2.item {
+    padding: 0.8em 0 0.8em 0;
     color: rgb(240, 240, 240);
     font-weight: bold;
     background-color: rgb(112, 112, 112);
@@ -38,6 +39,7 @@ main {
 }
 
 .contents .content {
+    margin: 2.5rem 0 2.5rem 0;
     background-color: rgb(240, 240, 240);
 }
 
@@ -76,6 +78,10 @@ main {
 }
 
 /* profile */
+.profile-area .contents .abstract {
+    margin: 1em 0 1rem 0;
+}
+
 .profile-area .contents .icon {
     width: 200px;
     height: 200px;
