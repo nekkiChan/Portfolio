@@ -28,7 +28,9 @@
                             <input type="text" name="" id="">
                         </div>{{-- ./input-box --}}
                     </div>{{-- ./input-content --}}
-                    <input type="submit" value="ログイン">
+                    <div class="input-content">
+                        <button type="submit">ログイン</button>
+                    </div>{{-- ./input-content --}}
                 </div>{{-- ./input-area --}}
             </div>{{-- ./content --}}
         </div>{{-- ./contents --}}

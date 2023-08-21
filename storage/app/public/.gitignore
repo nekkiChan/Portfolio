@@ -1,3 +1,6 @@
 # *
 # !.gitignore
-sample
+
+images/informations/*
+images/profile/*
+images/works/*

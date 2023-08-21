@@ -34,12 +34,13 @@ main {
 
 .contents {
     margin: 1em;
-    padding: 2em 1em 1em 1em;
     background-color: rgb(255, 168, 168);
+    /* background-color: rgb(240, 240, 240); */
 }
 
 .contents .content {
     margin: 2.5rem 0 2.5rem 0;
+    padding: 0.5rem;
     background-color: rgb(240, 240, 240);
 }
 
@@ -56,6 +57,10 @@ main {
     margin: 1em;
     border: 1px rgb(24, 24, 24) solid;
     border-radius: 10px;
+}
+
+.contents .content .input-area .input-content {
+    padding: 1rem 0 1rem 0;
 }
 
 /* footer */
@@ -77,9 +82,23 @@ main {
     padding: 1rem;
 }
 
+.home-area .contents .content .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-area .contents .content .icon img {
+    border: 1px rgb(24, 24, 24) solid;
+    border-radius: 135px;
+}
+
+/* .home-area .contents .content .abstract {} */
+
 /* profile */
 .profile-area .contents .abstract {
     margin: 1em 0 1rem 0;
+    text-align: center;
 }
 
 .profile-area .contents .icon {
@@ -93,6 +112,13 @@ main {
     border-radius: 135px;
 }
 
+/* create-area */
+.create-area .contents .content .input-area .input-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media screen and (min-width:1200px) {
 
     /* header */
@@ -100,11 +126,11 @@ main {
         padding-right: 2.5em;
     }
 
-        /* main */
-        main {
-            width: 1200px;
-            margin: auto;
-        }
+    /* main */
+    main {
+        width: 1200px;
+        margin: auto;
+    }
 }
 
 @media screen and (min-width:330px) and (max-width: 620px) {

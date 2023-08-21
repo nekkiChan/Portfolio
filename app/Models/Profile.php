@@ -30,7 +30,7 @@ class Profile extends Model
             "メイン",
             'concept_text' =>
             "少しでも楽に。少しでも楽しく。",
-            'image_name' => 'storage/'.'pictures/profile.JPG',
+            'image_name' => 'storage/'.'images/profile/profile.JPG',
             ''
         ];
         return $data;

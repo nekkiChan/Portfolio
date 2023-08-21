@@ -9,13 +9,27 @@ class Work extends Model
 {
     use HasFactory;
 
-    public function getData()
-    {
-        $data = [
-                'id' => 1,
-                'title' => 'Twitterクローン',
-        ];
+    protected $table = 'works';
+    protected $fillable = ['status', 'title', 'explanation', 'comment'];
+    public $common;
 
-        return $data;
+    public function __construct()
+    {
+        $this->common = new Common;
+    }
+    
+    /**
+     * データベース登録
+     *
+     * @param array 入力データ
+     */
+    public function insertWork($data)
+    {
+        return $this->create([
+            'status' => 'active',
+            'title' => $data['title'],
+            'explanation' => $data['explanation'],
+            'comment' => $data['comment'],
+        ]);
     }
 }

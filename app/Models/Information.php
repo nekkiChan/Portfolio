@@ -9,15 +9,27 @@ class Information extends Model
 {
     use HasFactory;
 
-    public function getData()
-    {
-        $data = [
-                'id' => 1,
-                'name' => 'taro is jiro!!',
-                'body' => 'YESYESYES!!!',
-        ];
+    protected $table = 'informations';
+    protected $fillable = ['status', 'title', 'explanation', 'work_id'];
+    public $common;
 
-        return $data;
+    public function __construct()
+    {
+        $this->common = new Common;
+    }
+
+    /**
+     * データベース登録
+     *
+     * @param array 入力データ
+     */
+    public function insertInformation($data)
+    {
+        return $this->create([
+            'status' => 'active',
+            'title' => $data['title'],
+            'explanation' => $data['explanation'],
+            'work_id' => $data['work_id'],
+        ]);
     }
 }
-
