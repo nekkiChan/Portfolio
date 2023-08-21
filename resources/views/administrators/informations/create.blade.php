@@ -58,16 +58,6 @@
 
                         {{-- タグ --}}
                         <div class="input-content">
-                            <div class="input-title">
-                                <label for="tag_name">タグ</label>
-                            </div>{{-- ./input-title --}}
-                            <div class="input-box">
-                                <input type="text" name="tag_name" id="tag_name" value="{{ old('tag_name') }}">
-                            </div>{{-- ./input-box --}}
-                        </div>{{-- ./input-content --}}
-
-                        {{-- タグ --}}
-                        <div class="input-content">
                             <table class="input-table input-tag">
                                 <tr>
                                     <td>
