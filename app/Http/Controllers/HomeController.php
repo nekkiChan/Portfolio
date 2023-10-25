@@ -39,12 +39,21 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $info = [
-            'id' => $this->information->find(1)->getKey(),
-            'title' => $this->information->find(1)->title,
-            'image' => $this->informationImage->searchImage(60),
-            'created_at' => $this->information->common->formatDateTime($this->information->find(1)->created_at),
-        ];
+        if($this->information->count() != 0) {
+            $info = [
+                'id' => $this->information->find(1)->getKey(),
+                'title' => $this->information->find(1)->title,
+                'image' => $this->informationImage->searchImage(60),
+                'created_at' => $this->information->common->formatDateTime($this->information->find(1)->created_at),
+            ];
+        } else {
+            $info = [
+                'id' => 0,
+                'title' => 'なし',
+                'image' => null,
+                'created_at' => '',
+            ];
+        }
 
         $data = [
             'short_text' => $this->profile->getData()['short_text'],
