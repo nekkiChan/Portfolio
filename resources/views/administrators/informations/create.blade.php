@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('administrators.layouts.app')
 
-@section('content')
+@section('administrators-field')
     <div class="create-area">
         {{-- ページタイトル --}}
         <h1 class="page-title text-center">

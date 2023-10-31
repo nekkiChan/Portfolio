@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,12 +27,14 @@ Route::get('/works', [App\Http\Controllers\WorkController::class, 'index'])->nam
 Route::get('/informations', [App\Http\Controllers\InformationController::class, 'index'])->name('informations');
 
 // administrators
-
 // login
-Auth::routes();
-Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])->name('login');
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::prefix('administrators')->group(function () {
+    // userEdit
+    Route::get('edit', [App\Http\Controllers\administratorController::class, 'edit'])->name('administrators.edit');
     // works
     Route::get('works/create', [App\Http\Controllers\WorkController::class, 'create'])->name('work.create');
     Route::post('works', [App\Http\Controllers\WorkController::class, 'store'])->name('work.store');
