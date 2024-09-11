@@ -12,7 +12,11 @@
 
 2. laravel環境構築
 
-```bash
-# gitcloneを行ったディレクトリ内で以下のコマンドを実行
-composer create-project --prefer-dist laravel/laravel .
-```
+    ```bash
+    # gitcloneを行ったディレクトリ内で以下のコマンドを実行
+    composer create-project --prefer-dist laravel/laravel .
+    ```
+
+3. インフラ構築
+
+4. laravel/breezeの導入
