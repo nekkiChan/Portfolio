@@ -9,7 +9,8 @@ use App\Http\Controllers\Controller;
 
 class MainMenuController extends Controller
 {
-    public function __construct(Request $request) {
+    public function __construct(Request $request)
+    {
         parent::__construct($request);
     }
     /**
@@ -17,6 +18,9 @@ class MainMenuController extends Controller
      */
     public function index(Request $request): View
     {
-        return view(view: 'public.mainmenu.index');
+        return view(view: 'public.mainmenu.index')
+            ->with('request', $request)
+            ->with('route_path', $this->route_path)
+            ->with('config_path', $this->config_path);
     }
 }

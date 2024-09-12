@@ -1,10 +1,11 @@
 <x-guest-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-        </h2>
-    </x-slot>
 
-    <div>
+    @php
+        $csspath = 'assets/css/' . config("screen.$config_path.csspath") . 'app.css';
+    @endphp
+    <link href="{{ public_path('assets/css/public/mainmenu/index/app.css') }}?v={{ time() }}" rel="stylesheet">
+
+    <x-materials.container>
         テスト
-    </div>
+    </x-materials.container>
 </x-guest-layout>
