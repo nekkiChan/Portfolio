@@ -14,16 +14,15 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script src=""></script>
 
     {{-- CSS --}}
-    <link href="{{ public_path('assets/css/public/app.css') }}?{{ date('YmdHis') }}" rel="stylesheet" />
+    <link href="{{ asset('storage/assets/css/app.css') }}?v={{ time() }}" rel="stylesheet" />
 </head>
 
 <body class="font-sans text-gray-900 antialiased">
 
     <!-- Page Heading -->
-    <header class="bg-white dark:bg-gray-800 shadow">
+    <header class="bg-white shadow">
         @include('layouts.header')
     </header>
 
