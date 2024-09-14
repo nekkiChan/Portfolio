@@ -5,7 +5,41 @@
 - [ポートフォリオ定義書](#ポートフォリオ定義書)
   - [目次](#目次)
   - [データベース](#データベース)
+    - [テーブル情報](#テーブル情報)
+    - [基本データ](#基本データ)
+      - [コンテンツカテゴリテーブル](#コンテンツカテゴリテーブル)
 
 ## データベース
 
-現状なし
+### テーブル情報
+
+### 基本データ
+
+```php
+$category = "テーブルの種別";
+$id = "2桁の固有番号";
+$name = "テーブル名";
+
+$tablename = "{$category}1{$id}_{$name}";
+```
+
+#### コンテンツカテゴリテーブル
+
+```php
+public function up(): void
+{
+    Schema::create('m101_content_categories', function (Blueprint $table) {
+        $table->id();
+        $table->string('name', 100)->comment('コンテンツカテゴリ名');
+        $table->string('view', 100)->comment('表示名');
+        $table->integer('sort')->comment('並び順');
+        $table->boolean('is_admin')->default(false)->comment('認証表示');
+        $table->boolean('is_disable')->default(false)->comment('無効化フラグ');
+        $table->boolean('is_delete')->default(false)->comment('削除フラグ');
+        $table->timestamp('created_at')->useCurrent()->comment('作成日');
+        $table->integer('created_by')->nullable()->comment('作成者');
+        $table->timestamp('updated_at')->useCurrent()->comment('更新日');
+        $table->integer('updated_by')->nullable()->comment('更新者');
+    });
+}
+```

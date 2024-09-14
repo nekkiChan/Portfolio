@@ -7,6 +7,7 @@
   - [240911](#240911)
   - [240912](#240912)
   - [240913](#240913)
+  - [240914](#240914)
 
 ## 240911
 
@@ -36,3 +37,148 @@ composer create-project --prefer-dist laravel/laravel .
 ## 240913
 
 1. [該当ブランチ](https://github.com/nekkiChan/Portfolio/tree/240913)
+
+## 240914
+
+1. [該当ブランチ](https://github.com/nekkiChan/Portfolio/tree/240914)
+
+2. 活動内容
+
+- コンテンツカテゴリテーブルの作成
+
+- マイグレーションファイルの生成
+
+```bash
+# コマンドで実施
+php artisan make:migration create_m101_content_categories --create=m101_content_categories
+```
+
+- マイグレーションファイルの編集
+
+```php
+# database/migrations/2024_09_14_133628_create_m101_content_categories.php
+public function up(): void
+{
+    Schema::create('m101_content_categories', function (Blueprint $table) {
+        $table->id();
+        $table->string('name', 100)->comment('コンテンツカテゴリ名');
+        $table->string('view', 100)->comment('表示名');
+        $table->integer('sort')->comment('並び順');
+        $table->boolean('is_admin')->default(false)->comment('認証表示');
+        $table->boolean('is_disable')->default(false)->comment('無効化フラグ');
+        $table->boolean('is_delete')->default(false)->comment('削除フラグ');
+        $table->timestamp('created_at')->useCurrent()->comment('作成日');
+        $table->integer('created_by')->nullable()->comment('作成者');
+        $table->timestamp('updated_at')->useCurrent()->comment('更新日');
+        $table->integer('updated_by')->nullable()->comment('更新者');
+    });
+}
+```
+
+- モデルの編集
+
+```php
+# app\Models\dbtables\M101ContentCategory.php
+namespace App\Models\dbtables;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class M101ContentCategory extends Model
+{
+    use HasFactory;
+
+    // テーブル名を指定
+    protected $table = 'm101_content_categories';
+
+    // 複数代入を許可するフィールド
+    protected $fillable = [
+        'name',
+        'view',
+        'sort',
+        'is_admin',
+        'is_disable',
+        'is_delete',
+        'created_by',
+        'updated_by'
+    ];
+
+    // タイムスタンプを自動で管理しない場合
+    public $timestamps = true;
+
+    // created_at と updated_at のカラム名を設定
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
+}
+```
+
+- configの編集
+
+```php
+# config/dbtables/m101_content_categories.php
+use App\Models\dbtables\M101ContentCategory;
+
+return [
+    'table' => 'm101_content_categories',
+    'dbmodel' => M101ContentCategory::class,
+    'initdata' => [
+        0 => [
+            'name' => 'profile',
+            'view' => 'プロフィール',
+        ],
+        1 => [
+            'name' => 'career',
+            'view' => '経歴',
+        ],
+        2 => [
+            'name' => 'works',
+            'view' => '実績',
+        ],
+    ],
+];
+```
+
+- シーダーの生成
+
+```php
+# database/seeders/dbtables/InitM101Seeder.php
+namespace Database\Seeders\dbtables;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
+
+class InitM101Seeder extends Seeder
+{
+    private $dbtable;
+
+    /**
+     * Seed the application's database.
+     */
+    public function run(): void
+    {
+        $this->dbtable = "m101_content_categories";
+
+        /**
+         * @var array データベースの設定データ
+         */
+        $dbconfigdata = config("dbtables.{$this->dbtable}");
+
+        /**
+         * @var array 初期データ
+         */
+        $initdata = $dbconfigdata['initdata'];
+
+        /**
+         * @var Model dbtableのモデル
+         */
+        $dbmodel = $dbconfigdata['dbmodel'];
+
+        foreach ($initdata as $key => $data) {
+            $count = $dbmodel::where('is_delete', false)->count();
+            $data['sort'] = $count;
+            $dbmodel::create($data);
+        }
+
+    }
+}
+```
