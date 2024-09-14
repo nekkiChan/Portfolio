@@ -44,8 +44,28 @@ main {
 /* container */
 main .container {
     margin: var(--basic-margin) auto;
-    padding: var(--basic-padding);
     width: 90%;
     border: 1px solid #ccc;
+    background-color: #eee;
+}
+
+main .container .content_field .content_space {
+    margin: var(--basic-margin) 0;
+    width: 100%;
+    height: 1px;
+    border: 1px #999 solid;
+}
+
+main .container .content_field .content_header {
+    padding: var(--basic-padding);
+    width: 100%;
+    height: auto;
+    background-color: #eee;
+}
+
+main .container .content_field .content_body {
+    padding: var(--basic-padding);
+    width: 100%;
+    height: auto;
     background-color: #eee;
 }
