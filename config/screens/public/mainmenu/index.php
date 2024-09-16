@@ -2,6 +2,12 @@
 use App\Models\screens\public\PublicMainMenuModel;
 
 return [
+    // title
+    'pagetitle' => [
+        'main' => 'MainMenu',
+        'view' => 'メインページ',
+        'transition' => 'メインページ',
+    ],
     // path
     'routepath' => 'public.mainmenu.index',
     'jspath' => 'public/mainmenu/index/',

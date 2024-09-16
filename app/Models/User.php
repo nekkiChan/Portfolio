@@ -6,10 +6,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+
+    // テーブル名を指定
+    protected $table = 's001_users';
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +23,12 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role_id',
         'password',
+        'is_disable',
+        'is_delete',
+        'created_by',
+        'updated_by'
     ];
 
     /**
@@ -44,4 +53,32 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * ハッシュ化されたパスワードを生成
+     * @param mixed $password
+     * @return string
+     */
+    public static function generatePassword($password)
+    {
+        return Hash::make($password);
+    }
+
+    /**
+     * ユーザー認証
+     * @param mixed $name
+     * @param mixed $password
+     * @return User|null
+     */
+    public static function authenticate($name, $password)
+    {
+        $user = self::where('name', $name)->first();
+
+        if ($user && Hash::check($password, $user->password)) {
+            return $user; // 認証成功
+        }
+
+        return null; // 認証失敗
+    }
+
 }

@@ -3,6 +3,7 @@
 namespace App\Models\screens;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\common\QueryModel;
 
 class ScreenModel
@@ -12,6 +13,7 @@ class ScreenModel
     protected $route_path;
     protected $query_model;
     protected $query_data;
+    protected $login_user;
     public function __construct(Request $request)
     {
         $path = $request->path();
@@ -20,8 +22,28 @@ class ScreenModel
         $this->route_path = config("screens.$this->config_path.routepath");
         // querymodel
         $this->query_model = new QueryModel();
+        // loginuser
+        $this->login_user = [];
+        $this->setupLoginUserData();
+        // query_data
         $this->query_data = [];
         $this->setupQueryData();
+    }
+
+    protected function setupLoginUserData()
+    {
+        if (Auth::check()) {
+            // $base_query_data = $this->config_data['querydata'];
+            // foreach ($base_query_data as $table => $query_data) {
+            //     $this->query_data[$table] = $this->query_model->getQueryData($query_data);
+            // }
+            $this->login_user = Auth::user();
+        }
+    }
+
+    public function getLoginUserData()
+    {
+        return $this->login_user;
     }
 
     protected function setupQueryData()

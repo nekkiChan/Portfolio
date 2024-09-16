@@ -8,6 +8,8 @@
         /* header */
         --header-height: 50px;
         /* content */
+        --content-margin: 1px;
+        --content-space-height: 5px;
         --content-row-padding: 1px;
         --content-row-height: 15px;
         /* card */
@@ -47,6 +49,11 @@
         align-items: center;
     }
 
+    /* sidemenu */
+    header .header_field #sidemenu_field {
+        width: 100%;
+    }
+
     /* link */
     a.row div:not(.sm_hidden) {
         width: 100%;
@@ -73,12 +80,17 @@
         margin: var(--basic-margin) 0;
         width: 100%;
         height: auto;
-        border: 1px solid #ccc;
-        background-color: #eee;
     }
 
     main .container .content_field .content_space {
-        margin: var(--basic-margin) 0;
+        width: 100%;
+        ;
+        height: var(--content-space-height);
+        background-color: #fff;
+        border: none;
+    }
+
+    main .container .content_field .content_border {
         width: 100%;
         height: 1px;
         border: 0.5px #999 solid;

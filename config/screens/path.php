@@ -1,5 +1,6 @@
 <?php
 return [
     // public
-    '/' => 'public.mainmenu.index'
+    '/' => 'public.mainmenu.index',
+    '/login' => 'public.login.index',
 ];

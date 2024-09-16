@@ -1,18 +1,16 @@
-<x-guest-layout>
+<x-app-layout>
 
     @php
-        $csspath = 'assets/css/' . config("screen.$config_path.csspath") . 'app.css';
+        $csspath = 'storage/assets/css/' . config("screens.$config_path.csspath") . 'app.css';
     @endphp
-    <link href="{{ asset('storage/assets/css/public/mainmenu/index/app.css') }}?v={{ time() }}" rel="stylesheet">
+    <link href="{{ asset($csspath) }}?v={{ time() }}" rel="stylesheet">
 
     <x-materials.container>
         <x-materials.content-field>
-            <div class="content_header">
-                <div class="content_row">
-                    {{ config('app.name') }}
-                </div>
-            </div>
-            <div class="content_space"></div>
+            @include('common.content-row-pagetitle')
+            @include('common.content-row-profile')
+            @include('common.content-row-errors')
+            
             <div class="content_body">
                 @foreach ($content_categories_data as $index => $content_category_data)
                     <x-materials.card-field>
@@ -55,7 +53,6 @@
                         {{ $content_category_data->view }}
                     </div>
                 </div>
-                <div class="content_space"></div>
                 <div class="content_body">
                     <x-materials.card-field>
                     </x-materials.card-field>
@@ -63,4 +60,4 @@
             </x-materials.content-field>
         @endforeach
     </x-materials.container>
-</x-guest-layout>
+</x-app-layout>
