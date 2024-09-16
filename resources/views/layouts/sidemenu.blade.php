@@ -16,6 +16,9 @@
 <div id="sidemenu_field" class="sidemenu_field">
     @isset($transition_contents_data)
         @foreach ($transition_contents_data as $transition_content_data)
+            @if (Auth::check())
+                @continue($transition_content_data['level'] > Auth::user()->level)
+            @endif
             <div class="sidemenu_row">
                 <a href="{{ route($transition_content_data['routepath']) }}" class="row">
                     {{ $transition_content_data['view'] }}

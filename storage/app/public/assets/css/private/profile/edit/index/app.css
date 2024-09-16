@@ -1,0 +1,12 @@
+/* form_footer */
+.form_footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* button_field */
+.button_field.trigger.update {
+    position: relative;
+    background-color: #962222;
+}

@@ -22,3 +22,15 @@ Route::prefix('/')->name('public.')->group(function (): void {
         Route::get('/', [MainMenuController::class, 'index'])->name('index');
     });
 });
+
+
+use App\Http\Controllers\private\profile\ProfileEditController;
+
+Route::prefix('/private')->name('private.')->group(function (): void {
+    Route::prefix('/profile')->name('profile.')->group(function (): void {
+        Route::prefix('/edit')->name('edit.')->group(function (): void {
+            Route::get('/', [ProfileEditController::class, 'index'])->name('index');
+            Route::post('/action', [ProfileEditController::class, 'action'])->name('action');
+        });
+    });
+});

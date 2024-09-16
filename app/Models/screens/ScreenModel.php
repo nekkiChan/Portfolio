@@ -23,7 +23,6 @@ class ScreenModel
         // querymodel
         $this->query_model = new QueryModel();
         // loginuser
-        $this->login_user = [];
         $this->setupLoginUserData();
         // query_data
         $this->query_data = [];
@@ -33,16 +32,22 @@ class ScreenModel
     protected function setupLoginUserData()
     {
         if (Auth::check()) {
-            // $base_query_data = $this->config_data['querydata'];
-            // foreach ($base_query_data as $table => $query_data) {
-            //     $this->query_data[$table] = $this->query_model->getQueryData($query_data);
-            // }
-            $this->login_user = Auth::user();
+            $user = Auth::user();
+            $base_query_data = config('screens.common.querydata.loginuser');
+            $base_query_data['where'][] = [
+                'table' => 's001',
+                'column' => 'id',
+                'value' => $user->id,
+                'function' => '=',
+            ];
+
+            $this->login_user = $this->query_model->getQueryData($base_query_data)->first();
         }
     }
 
     public function getLoginUserData()
     {
+        Auth::user()->level = $this->login_user->level;
         return $this->login_user;
     }
 

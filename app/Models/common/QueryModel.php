@@ -76,9 +76,6 @@ class QueryModel
             foreach ($query_data['join'] as $data) {
                 $joinAlias = $data['alias'];
                 $query = $query->where("$joinAlias.is_delete", "=", false);
-                if ($is_auth) {
-                    $query = $query->where("$joinAlias.owner_id", "=", $user->owner_id);
-                }
                 if (!$is_disable) {
                     $query = $query->where("$joinAlias.is_disable", "=", false);
                 }
