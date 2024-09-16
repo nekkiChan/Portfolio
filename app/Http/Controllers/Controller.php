@@ -38,8 +38,7 @@ abstract class Controller
             $this->view_data = view($this->route_path)
                 ->with('request', $request)
                 ->with('route_path', $this->route_path)
-                ->with('config_path', $this->config_path)
-                ->with('login_user', $this->screen_model->getLoginUserData());
+                ->with('config_path', $this->config_path);
         }
     }
 }

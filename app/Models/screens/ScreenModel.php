@@ -5,6 +5,7 @@ namespace App\Models\screens;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\common\QueryModel;
+use App\Models\dbtables\S001User;
 
 class ScreenModel
 {
@@ -31,6 +32,9 @@ class ScreenModel
 
     protected function setupLoginUserData()
     {
+        $usermodel = new S001User();
+        $usermodel_columnlist = $usermodel->getColumnNames();
+
         if (Auth::check()) {
             $user = Auth::user();
             $base_query_data = config('screens.common.querydata.loginuser');
@@ -42,7 +46,7 @@ class ScreenModel
             ];
 
             $this->login_user = $this->query_model->getQueryData($base_query_data)->first();
-            Auth::user()->level = $this->login_user->level;
+            session(['login_user' =>  $this->login_user]);
         }
     }
 
