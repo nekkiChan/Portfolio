@@ -41,13 +41,13 @@ class ScreenModel
                 'function' => '=',
             ];
 
+            Auth::user()->level = $this->login_user->level;
             $this->login_user = $this->query_model->getQueryData($base_query_data)->first();
         }
     }
 
     public function getLoginUserData()
     {
-        Auth::user()->level = $this->login_user->level;
         return $this->login_user;
     }
 
