@@ -112,6 +112,7 @@ public function up(): void
     Schema::create('m201_service_categories', function (Blueprint $table) {
         $table->id();
         $table->string('name', 100)->comment('サービス名');
+        $table->string('view', 100)->comment('表示名');
         $table->string('icon_image_path', 100)->nullable()->comment('アイコン画像パス');
         $table->integer('sort')->comment('並び順');
         $table->boolean('is_disable')->default(false)->comment('無効化フラグ');
