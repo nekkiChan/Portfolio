@@ -6,14 +6,19 @@
   - [目次](#目次)
   - [データベース](#データベース)
     - [テーブル情報](#テーブル情報)
-    - [基本データ](#基本データ)
+    - [コンテンツデータ](#コンテンツデータ)
       - [コンテンツカテゴリテーブル](#コンテンツカテゴリテーブル)
+      - [コンテンツサブカテゴリテーブル](#コンテンツサブカテゴリテーブル)
+      - [コンテンツボディテーブル](#コンテンツボディテーブル)
+    - [サービスデータ](#サービスデータ)
+      - [サービスカテゴリテーブル](#サービスカテゴリテーブル)
+      - [サービスリンクテーブル](#サービスリンクテーブル)
 
 ## データベース
 
 ### テーブル情報
 
-### 基本データ
+### コンテンツデータ
 
 ```php
 $category = "テーブルの種別";
@@ -34,6 +39,103 @@ public function up(): void
         $table->string('view', 100)->comment('表示名');
         $table->integer('sort')->comment('並び順');
         $table->boolean('is_admin')->default(false)->comment('認証表示');
+        $table->boolean('is_disable')->default(false)->comment('無効化フラグ');
+        $table->boolean('is_delete')->default(false)->comment('削除フラグ');
+        $table->timestamp('created_at')->useCurrent()->comment('作成日');
+        $table->integer('created_by')->nullable()->comment('作成者');
+        $table->timestamp('updated_at')->useCurrent()->comment('更新日');
+        $table->integer('updated_by')->nullable()->comment('更新者');
+    });
+}
+```
+
+#### コンテンツサブカテゴリテーブル
+
+```php
+public function up(): void
+{
+    Schema::create('m102_content_subcategories', function (Blueprint $table) {
+        $table->id();
+        $table->string('name', 100)->comment('コンテンツサブカテゴリ名');
+        $table->string('view', 100)->comment('表示名');
+        $table->integer('sort')->comment('並び順');
+        $table->boolean('is_admin')->default(false)->comment('認証表示');
+        $table->integer('content_category_id')->nullable()->comment('コンテンツカテゴリID');
+        $table->boolean('is_disable')->default(false)->comment('無効化フラグ');
+        $table->boolean('is_delete')->default(false)->comment('削除フラグ');
+        $table->timestamp('created_at')->useCurrent()->comment('作成日');
+        $table->integer('created_by')->nullable()->comment('作成者');
+        $table->timestamp('updated_at')->useCurrent()->comment('更新日');
+        $table->integer('updated_by')->nullable()->comment('更新者');
+    });
+}
+```
+
+#### コンテンツボディテーブル
+
+```php
+public function up(): void
+{
+    Schema::create('d101_content_bodies', function (Blueprint $table) {
+        $table->id();
+        $table->string('name', 100)->comment('コンテンツボディ名');
+        $table->string('title', 100)->comment('タイトル');
+        $table->text('body')->nullable()->comment('内容');
+        $table->integer('sort')->comment('並び順');
+        $table->boolean('is_admin')->default(false)->comment('認証表示');
+        $table->integer('content_subcategory_id')->nullable()->comment('コンテンツサブカテゴリID');
+        $table->boolean('is_disable')->default(false)->comment('無効化フラグ');
+        $table->boolean('is_delete')->default(false)->comment('削除フラグ');
+        $table->timestamp('created_at')->useCurrent()->comment('作成日');
+        $table->integer('created_by')->nullable()->comment('作成者');
+        $table->timestamp('updated_at')->useCurrent()->comment('更新日');
+        $table->integer('updated_by')->nullable()->comment('更新者');
+    });
+}
+```
+
+### サービスデータ
+
+```php
+$category = "テーブルの種別";
+$id = "2桁の固有番号";
+$name = "テーブル名";
+
+$tablename = "{$category}2{$id}_{$name}";
+```
+
+#### サービスカテゴリテーブル
+
+```php
+public function up(): void
+{
+    Schema::create('m201_service_categories', function (Blueprint $table) {
+        $table->id();
+        $table->string('name', 100)->comment('サービス名');
+        $table->string('icon_image_path', 100)->nullable()->comment('アイコン画像パス');
+        $table->integer('sort')->comment('並び順');
+        $table->boolean('is_disable')->default(false)->comment('無効化フラグ');
+        $table->boolean('is_delete')->default(false)->comment('削除フラグ');
+        $table->timestamp('created_at')->useCurrent()->comment('作成日');
+        $table->integer('created_by')->nullable()->comment('作成者');
+        $table->timestamp('updated_at')->useCurrent()->comment('更新日');
+        $table->integer('updated_by')->nullable()->comment('更新者');
+    });
+}
+```
+
+#### サービスリンクテーブル
+
+```php
+public function up(): void
+{
+    Schema::create('d201_service_links', function (Blueprint $table) {
+        $table->id();
+        $table->string('link_path', 200)->nullable()->comment('リンクパス');
+        $table->string('file_path', 200)->nullable()->comment('ファイルパス');
+        $table->boolean('is_admin')->default(false)->comment('認証表示');
+        $table->integer('service_category_id')->nullable()->comment('サービスカテゴリID');
+        $table->integer('content_body_id')->nullable()->comment('コンテンツボディID');
         $table->boolean('is_disable')->default(false)->comment('無効化フラグ');
         $table->boolean('is_delete')->default(false)->comment('削除フラグ');
         $table->timestamp('created_at')->useCurrent()->comment('作成日');

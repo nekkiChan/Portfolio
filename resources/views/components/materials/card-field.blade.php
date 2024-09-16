@@ -1,14 +1,13 @@
 @if (isset($class))
-    <div class="content_field {{ $class }}">
+    <div class="card_field {{ $class }}">
         {{ $slot }}
     </div>
 @elseif (isset($id))
-    <div class="content_field" id="{{ $id }}">
+    <div class="card_field" id="{{ $id }}">
         {{ $slot }}
     </div>
 @else
-    <div class="content_field">
+    <div class="card_field">
         {{ $slot }}
     </div>
 @endisset
-
