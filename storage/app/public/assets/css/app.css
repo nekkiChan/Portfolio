@@ -2,13 +2,22 @@
     /* basic */
     --basic-margin: 10px;
     --basic-padding: 10px;
+    --basic-font-size: 14px;
+    --basic-row-padding: 1px;
     /* header */
     --header-height: 50px;
+    /* content */
+    --content-row-padding: 1px;
+    --content-row-height: 15px;
+    /* card */
+    --card-row-padding: 1px;
+    --card-row-height: 15px;
 }
 
 /* body */
 body {
     position: relative;
+    font-size: var(--basic-font-size);
 }
 
 /* header */
@@ -16,6 +25,7 @@ header {
     padding: 0 var(--basic-padding);
     width: 100%;
     height: var(--header-height);
+    font-size: var(--basic-font-size);
     border: 1px solid #ccc;
     position: fixed;
     top: 0;
@@ -31,10 +41,27 @@ header .header_title {
     align-items: center;
 }
 
+/* link */
+a.row {
+    padding: 5px;
+    width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+a.row:hover {
+    background-color: #D2ECF9;
+}
+
 /* main */
 main {
     width: 100%;
     height: auto;
+    font-size: var(--basic-font-size);
     position: absolute;
     top: var(--header-height);
     left: 0;
@@ -44,8 +71,96 @@ main {
 /* container */
 main .container {
     margin: var(--basic-margin) auto;
-    padding: var(--basic-padding);
     width: 90%;
+}
+
+main .container .content_field {
+    margin: var(--basic-margin) 0;
+    width: 100%;
+    height: auto;
     border: 1px solid #ccc;
     background-color: #eee;
+}
+
+main .container .content_field .content_space {
+    margin: var(--basic-margin) 0;
+    width: 100%;
+    height: 1px;
+    border: 0.5px #999 solid;
+}
+
+main .container .content_field .content_header {
+    padding: var(--basic-padding);
+    width: 100%;
+    height: auto;
+    background-color: #eee;
+}
+
+main .container .content_field .content_header .content_row {
+    padding: var(--content-row-padding) 0;
+    width: 100%;
+    height: auto;
+    font-size: var(--basic-font-size);
+    font-weight: bold;
+}
+
+main .container .content_field .content_body {
+    padding: var(--basic-padding);
+    width: 100%;
+    height: auto;
+    background-color: #eee;
+}
+
+/* card_field */
+.card_field {
+    padding: var(--basic-row-padding);
+    width: 100%;
+    height: auto;
+    font-size: var(--basic-font-size);
+}
+
+.card_field .card_header_field {
+    width: 100%;
+    height: auto;
+    font-size: var(--basic-font-size);
+    font-weight: bold;
+}
+
+.card_field .card_body_field {
+    width: 100%;
+    height: auto;
+    font-size: var(--basic-font-size);
+}
+
+/* .card_row  */
+.card_field .card_row {
+    width: 100%;
+    height: auto;
+    font-size: var(--basic-font-size);
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.card_field .card_row .card_row_title {
+    padding: 5px;
+    width: 10%;
+    height: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    border-right: 1px #999 solid;
+}
+
+.card_field .card_row .card_row_body {
+    padding: 5px;
+    width: 90%;
+    height: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.card_field .card_row:not(:has(.card_row_title)) .card_row_body {
+    width: 100%;
 }

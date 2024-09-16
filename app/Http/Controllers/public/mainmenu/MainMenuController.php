@@ -18,9 +18,10 @@ class MainMenuController extends Controller
      */
     public function index(Request $request): View
     {
-        return view(view: 'public.mainmenu.index')
-            ->with('request', $request)
-            ->with('route_path', $this->route_path)
-            ->with('config_path', $this->config_path);
+        foreach ($this->query_data as $name => $data) {
+            $this->view_data->with($name, $data);
+        }
+
+        return $this->view_data;
     }
 }

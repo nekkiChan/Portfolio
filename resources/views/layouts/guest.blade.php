@@ -17,6 +17,7 @@
 
     {{-- CSS --}}
     <link href="{{ asset('storage/assets/css/app.css') }}?v={{ time() }}" rel="stylesheet" />
+    <link href="{{ asset('storage/assets/css/appsm.css') }}?v={{ time() }}" rel="stylesheet" />
 </head>
 
 <body class="font-sans text-gray-900 antialiased">
