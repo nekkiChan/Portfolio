@@ -14,7 +14,7 @@ abstract class Controller
 
     public function __construct(Request $request)
     {
-        $path = $request->path();
+        $path = $request->getRequestUri();
         $this->config_path = config("screens.path.$path");
         $this->config_data = config("screens.$this->config_path");
         $this->route_path = config("screens.$this->config_path.routepath");
@@ -34,9 +34,12 @@ abstract class Controller
 
     public function setupViewData($request)
     {
-        $this->view_data = view($this->route_path)
-            ->with('request', $request)
-            ->with('route_path', $this->route_path)
-            ->with('config_path', $this->config_path);
+        if (!empty($this->route_path)) {
+            $this->view_data = view($this->route_path)
+                ->with('request', $request)
+                ->with('route_path', $this->route_path)
+                ->with('config_path', $this->config_path)
+                ->with('login_user', $this->screen_model->getLoginUserData());
+        }
     }
 }

@@ -3,15 +3,26 @@
     --basic-margin: 10px;
     --basic-padding: 10px;
     --basic-font-size: 14px;
+    --basic-row-margin: 1px;
     --basic-row-padding: 1px;
+    --basic-color: #694eed;
+    --basic-hover-color: #D2ECF9;
     /* header */
     --header-height: 50px;
     /* content */
+    --content-margin: 1px;
+    --content-space-height: 10px;
     --content-row-padding: 1px;
     --content-row-height: 15px;
     /* card */
     --card-row-padding: 1px;
     --card-row-height: 15px;
+    /* input select */
+    --input-field-padding: 5px;
+    --input-focus-color: #D2ECF9;
+    /* button */
+    --button-field-size: 40px;
+
 }
 
 /* body */
@@ -33,12 +44,56 @@ header {
     z-index: 100;
 }
 
-header .header_title {
+header .header_field {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+header .header_field .header_title {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: left;
     align-items: center;
+    user-select: none;
+    cursor: pointer;
+}
+
+/* sidemenu */
+header .header_field #sidemenu_trigger_field {
+    padding: var(--basic-padding);
+    width: var(--header-height);
+    height: var(--header-height);
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+
+header .header_field #sidemenu_trigger_field.active {
+    rotate: 180deg;
+}
+
+header .header_field #sidemenu_field {
+    padding: var(--basic-padding);
+    width: 30%;
+    height: auto;
+    background-color: #222;
+    display: none;
+    position: fixed;
+    top: var(--header-height);
+    right: 0;
+    color: white;
+}
+
+header .header_field #sidemenu_field a.row {
+    margin: var(--basic-margin) 0;
+}
+
+header .header_field #sidemenu_field a.row:hover {
+    background-color: #222;
+    border: 1px solid #F0F;
 }
 
 /* link */
@@ -68,6 +123,48 @@ main {
     z-index: 0;
 }
 
+/* form */
+form {
+    width: 100%;
+    height: auto;
+}
+
+form .form_header,
+form .form_footer {
+    padding: var(--basic-padding);
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* button_field */
+.button_field {
+    width: calc(var(--button-field-size) * 3);
+    height: var(--button-field-size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: var(--basic-font-size);
+    font-weight: bold;
+    background-color: var(--basic-color);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button_field.trigger {
+    position: absolute;
+    top: 0;
+}
+
+.button_field.trigger.update {
+    right: 0;
+    background-color: #962222;
+}
+
 /* container */
 main .container {
     margin: var(--basic-margin) auto;
@@ -78,22 +175,29 @@ main .container .content_field {
     margin: var(--basic-margin) 0;
     width: 100%;
     height: auto;
-    border: 1px solid #ccc;
-    background-color: #eee;
 }
 
 main .container .content_field .content_space {
-    margin: var(--basic-margin) 0;
+    width: 100%;
+    ;
+    height: var(--content-space-height);
+    background-color: #fff;
+    border: none;
+}
+
+main .container .content_field .content_border {
     width: 100%;
     height: 1px;
     border: 0.5px #999 solid;
 }
 
 main .container .content_field .content_header {
+    margin-bottom: var(--content-margin) 0;
     padding: var(--basic-padding);
     width: 100%;
     height: auto;
     background-color: #eee;
+    border: 1px solid #ccc;
 }
 
 main .container .content_field .content_header .content_row {
@@ -105,10 +209,12 @@ main .container .content_field .content_header .content_row {
 }
 
 main .container .content_field .content_body {
+    margin-bottom: var(--content-margin) 0;
     padding: var(--basic-padding);
     width: 100%;
     height: auto;
     background-color: #eee;
+    border: 1px solid #ccc;
 }
 
 /* card_field */
@@ -142,6 +248,10 @@ main .container .content_field .content_body {
     align-items: center;
 }
 
+.card_field .card_header_field .card_row {
+    padding: 5px;
+}
+
 .card_field .card_row .card_row_title {
     padding: 5px;
     width: 10%;
@@ -163,4 +273,41 @@ main .container .content_field .content_body {
 
 .card_field .card_row:not(:has(.card_row_title)) .card_row_body {
     width: 100%;
+}
+
+/* input_field */
+.input_field {
+    width: 100%;
+    height: 100%;
+}
+
+.input_field .text_field {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.input_field .text_field input {
+    width: 100%;
+    height: 100%;
+}
+
+.input_field .text_field select {
+    width: 100%;
+    height: 100%;
+}
+
+.input_field .text_field:not(:has(input, select)) {
+    padding: 5px;
+}
+
+/* input */
+input::placeholder {
+    color: #999;
+}
+
+input:focus {
+    border-color: var(--input-focus-color);
 }
