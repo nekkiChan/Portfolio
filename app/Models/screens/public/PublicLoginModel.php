@@ -15,17 +15,8 @@ class PublicLoginModel extends ScreenModel
 
     public function getValidator(Request $request)
     {
-        $conditions = [
-            'name' => ['required', 'string'],
-            'password' => ['required', 'string'],
-        ];
-
-        $messages = [
-            'name.required' => 'ユーザー名は必須です。',
-            'name.string' => 'ユーザー名は文字列でなければなりません。',
-            'password.required' => 'パスワードは必須です。',
-            'password.string' => 'パスワードは文字列でなければなりません。',
-        ];
+        $conditions = $this->config_data['validate']['conditions'];
+        $messages = $this->config_data['validate']['messages'];
 
         return Validator::make($request->all(), $conditions, $messages);
     }

@@ -14,4 +14,17 @@ return [
     'csspath' => 'public/login/index/',
     // model
     'model' => PublicLoginModel::class,
+    // validate
+    'validate' => [
+        'conditions' => [
+            'name' => ['required', 'string'],
+            'password' => ['required', 'string'],
+        ],
+        'messages' => [
+            'name.required' => 'ユーザー名は必須です。',
+            'name.string' => 'ユーザー名は文字列でなければなりません。',
+            'password.required' => 'パスワードは必須です。',
+            'password.string' => 'パスワードは文字列でなければなりません。',
+        ],
+    ],
 ];

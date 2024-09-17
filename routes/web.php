@@ -26,7 +26,7 @@ Route::prefix('/')->name('public.')->group(function (): void {
 
 use App\Http\Controllers\private\profile\ProfileEditController;
 
-Route::prefix('/private')->name('private.')->group(function (): void {
+Route::middleware(['auth'])->prefix('/private')->name('private.')->group(function (): void {
     Route::prefix('/profile')->name('profile.')->group(function (): void {
         Route::prefix('/edit')->name('edit.')->group(function (): void {
             Route::get('/', [ProfileEditController::class, 'index'])->name('index');

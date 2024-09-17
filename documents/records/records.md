@@ -209,3 +209,6 @@ class InitM101Seeder extends Seeder
 1. [該当ブランチ](https://github.com/nekkiChan/Portfolio/tree/240917)
 
 2. 活動内容
+
+   - 所有者テーブルの作成
+   - アドミンユーザーのパスワード再設定

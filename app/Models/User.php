@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 
+use App\Models\common\CommonModel;
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -61,7 +63,8 @@ class User extends Authenticatable
      */
     public static function generatePassword($password)
     {
-        return Hash::make($password);
+        $common_model = new CommonModel();
+        return $common_model->generatePassword($password);
     }
 
     /**

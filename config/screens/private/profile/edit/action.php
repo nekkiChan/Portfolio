@@ -1,55 +1,75 @@
 <?php
-use App\Models\screens\public\PublicMainMenuModel;
+use App\Models\screens\private\profile\PrivateProfileModel;
+use App\Models\dbtables\S001User;
+use App\Models\dbtables\D201ServiceLink;
 
 return [
     // title
     'pagetitle' => [
-        'main' => 'MainMenu',
-        'view' => 'メインページ',
-        'transition' => 'メインページ',
+        'main' => 'ProfileEdit',
+        'view' => 'プロフィール編集',
+        'transition' => 'プロフィール編集',
     ],
     // path
-    'routepath' => 'public.mainmenu.index',
-    'jspath' => 'public/mainmenu/index/',
-    'csspath' => 'public/mainmenu/index/',
+    'routepath' => 'private.profile.edit.index',
+    'jspath' => 'private/profile/edit/index/',
+    'csspath' => 'private/profile/edit/index/',
+    'nextpath' => 'private.profile.edit.index',
+    'backpath' => 'private.profile.edit.index',
     // model
-    'model' => PublicMainMenuModel::class,
+    'model' => PrivateProfileModel::class,
+    // table
+    'table' => S001User::class,
     // querydata
     'querydata' => [
-        // m101_content_categories
-        'content_categories_data' => [
-            'basetable' => [
-                'table' => 'm101_content_categories',
-                'alias' => 'm101',
+    ],
+    // insert
+    'insert' => [
+        'column' => [
+        ],
+    ],
+    // update
+    'update' => [
+        'column' => [
+            'name',
+            'password',
+        ],
+    ],
+    // upsert
+    'upsert' => [
+        'dbdata' => [
+            S001User::class => [
+                'name',
+                'password',
             ],
-            'select' => [
-                [
-                    'table' => 'm101',
-                    'column' => 'name',
-                    'alias' => 'name',
-                ],
-                [
-                    'table' => 'm101',
-                    'column' => 'view',
-                    'alias' => 'view',
-                ],
-                [
-                    'table' => 'm101',
-                    'column' => 'sort',
-                    'alias' => 'sort',
-                ],
-                [
-                    'table' => 'm101',
-                    'column' => 'is_admin',
-                    'alias' => 'is_admin',
-                ],
+        ],
+    ],
+    // validate
+    'validate' => [
+        'conditions' => [
+            'name.*' => [
+                'required',
+                'string',
             ],
-            'order' => [
-                [
-                    'table' => 'm101',
-                    'column' => 'sort',
-                    'order' => 'asc',
-                ],
+            'password.*' => [
+                'nullable',
+                'string',
+            ],
+        ],
+        'messages' => [
+            'name.*.required' => 'ユーザー名は必須です。',
+            'name.*.string' => 'ユーザー名は文字列でなければなりません。',
+            'password.*.string' => 'パスワードは文字列でなければなりません。',
+        ],
+    ],
+    // file
+    'file' => [
+        'dirname' => 'users/icon/',
+        'delete' => [
+            'icon_image_path' => [
+                'table' => D201ServiceLink::class,
+                'column' => 'icon_image_path',
+                'flag' => 'icon_image_path_flag',
             ],
         ],
     ],

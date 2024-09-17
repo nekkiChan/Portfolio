@@ -41,4 +41,15 @@ abstract class Controller
                 ->with('config_path', $this->config_path);
         }
     }
+
+    /**
+     * アクション
+     */
+    public function action(Request $request)
+    {
+        if (empty($this->config_data['model'])) {
+            return redirect()->back();
+        }
+        return $this->screen_model->action($request);
+    }
 }

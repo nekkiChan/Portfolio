@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\private\profile;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -24,20 +25,5 @@ class ProfileEditController extends Controller
         }
 
         return $this->view_data;
-    }
-
-    /**
-     * アクション
-     */
-    public function action(Request $request)
-    {
-        switch ($request->input('button')) {
-            case 'update':
-                return $this->screen_model->handleUpdate($request);
-            case 'back':
-                return $this->screen_model->handleBack($request);
-            default:
-                return redirect()->back();
-        }
     }
 }

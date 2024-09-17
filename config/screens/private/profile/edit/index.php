@@ -1,5 +1,5 @@
 <?php
-use App\Models\screens\private\PrivateProfileModel;
+use App\Models\screens\private\profile\PrivateProfileModel;
 
 return [
     // title
