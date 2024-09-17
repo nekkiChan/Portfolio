@@ -9,6 +9,7 @@
     - [システムデータ](#システムデータ)
       - [ユーザーテーブル](#ユーザーテーブル)
       - [権限テーブル](#権限テーブル)
+      - [所有者テーブル](#所有者テーブル)
     - [コンテンツデータ](#コンテンツデータ)
       - [コンテンツカテゴリテーブル](#コンテンツカテゴリテーブル)
       - [コンテンツサブカテゴリテーブル](#コンテンツサブカテゴリテーブル)
@@ -62,6 +63,26 @@ public function up(): void
         $table->id();
         $table->string('name')->comment('権限名');
         $table->integer('level')->default(1)->comment('権限レベル');
+        $table->boolean('is_disable')->default(false)->comment('無効化フラグ');
+        $table->boolean('is_delete')->default(false)->comment('削除フラグ');
+        $table->timestamp('created_at')->useCurrent()->comment('作成日');
+        $table->integer('created_by')->nullable()->comment('作成者');
+        $table->timestamp('updated_at')->useCurrent()->comment('更新日');
+        $table->integer('updated_by')->nullable()->comment('更新者');
+    });
+}
+```
+
+#### 所有者テーブル
+
+```php
+public function up(): void
+{
+    Schema::create('s003_owners', function (Blueprint $table) {
+        $table->id();
+        $table->string('name')->comment('所有者名');
+        $table->string('profile_icon_path')->nullable()->comment('プロフィールアイコンパス');
+        $table->string('favicon_icon_path')->nullable()->comment('サイトアイコンパス');
         $table->boolean('is_disable')->default(false)->comment('無効化フラグ');
         $table->boolean('is_delete')->default(false)->comment('削除フラグ');
         $table->timestamp('created_at')->useCurrent()->comment('作成日');

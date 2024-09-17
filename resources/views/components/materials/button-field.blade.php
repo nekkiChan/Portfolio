@@ -24,6 +24,9 @@
                 case 'update':
                     $value = '更新';
                     break;
+                case 'back':
+                    $value = '戻る';
+                    break;
                 default:
                     break;
             }

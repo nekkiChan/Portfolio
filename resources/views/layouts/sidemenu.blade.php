@@ -6,6 +6,7 @@
     // 認証済み
     if (Auth::check()) {
         $transition_contents_data = config('screens.transition.auth');
+        $login_user = session('login_user');
     }
     // ゲスト
     else {
@@ -17,7 +18,7 @@
     @isset($transition_contents_data)
         @foreach ($transition_contents_data as $transition_content_data)
             @if (Auth::check())
-                @continue($transition_content_data['level'] > Auth::user()->level)
+                @continue($transition_content_data['level'] > $login_user->level)
             @endif
             <div class="sidemenu_row">
                 <a href="{{ route($transition_content_data['routepath']) }}" class="row">

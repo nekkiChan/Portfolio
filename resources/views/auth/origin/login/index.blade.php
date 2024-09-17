@@ -82,9 +82,10 @@
                             <div class="card_row">
                                 <div class="form_footer">
                                     @php
+                                        $value = 'ログイン';
                                         $trigger = 'update';
                                     @endphp
-                                    <x-materials.button-field :trigger="$trigger">
+                                    <x-materials.button-field :trigger="$trigger" :value="$value">
                                     </x-materials.button-field>
                                 </div>
                         </x-materials.card-body-field>

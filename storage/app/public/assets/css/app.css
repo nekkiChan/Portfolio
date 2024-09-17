@@ -51,12 +51,20 @@ header .header_field {
 }
 
 header .header_field .header_title {
-    width: 100%;
+    width: 50%;
     height: 100%;
     display: flex;
     justify-content: left;
     align-items: center;
     user-select: none;
+}
+
+header .header_field .header_title a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
 }
 
@@ -131,6 +139,7 @@ form {
 
 form .form_header,
 form .form_footer {
+    margin: 5px;
     padding: var(--basic-padding);
     width: 100%;
     height: 50px;
@@ -152,6 +161,7 @@ form .form_footer {
     background-color: var(--basic-color);
     border: 1px solid #ccc;
     border-radius: 5px;
+    user-select: none;
     cursor: pointer;
 }
 
@@ -163,6 +173,10 @@ form .form_footer {
 .button_field.trigger.update {
     right: 0;
     background-color: #962222;
+}
+
+.button_field.trigger.back {
+    left: 0;
 }
 
 /* container */
@@ -206,6 +220,14 @@ main .container .content_field .content_header .content_row {
     height: auto;
     font-size: var(--basic-font-size);
     font-weight: bold;
+}
+
+main .container .content_field .content_header .content_row.validate.success{
+    color: #32bd23;
+}
+
+main .container .content_field .content_header .content_row.validate.error{
+    color: #962222;
 }
 
 main .container .content_field .content_body {

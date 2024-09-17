@@ -5,8 +5,3 @@
     align-items: center;
 }
 
-/* button_field */
-.button_field.trigger.update {
-    position: relative;
-    background-color: #962222;
-}

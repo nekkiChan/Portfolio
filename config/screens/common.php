@@ -20,6 +20,11 @@ return [
             'select' => [
                 [
                     'table' => 's001',
+                    'column' => 'id',
+                    'alias' => 'id',
+                ],
+                [
+                    'table' => 's001',
                     'column' => 'name',
                     'alias' => 'name',
                 ],
@@ -27,6 +32,11 @@ return [
                     'table' => 's001',
                     'column' => 'email',
                     'alias' => 'email',
+                ],
+                [
+                    'table' => 's001',
+                    'column' => 'role_id',
+                    'alias' => 'role_id',
                 ],
                 [
                     'table' => 's002',

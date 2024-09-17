@@ -21,6 +21,7 @@
     function setup() {
         initializeSidemenu();
         initializeTriggerButton();
+        initializeATag();
     }
 
     /**
@@ -88,38 +89,67 @@
      */
     function initializeTriggerButton() {
         const $triggerButtonElements = $('form .button_field.trigger');
-        const triggerType = ['update', 'button'];
+        const triggerType = ['update', 'back'];
 
-        $triggerButtonElements.on('click', function() {
+        $triggerButtonElements.each(function() {
             const $triggerButtonElement = $(this);
             const $formElement = $($triggerButtonElement.closest('form'));
 
-            $.each(triggerType, function(index, type) {
-                let is_submit = false;
-                if ($triggerButtonElement.hasClass(type)) {
+            // ボタンクリックイベント
+            $triggerButtonElement.on('click', function() {
+                submitForm();
+            });
 
-                    const $buttonInputElement = $('<input>').prop({
-                        type: 'hidden',
-                        name: 'button',
-                        value: type,
-                    });
-
-                    switch (type) {
-                        case 'update':
-                            is_submit = true;
-                            break;
-                        case 'back':
-                            is_submit = true;
-                            break;
+            // フォーム全体でのキーイベント
+            $formElement.on('keydown', function(event) {
+                // Enterキーを押した場合
+                if (event.key === 'Enter') {
+                    // フォームの最後のinput要素にフォーカスがある場合に実行
+                    if ($(':focus').is($formElement.find('input:last'))) {
+                        event.preventDefault(); // デフォルトのフォーム送信を防ぐ
+                        submitForm();
                     }
-
-                    if(is_submit){
-                        $formElement.append($buttonInputElement);
-                        $formElement.submit();
-                    }
-
                 }
             });
+
+            function submitForm() {
+                $.each(triggerType, function(index, type) {
+                    let is_submit = false;
+                    if ($triggerButtonElement.hasClass(type)) {
+
+                        const $buttonInputElement = $('<input>').prop({
+                            type: 'hidden',
+                            name: 'button',
+                            value: type,
+                        });
+
+                        switch (type) {
+                            case 'update':
+                                is_submit = true;
+                                break;
+                            case 'back':
+                                is_submit = true;
+                                break;
+                        }
+
+                        if (is_submit) {
+                            $formElement.append($buttonInputElement);
+                            $formElement.submit();
+                        }
+
+                    }
+                });
+            }
+        });
+    }
+
+    /**
+     * aタグに関するメソッド
+     */
+    function initializeATag() {
+        const $aLinkElements = $('a');
+        $aLinkElements.prop({
+            tabindex: -1,
         });
     }
 </script>

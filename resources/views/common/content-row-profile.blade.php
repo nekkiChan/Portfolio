@@ -1,3 +1,6 @@
+@php
+    $login_user = session('login_user');
+@endphp
 @auth
     <div class="content_header">
         <div class="content_row flex items-center justify-left">
