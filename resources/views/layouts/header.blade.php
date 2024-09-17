@@ -1,6 +1,8 @@
 <div class="header_field">
     <div class="header_title">
-        {{ config('app.name') }}
+        <a href="/">
+            {{ config('app.name') }}
+        </a>
     </div>
 
     @include('layouts.sidemenu')
