@@ -14,7 +14,7 @@
 
             <div class="content_body">
 
-                <form action="{{ route('private.profile.edit.action') }}" method="post">
+                <form action="{{ route('private.profile.edit.action') }}" method="post" enctype="multipart/form-data">
                     @csrf
 
                     <input type="hidden" name="id[0]" value="{{$login_user->id}}">

@@ -29,6 +29,12 @@ return [
             'view' => config('screens.private.profile.edit.index.pagetitle.transition'),
             'level' => 999,
         ],
+        'owner_edit' => [
+            'routepath' => 'private.owner.edit.index',
+            'configpath' => 'private.owner.edit.index',
+            'view' => config('screens.private.owner.edit.index.pagetitle.transition'),
+            'level' => 999,
+        ],
         'logout' => [
             'routepath' => 'logout',
             'configpath' => 'public.mainmenu.index',

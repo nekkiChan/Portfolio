@@ -26,6 +26,25 @@
                                 value="{{ $value }}" placeholder="{{ $placeholder }}">
                         @break
 
+                        @case('file')
+                            <input type="hidden" class="{{ $name }}_flag flag" name="{{ "{$name}_flag[{$index}]" }}"
+                                value="{{ $value }}">
+                            <input type="{{ $type }}" class="{{ $name }} file"
+                                name="{{ "{$name}[{$index}]" }}">
+                            @empty($value)
+                                <div class="file close hidden">
+                                    <img src="{{ asset('storage/assets/img/gray/close.svg') }}" alt="close">
+                                </div>
+                            @else
+                                <div class="file image">
+                                    <img src="{{ asset('storage/assets/img/gray/image.svg') }}" alt="image">
+                                </div>
+                                <div class="file delete">
+                                    <img src="{{ asset('storage/assets/img/gray/delete.svg') }}" alt="delete">
+                                </div>
+                            @endempty
+                        @break
+
                         @case('password')
                             <input type="{{ $type }}" class="{{ $name }}" name="{{ "{$name}[{$index}]" }}"
                                 value="{{ $value }}" placeholder="{{ $placeholder }}">
