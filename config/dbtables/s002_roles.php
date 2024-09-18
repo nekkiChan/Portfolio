@@ -8,10 +8,12 @@ return [
         0 => [
             'name' => 'システム管理者',
             'level' => 999,
+            'created_by' => 1,
         ],
         1 => [
             'name' => '一般',
             'level' => 1,
+            'created_by' => 1,
         ],
     ],
 ];

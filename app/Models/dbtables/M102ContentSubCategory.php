@@ -16,15 +16,14 @@ class M102ContentSubCategory extends Model
     // 複数代入を許可するフィールド
     protected $fillable = [
         'name',
-        'title',
-        'body',
+        'view',
         'sort',
         'is_admin',
-        'content_subcategory_id',
+        'content_category_id',
         'is_disable',
         'is_delete',
         'created_by',
-        'updated_by'
+        'updated_by',
     ];
 
     // タイムスタンプを自動で管理しない場合

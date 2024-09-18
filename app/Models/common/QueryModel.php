@@ -100,7 +100,7 @@ class QueryModel
         }
 
         // クエリの実行と結果の取得
-        return $query->get();
+        return $query->get()->unique();
     }
 
     /**

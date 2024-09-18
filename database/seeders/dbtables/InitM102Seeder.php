@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\common\QueryModel;
 
-class InitM101Seeder extends Seeder
+class InitM102Seeder extends Seeder
 {
     private $query_model;
     private $dbtable;
@@ -17,7 +17,7 @@ class InitM101Seeder extends Seeder
     public function run(): void
     {
         $this->query_model = new QueryModel();
-        $this->dbtable = "m101_content_categories";
+        $this->dbtable = "m102_content_subcategories";
 
         /**
          * @var array データベースの設定データ
@@ -39,6 +39,7 @@ class InitM101Seeder extends Seeder
             foreach ($data as $column => $value) {
                 switch ($column) {
                     case 'created_by':
+                    case 'content_category_id':
                         $tableclass = $value['table'];
                         $data = $value['data'];
                         $insertdata[$column] = $this->query_model->getReferenceId($tableclass, $data);
