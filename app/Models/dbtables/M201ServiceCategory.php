@@ -15,14 +15,13 @@ class M201ServiceCategory extends Model
 
     // 複数代入を許可するフィールド
     protected $fillable = [
-        'link_path',
-        'file_path',
-        'sort',
+        'name',
+        'view',
         'icon_image_path',
         'is_disable',
         'is_delete',
         'created_by',
-        'updated_by'
+        'updated_by',
     ];
 
     // タイムスタンプを自動で管理しない場合

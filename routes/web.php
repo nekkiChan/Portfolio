@@ -25,12 +25,21 @@ Route::prefix('/')->name('public.')->group(function (): void {
 
 
 use App\Http\Controllers\private\profile\ProfileEditController;
+use App\Http\Controllers\private\owner\OwnerEditController;
 
 Route::middleware(['auth'])->prefix('/private')->name('private.')->group(function (): void {
+    // profile
     Route::prefix('/profile')->name('profile.')->group(function (): void {
         Route::prefix('/edit')->name('edit.')->group(function (): void {
             Route::get('/', [ProfileEditController::class, 'index'])->name('index');
             Route::post('/action', [ProfileEditController::class, 'action'])->name('action');
+        });
+    });
+    // owner
+    Route::prefix('/owner')->name('owner.')->group(function (): void {
+        Route::prefix('/edit')->name('edit.')->group(function (): void {
+            Route::get('/', [OwnerEditController::class, 'index'])->name('index');
+            Route::post('/action', [OwnerEditController::class, 'action'])->name('action');
         });
     });
 });

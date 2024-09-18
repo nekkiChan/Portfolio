@@ -300,7 +300,7 @@ class ScreenModel
                 $randomString = substr($uniqueId, -3);
                 $fileName = $timestamp . '_' . $randomString . '.' . $extension;
 
-                $path = $file->storeAs("/file/{$file_dirname}", $fileName, 'uploads');
+                $path = $file->storeAs("/files/{$file_dirname}", $fileName, 'uploads');
 
                 $savedFiles[$key][$column] = [
                     'column' => $column,
@@ -309,6 +309,7 @@ class ScreenModel
                 ];
             }
         }
+
         return $savedFiles;
     }
 
@@ -473,6 +474,8 @@ class ScreenModel
         if (is_array($data)) {
             return json_encode($data);
         }
+
+        $data = str_replace(array("\r\n", "\r", "\n","&nbsp;"), '', $data);
 
         // デフォルトの処理
         return $data;

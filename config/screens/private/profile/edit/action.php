@@ -64,7 +64,7 @@ return [
     ],
     // file
     'file' => [
-        'dirname' => 'users/icon/',
+        'dirname' => 'users/icon',
         'delete' => [
             'icon_image_path' => [
                 'table' => D201ServiceLink::class,

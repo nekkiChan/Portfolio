@@ -49,6 +49,15 @@
         align-items: center;
     }
 
+    header .header_field .header_title a {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
     /* sidemenu */
     header .header_field #sidemenu_field {
         width: 100%;

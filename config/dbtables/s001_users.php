@@ -17,6 +17,7 @@ return [
                     'is_delete' => 'false',
                 ],
             ],
+            'created_by' => 1,
         ],
     ],
 ];

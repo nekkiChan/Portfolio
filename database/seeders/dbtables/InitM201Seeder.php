@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\common\QueryModel;
 
-class InitM101Seeder extends Seeder
+class InitM201Seeder extends Seeder
 {
     private $query_model;
     private $dbtable;
@@ -17,7 +17,7 @@ class InitM101Seeder extends Seeder
     public function run(): void
     {
         $this->query_model = new QueryModel();
-        $this->dbtable = "m101_content_categories";
+        $this->dbtable = "m201_service_categories";
 
         /**
          * @var array データベースの設定データ
@@ -42,6 +42,9 @@ class InitM101Seeder extends Seeder
                         $tableclass = $value['table'];
                         $data = $value['data'];
                         $insertdata[$column] = $this->query_model->getReferenceId($tableclass, $data);
+                        break;
+                    case 'icon_image_path':
+                        $insertdata[$column] = asset($value);
                         break;
                     default:
                         $insertdata[$column] = $value;

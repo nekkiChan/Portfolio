@@ -11,4 +11,13 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    server: {
+        proxy: {
+            '/': {
+                target: 'http://localhost', // LaravelサーバーのURL
+                changeOrigin: true,
+                secure: false,
+            },
+        },
+    },
 });
