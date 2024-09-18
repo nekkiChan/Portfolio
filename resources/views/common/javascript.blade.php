@@ -21,6 +21,7 @@
     function setup() {
         initializeSidemenu();
         initializeTriggerButton();
+        initializeCKEditor();
         initializeATag();
     }
 
@@ -140,6 +141,33 @@
                     }
                 });
             }
+        });
+    }
+
+    /**
+     * CKEditorに関するメソッド
+     */
+    function initializeCKEditor() {
+
+        const $ckEditorElements = $('.ckeditor');
+
+        $ckEditorElements.each(function() {
+            const $elementName = $(this).attr('name');
+
+            // CKEditorのインスタンスを初期化
+            CKEDITOR.replace($elementName);
+
+            // CKEditorが完全に初期化された後に、テキストから \r\n を削除
+            CKEDITOR.on('instanceReady', function(event) {
+                const editor = event.editor;
+
+                // 入力中に \r\n を削除
+                editor.on('change', function() {
+                    const data = editor.getData();
+                    const cleanedData = data.replace(/\r\n/g, ''); // \r\n を削除
+                    editor.setData(cleanedData);
+                });
+            });
         });
     }
 

@@ -474,6 +474,8 @@ class ScreenModel
             return json_encode($data);
         }
 
+        $data = str_replace(array("\r\n", "\r", "\n","&nbsp;"), '', $data);
+
         // デフォルトの処理
         return $data;
     }

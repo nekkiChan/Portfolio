@@ -31,6 +31,12 @@
                                 value="{{ $value }}" placeholder="{{ $placeholder }}">
                         @break
 
+                        @case('ckeditor')
+                            <textarea class="ckeditor {{ $name }}" name="{{ "{$name}[{$index}]" }}">
+                            {{ $value }}
+                        </textarea>
+                        @break
+
                         @case('select')
                             @isset($selectdata)
                                 <select class="{{ $name }}" name="{{ "{$name}[{$index}]" }}">
@@ -53,6 +59,12 @@
                         @case('number')
                             <input type="{{ $type }}" class="{{ $name }}" name="{{ "{$name}" }}"
                                 value="{{ $value }}" placeholder="{{ $placeholder }}">
+                        @break
+
+                        @case('ckeditor')
+                            <textarea class="ckeditor {{ $name }}" name="{{ "{$name}" }}">
+                            {{ $value }}
+                        </textarea>
                         @break
 
                         @case('password')
@@ -83,6 +95,12 @@
                     @case('number')
                         <input type="{{ $type }}" class="{{ $name }}" value="{{ $value }}"
                             placeholder="{{ $placeholder }}">
+                    @break
+
+                    @case('ckeditor')
+                        <textarea class="ckeditor {{ $name }}" name="content">
+                            {{ $value }}
+                        </textarea>
                     @break
 
                     @case('select')
