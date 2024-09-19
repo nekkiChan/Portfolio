@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    {{-- icon --}}
+    @if (session('owner_data'))
+        @php
+            $owner_data = session('owner_data');
+        @endphp
+        @if ($owner_data->favicon_icon_path)
+            <link rel="icon" href="{{ asset("storage/uploads/$owner_data->favicon_icon_path") }}">
+        @endif
+    @endif
+
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->

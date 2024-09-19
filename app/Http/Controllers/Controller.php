@@ -37,6 +37,7 @@ abstract class Controller
         if (!empty($this->route_path)) {
             $this->view_data = view($this->route_path)
                 ->with('request', $request)
+                ->with('owner_data', $this->screen_model->getOwnerData())
                 ->with('route_path', $this->route_path)
                 ->with('config_path', $this->config_path);
         }

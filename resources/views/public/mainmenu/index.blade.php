@@ -10,7 +10,7 @@
             @include('common.content-row-pagetitle')
             @include('common.content-row-profile')
             @include('common.content-row-errors')
-            
+
             <div class="content_body">
                 @foreach ($content_categories_data as $index => $content_category_data)
                     <x-materials.card-field>
@@ -42,6 +42,25 @@
                 @endforeach
             </div>
         </x-materials.content-field>
+
+        @if ($owner_data->profile_icon_path)
+            <x-materials.content-field>
+                <div class="content_body">
+                    <x-materials.card-field>
+                        <x-materials.card-body-field>
+                            <div class="card_row">
+                                <div class="card_row_body">
+                                    <div class="image_field">
+                                        <img src="{{ asset("storage/uploads/$owner_data->profile_icon_path") }}"
+                                            alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </x-materials.card-body-field>
+                    </x-materials.card-field>
+                </div>
+            </x-materials.content-field>
+        @endif
 
         @foreach ($content_categories_data as $content_category_data)
             @if (!Auth::check())

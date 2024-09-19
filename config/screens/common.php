@@ -55,5 +55,44 @@ return [
                 'count' => 1,
             ]
         ],
+        // owner_data
+        'owner_data' => [
+            'basetable' => [
+                'table' => 's003_owners',
+                'alias' => 's003',
+            ],
+            'select' => [
+                [
+                    'table' => 's003',
+                    'column' => 'id',
+                    'alias' => 'id',
+                ],
+                [
+                    'table' => 's003',
+                    'column' => 'name',
+                    'alias' => 'name',
+                ],
+                [
+                    'table' => 's003',
+                    'column' => 'favicon_icon_path',
+                    'alias' => 'favicon_icon_path',
+                ],
+                [
+                    'table' => 's003',
+                    'column' => 'profile_icon_path',
+                    'alias' => 'profile_icon_path',
+                ],
+            ],
+            'order' => [
+                [
+                    'table' => 's003',
+                    'column' => 'id',
+                    'order' => 'asc',
+                ],
+            ],
+            'limit' => [
+                'count' => 1,
+            ]
+        ],
     ],
 ];

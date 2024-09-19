@@ -68,6 +68,14 @@ class ScreenModel
      */
     protected $login_user;
 
+
+    /**
+     * サイト所有者ユーザー
+     *
+     * @var object
+     */
+    protected $owner_data;
+
     /**
      * コンストラクタ
      *
@@ -85,6 +93,8 @@ class ScreenModel
         $this->query_model = new QueryModel();
         // ログインユーザーの設定
         $this->setupLoginUserData();
+        // 所有者データの設定
+        $this->setupOwnerData();
         // クエリデータの設定
         $this->query_data = [];
         $this->setupQueryData();
@@ -120,6 +130,29 @@ class ScreenModel
     public function getLoginUserData()
     {
         return $this->login_user;
+    }
+
+    /**
+     * 所有者データの設定
+     *
+     * @return void
+     */
+    protected function setupOwnerData()
+    {
+        $base_query_data = config('screens.common.querydata.owner_data');
+
+        $this->owner_data = $this->query_model->getQueryData($base_query_data)->first();
+        session(['owner_data' => $this->owner_data]);
+    }
+
+    /**
+     * 所有者データを取得
+     *
+     * @return object|null
+     */
+    public function getOwnerData()
+    {
+        return $this->owner_data;
     }
 
     /**
@@ -475,7 +508,7 @@ class ScreenModel
             return json_encode($data);
         }
 
-        $data = str_replace(array("\r\n", "\r", "\n","&nbsp;"), '', $data);
+        $data = str_replace(array("\r\n", "\r", "\n", "&nbsp;"), '', $data);
 
         // デフォルトの処理
         return $data;

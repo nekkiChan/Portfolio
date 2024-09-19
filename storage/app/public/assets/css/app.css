@@ -304,6 +304,24 @@ main .container .content_field .content_body {
     width: 100%;
 }
 
+/* image_field */
+.image_field {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image_field img {
+    width: auto;
+    height: auto;
+    max-height: 300px;
+    user-select: none;
+    pointer-events: none;
+}
+
 /* input_field */
 .input_field {
     width: 100%;
@@ -355,7 +373,7 @@ main .container .content_field .content_body {
     height: var(--input-field-height);
     background-color: #fff;
     border: 1px solid #000;
-    border-right:none;
+    border-right: none;
     cursor: pointer;
 }
 
@@ -382,4 +400,3 @@ input::placeholder {
 input:focus {
     border-color: var(--input-focus-color);
 }
-
