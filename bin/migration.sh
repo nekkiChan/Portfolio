@@ -13,5 +13,3 @@ cd "$SCRIPT_DIR/.."
 php artisan migrate:reset
 php artisan migrate
 php artisan db:seed --class=InitializeSeeder
-
-
