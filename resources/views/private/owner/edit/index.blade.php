@@ -14,7 +14,8 @@
 
             <div class="content_body">
 
-                <form action="{{ route('private.owner.edit.action') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route(str_replace('index', 'action', $route_path)) }}" method="post"
+                    enctype="multipart/form-data">
                     @csrf
 
                     @foreach ($owners_data as $key => $owner_data)

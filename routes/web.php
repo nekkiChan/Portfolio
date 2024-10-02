@@ -26,6 +26,7 @@ Route::prefix('/')->name('public.')->group(function (): void {
 
 use App\Http\Controllers\private\profile\ProfileEditController;
 use App\Http\Controllers\private\owner\OwnerEditController;
+use App\Http\Controllers\private\contents\menu\ContentsMenuController;
 
 Route::middleware(['auth'])->prefix('/private')->name('private.')->group(function (): void {
     // profile
@@ -40,6 +41,14 @@ Route::middleware(['auth'])->prefix('/private')->name('private.')->group(functio
         Route::prefix('/edit')->name('edit.')->group(function (): void {
             Route::get('/', [OwnerEditController::class, 'index'])->name('index');
             Route::post('/action', [OwnerEditController::class, 'action'])->name('action');
+        });
+    });
+    // contents
+    Route::prefix('/contents')->name('contents.')->group(function (): void {
+        // menu
+        Route::prefix('/menu')->name('menu.')->group(function (): void {
+            Route::get('/', [ContentsMenuController::class, 'index'])->name('index');
+            Route::post('/action', [ContentsMenuController::class, 'action'])->name('action');
         });
     });
 });

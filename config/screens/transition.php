@@ -30,9 +30,9 @@ return [
             'level' => 999,
         ],
         'contents' => [
-            'routepath' => 'private.contents.index',
-            'configpath' => 'private.contents.index',
-            'view' => config('screens.private.contents.index.pagetitle.transition'),
+            'routepath' => 'private.contents.menu.index',
+            'configpath' => 'private.contents.menu.index',
+            'view' => config('screens.private.contents.menu.index.pagetitle.transition'),
             'level' => 999,
         ],
         'owner_edit' => [

@@ -14,10 +14,11 @@
 
             <div class="content_body">
 
-                <form action="{{ route('private.profile.edit.action') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route(str_replace('index', 'action', $route_path)) }}" method="post"
+                    enctype="multipart/form-data">
                     @csrf
 
-                    <input type="hidden" name="id[0]" value="{{$login_user->id}}">
+                    <input type="hidden" name="id[0]" value="{{ $login_user->id }}">
 
                     {{-- name --}}
                     <x-materials.card-field>
