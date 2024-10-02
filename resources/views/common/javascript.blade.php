@@ -218,27 +218,60 @@
     /**
      * CKEditorに関するメソッド
      */
+    /**
+     * CKEditorに関するメソッド
+     */
     function initializeCKEditor() {
-
         const $ckEditorElements = $('.ckeditor');
 
         $ckEditorElements.each(function() {
-            const $elementName = $(this).attr('name');
+            const $element = $(this);
 
             // CKEditorのインスタンスを初期化
-            CKEDITOR.replace($elementName);
+            ClassicEditor
+                .create($element[0], {
+                    language: 'ja' // 日本語に設定
+                })
+                .then(editor => {
+                    let previousData = editor.getData(); // 前のデータを保存
 
-            // CKEditorが完全に初期化された後に、テキストから \r\n を削除
-            CKEDITOR.on('instanceReady', function(event) {
-                const editor = event.editor;
+                    // CKEditorが完全に初期化された後に、テキストから \r\n を削除
+                    editor.model.document.on('change:data', () => {
+                        const data = editor.getData();
+                    });
 
-                // 入力中に \r\n を削除
-                editor.on('change', function() {
-                    const data = editor.getData();
-                    const cleanedData = data.replace(/\r\n/g, ''); // \r\n を削除
-                    editor.setData(cleanedData);
+                    // 入力中のエンターキーを制御
+                    editor.editing.view.document.on('keydown', (evt) => {
+                        if (evt.key === 'Enter') {
+                            const data = editor.getData();
+                            // 空の状態でエンターが押された場合、処理を中止
+                            if (data.trim() === '') {
+                                evt.preventDefault(); // デフォルトのエンター動作を防ぐ
+                                return;
+                            }
+
+                            // デフォルトのエンター動作を防ぎ、カスタムで改行を追加
+                            evt.preventDefault();
+
+                            // モデルに新しい段落を追加
+                            const model = editor.model;
+                            model.change(writer => {
+                                const insertPosition = model.document.selection
+                                    .getFirstPosition();
+                                const newParagraph = writer.createElement('paragraph');
+
+                                // 新しい段落を挿入
+                                writer.insert(newParagraph, insertPosition);
+
+                                // 新しい段落にカーソルを移動
+                                writer.setSelection(newParagraph, 'in');
+                            });
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
                 });
-            });
         });
     }
 

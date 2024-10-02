@@ -32,6 +32,9 @@ abstract class Controller
         if (!empty($this->config_data['model'])) {
             $this->screen_model = app($this->config_data['model'], ['request', $request]);
             $this->query_data = $this->screen_model->getQueryData();
+            foreach ($this->query_data as $name => $data) {
+                session()->flash($name, $data);
+            }
         }
     }
 

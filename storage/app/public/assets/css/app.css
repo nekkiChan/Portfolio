@@ -424,9 +424,14 @@ main .container .content_field .content_body {
     height: 100%;
 }
 
-.input_field .text_field .cke {
+.input_field .text_field .ck-editor {
     width: 100%;
-    height: 100%;
+    height: auto;
+}
+
+.input_field:has(.ck-editor),
+.input_field .text_field:has(.ck-editor){
+    height: auto;
 }
 
 .input_field .text_field select {

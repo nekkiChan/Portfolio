@@ -1,0 +1,18 @@
+.card_field {
+    margin-bottom: var(--basic-margin);
+    border: 2px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.card_field:hover{
+    border-color: var(--basic-hover-color);
+}
+
+.card_field .card_row .card_row_title{
+    width: 30%;
+}
+
+.card_field .card_row .card_row_body{
+    width: 70%;
+}

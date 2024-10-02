@@ -11,6 +11,11 @@ return [
     // contents
     '/private/contents/menu' => 'private.contents.menu.index',
     '/private/contents/menu/action' => 'private.contents.menu.action',
+    // content_body
+    '/private/contents/body/list' => 'private.contents.body.list.index',
+    '/private/contents/body/list/action' => 'private.contents.body.list.action',
+    '/private/contents/body/edit' => 'private.contents.body.edit.index',
+    '/private/contents/body/edit/action' => 'private.contents.body.edit.action',
     // content_category
     '/private/contents/category/list' => 'private.contents.category.list.index',
     '/private/contents/category/list/action' => 'private.contents.category.list.action',

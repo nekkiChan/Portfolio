@@ -34,6 +34,24 @@ return [
     ],
     // transition_data
     'transition_data' => [
+        // content_category_body
+        'content_category_body' => [
+            'view' => 'コンテンツ内容',
+            'data' => [
+                'list' => [
+                    'routepath' => 'private.contents.body.list.index',
+                    'configpath' => 'private.contents.body.list.index',
+                    'iconpath' => 'home.svg',
+                    'level' => 999,
+                ],
+                'edit' => [
+                    'routepath' => 'private.contents.body.edit.index',
+                    'configpath' => 'private.contents.body.edit.index',
+                    'iconpath' => 'home.svg',
+                    'level' => 999,
+                ],
+            ],
+        ],
         // content_category
         'content_category' => [
             'view' => 'コンテンツカテゴリ',
