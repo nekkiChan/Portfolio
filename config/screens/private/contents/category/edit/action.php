@@ -7,11 +7,11 @@ return [
     'pagetitle' => [
     ],
     // path
-    'routepath' => 'private.contents.category.edit.index',
-    'jspath' => 'private/contents/category/edit/index/',
-    'csspath' => 'private/contents/category/edit/index/',
-    'nextpath' => 'private.contents.category.list.index',
-    'backpath' => 'private.contents.category.list.index',
+    'routepath' => 'private.contents.subcategory.edit.index',
+    'jspath' => 'private/contents/subcategory/edit/index/',
+    'csspath' => 'private/contents/subcategory/edit/index/',
+    'nextpath' => 'private.contents.subcategory.list.index',
+    'backpath' => 'private.contents.subcategory.list.index',
     // model
     'model' => PrivateContentsCategoryEditModel::class,
     // table
@@ -44,6 +44,7 @@ return [
                 'name',
                 'view',
                 'is_admin',
+                'sort',
             ],
         ],
     ],

@@ -56,15 +56,15 @@ return [
         'content_subcategory' => [
             'view' => 'コンテンツサブカテゴリ',
             'data' => [
-                'edit' => [
-                    'routepath' => 'private.contents.menu.index',
-                    'configpath' => 'private.contents.menu.index',
+                'list' => [
+                    'routepath' => 'private.contents.subcategory.list.index',
+                    'configpath' => 'private.contents.subcategory.list.index',
                     'iconpath' => 'home.svg',
                     'level' => 999,
                 ],
-                'add' => [
-                    'routepath' => 'private.contents.menu.index',
-                    'configpath' => 'private.contents.menu.index',
+                'edit' => [
+                    'routepath' => 'private.contents.subcategory.edit.index',
+                    'configpath' => 'private.contents.subcategory.edit.index',
                     'iconpath' => 'home.svg',
                     'level' => 999,
                 ],
