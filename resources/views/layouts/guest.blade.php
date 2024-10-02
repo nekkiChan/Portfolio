@@ -29,7 +29,6 @@
     </header>
 
     <main>
-        
         {{ $slot }}
     </main>
 </body>

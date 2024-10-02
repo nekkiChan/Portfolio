@@ -41,6 +41,13 @@ class ScreenModel
     protected $route_path;
 
     /**
+     * ルートクエリ
+     *
+     * @var array
+     */
+    protected $route_query_data;
+
+    /**
      * コモンモデル
      *
      * @var \App\Models\common\CommonModel
@@ -57,7 +64,7 @@ class ScreenModel
     /**
      * クエリデータ
      *
-     * @var array
+     * @var object
      */
     protected $query_data;
 
@@ -84,6 +91,11 @@ class ScreenModel
     public function __construct(Request $request)
     {
         $path = $request->getRequestUri();
+        $this->route_query_data = [];
+        if (!empty($request->query())) {
+            $path = explode('?', $path)[0];
+            $this->route_query_data = $request->query();
+        }
         $this->config_path = config("screens.path.$path");
         $this->config_data = config("screens.$this->config_path");
         $this->route_path = config("screens.$this->config_path.routepath");
@@ -164,7 +176,49 @@ class ScreenModel
     {
         if (!empty($this->config_data['querydata'])) {
             $base_query_data = $this->config_data['querydata'];
+
             foreach ($base_query_data as $table => $query_data) {
+
+                if (!empty($this->config_data['routequerydata'])) {
+                    $route_query_data = $this->config_data['routequerydata'];
+
+                    foreach ($route_query_data as $column => $route_query_subdata) {
+                        foreach ($route_query_subdata['data'] as $name => $data) {
+
+                            $is_exist_routequery = true;
+                            if ($name != $table) {
+                                $is_exist_routequery = false;
+                                continue;
+                            }
+
+                            if ($data['table'] != $query_data['basetable']['alias']) {
+                                continue;
+                            }
+
+                            if (!in_array($column, array_keys($this->route_query_data))) {
+                                continue;
+                            }
+
+                            $query_data['where'][] = [
+                                'table' => $data['table'],
+                                'column' => $data['column'],
+                                'function' => $data['function'],
+                                'value' => $this->route_query_data[$column],
+                            ];
+
+                        }
+
+                        if ($route_query_subdata['required'] && empty($query_data['where'])&& $is_exist_routequery) {
+                            $query_data['where'][] = [
+                                'table' => $data['table'],
+                                'column' => $data['column'],
+                                'function' => $data['function'],
+                                'value' => 'none',
+                            ];
+                        }
+                    }
+                }
+
                 $this->query_data[$table] = $this->query_model->getQueryData($query_data);
             }
         }
@@ -230,7 +284,7 @@ class ScreenModel
         }
 
         $view = $this->config_data['nextpath'];
-        return redirect()->route($view)->with('validate_success', true);
+        return redirect()->route($view, $this->route_query_data)->with('validate_success', true);
     }
 
     /**

@@ -10,7 +10,7 @@ return [
     ],
     // path
     'routepath' => 'public.mainmenu.index',
-    'jspath' => 'public/mainmenu/index/',
+    'jspath' => 'public.mainmenu.javascript',
     'csspath' => 'public/mainmenu/index/',
     // model
     'model' => PublicMainMenuModel::class,

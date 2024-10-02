@@ -27,6 +27,8 @@ Route::prefix('/')->name('public.')->group(function (): void {
 use App\Http\Controllers\private\profile\ProfileEditController;
 use App\Http\Controllers\private\owner\OwnerEditController;
 use App\Http\Controllers\private\contents\menu\ContentsMenuController;
+use App\Http\Controllers\private\contents\category\ContentsCategoryListController;
+use App\Http\Controllers\private\contents\category\ContentsCategoryEditController;
 
 Route::middleware(['auth'])->prefix('/private')->name('private.')->group(function (): void {
     // profile
@@ -49,6 +51,19 @@ Route::middleware(['auth'])->prefix('/private')->name('private.')->group(functio
         Route::prefix('/menu')->name('menu.')->group(function (): void {
             Route::get('/', [ContentsMenuController::class, 'index'])->name('index');
             Route::post('/action', [ContentsMenuController::class, 'action'])->name('action');
+        });
+        // category
+        Route::prefix('/category')->name('category.')->group(function (): void {
+            // list
+            Route::prefix('/list')->name('list.')->group(function (): void {
+                Route::get('/', [ContentsCategoryListController::class, 'index'])->name('index');
+                Route::post('/action', [ContentsCategoryListController::class, 'action'])->name('action');
+            });
+            // edit
+            Route::prefix('/edit')->name('edit.')->group(function (): void {
+                Route::get('/', [ContentsCategoryEditController::class, 'index'])->name('index');
+                Route::post('/action', [ContentsCategoryEditController::class, 'action'])->name('action');
+            });
         });
     });
 });

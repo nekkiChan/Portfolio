@@ -1,20 +1,20 @@
 <?php
-use App\Models\screens\private\owner\PrivateOwnerModel;
+use App\Models\screens\private\contents\menu\PrivateContentsMenuModel;
 use App\Models\dbtables\S003Owner;
 
 return [
     // title
     'pagetitle' => [
-        'main' => 'OwnerEdit',
-        'view' => 'サイトデータ編集',
-        'transition' => 'サイトデータ編集',
+        'main' => 'ContentsMenu',
+        'view' => 'コンテンツ情報',
+        'transition' => 'コンテンツ情報',
     ],
     // path
-    'routepath' => 'private.owner.edit.index',
-    'jspath' => 'private.owner.edit.javascript',
-    'csspath' => 'private/owner/edit/index/',
+    'routepath' => 'private.contents.menu.index',
+    'jspath' => 'private.contents.menu.javascript',
+    'csspath' => 'private/contents/menu/index/',
     // model
-    'model' => PrivateOwnerModel::class,
+    'model' => PrivateContentsMenuModel::class,
     // querydata
     'querydata' => [
         // owners_data

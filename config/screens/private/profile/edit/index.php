@@ -10,7 +10,7 @@ return [
     ],
     // path
     'routepath' => 'private.profile.edit.index',
-    'jspath' => 'private/profile/edit/index/',
+    'jspath' => 'private.profile.edit.javascript',
     'csspath' => 'private/profile/edit/index/',
     // model
     'model' => PrivateProfileModel::class,

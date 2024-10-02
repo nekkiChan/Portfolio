@@ -15,7 +15,7 @@ return [
     'jspath' => 'private/profile/edit/index/',
     'csspath' => 'private/profile/edit/index/',
     'nextpath' => 'private.profile.edit.index',
-    'backpath' => 'private.profile.edit.index',
+    'backpath' => 'public.mainmenu.index',
     // model
     'model' => PrivateProfileModel::class,
     // table

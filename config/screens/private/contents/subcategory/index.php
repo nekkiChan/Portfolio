@@ -39,14 +39,14 @@ return [
             'view' => 'コンテンツカテゴリ',
             'data' => [
                 'list' => [
-                    'routepath' => 'private.contents.category.list.index',
-                    'configpath' => 'private.contents.category.list.index',
+                    'routepath' => 'private.contents.menu.index',
+                    'configpath' => 'private.contents.menu.index',
                     'iconpath' => 'home.svg',
                     'level' => 999,
                 ],
-                'edit' => [
-                    'routepath' => 'private.contents.category.edit.index',
-                    'configpath' => 'private.contents.category.edit.index',
+                'add' => [
+                    'routepath' => 'private.contents.menu.index',
+                    'configpath' => 'private.contents.menu.index',
                     'iconpath' => 'home.svg',
                     'level' => 999,
                 ],

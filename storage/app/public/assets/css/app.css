@@ -6,10 +6,12 @@
     --basic-row-margin: 1px;
     --basic-row-padding: 1px;
     --basic-color: #694eed;
-    --basic-hover-color: #D2ECF9;
+    --basic-hover-color: #962222;
+    --basic-icon-size: 50px;
     /* header */
     --header-height: 50px;
     /* content */
+    --container-width: 800px;
     --content-margin: 1px;
     --content-space-height: 10px;
     --content-row-padding: 1px;
@@ -24,6 +26,8 @@
     --input-field-file-icon-width: 50px;
     /* button */
     --button-field-size: 40px;
+    /* icon */
+    --icon-hover-color: #962222;
 
 }
 
@@ -146,9 +150,9 @@ form {
 
 form .form_header,
 form .form_footer {
-    margin: 5px;
+    /* margin: 5px; */
     padding: var(--basic-padding);
-    width: 100%;
+    /* width: 100%; */
     height: 50px;
     display: flex;
     align-items: center;
@@ -189,7 +193,7 @@ form .form_footer {
 /* container */
 main .container {
     margin: var(--basic-margin) auto;
-    width: 90%;
+    width: var(--container-width);
 }
 
 main .container .content_field {
@@ -291,6 +295,10 @@ main .container .content_field .content_body {
     border-right: 1px #999 solid;
 }
 
+.card_field:has(.card_header_field) .card_row .card_row_title{
+    border-right: none;
+}
+
 .card_field .card_row .card_row_body {
     padding: 5px;
     width: 90%;
@@ -302,6 +310,70 @@ main .container .content_field .content_body {
 
 .card_field .card_row:not(:has(.card_row_title)) .card_row_body {
     width: 100%;
+}
+
+/* card-icon */
+.content_body:has(.card_icon_field) {
+    width: 100%;
+    height: calc(var(--basic-icon-size)*2);
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.card_field:has(.card_icon_field) {
+    margin-right: 5%;
+    margin-bottom: var(--basic-margin);
+    width: 30%;
+    height: calc(var(--basic-icon-size)*2);
+    border: 2px solid #000;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.card_field:has(.card_icon_field):hover {
+    border-color: var(--icon-hover-color);
+}
+
+.card_field:has(.card_icon_field):nth-child(3n) {
+    margin-right: 0;
+}
+
+.card_field:has(.card_icon_field):nth-child(3n+1) {
+    clear: left;
+}
+
+.card_field .card_icon_field {
+    width: 100%;
+    height: 100%;
+    font-size: var(--basic-font-size);
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card_field .card_icon_field img {
+    margin: auto;
+    width: var(--basic-icon-size);
+    height: var(--basic-icon-size);
+}
+
+.card_field .card_icon_field:has(.icon_text_field) {
+    padding-bottom: var(--basic-font-size);
+}
+
+.card_field .card_icon_field .icon_text_field {
+    position: absolute;
+    width: 100%;
+    height: var(--basic-font-size);
+    font-size: 0.8em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 0.2em;
 }
 
 /* image_field */
