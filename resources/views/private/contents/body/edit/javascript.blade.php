@@ -50,10 +50,31 @@
          * データ
          */
         const contents_subcategories_data = @json($contents_subcategories_data);
-        console.log(contents_subcategories_data);
 
         const $categorySelectElement = $('select.content_category_id');
         const $subcategorySelectElement = $('select.content_subcategory_id');
+        const $subcategoryOptionElements = $subcategorySelectElement.children('option:not(.empty)');
 
+        $subcategoryOptionElements.addClass('hidden');
+
+        $categorySelectElement.on('change', function() {
+
+            // subcategorySelectElementの値をoption.emptyにする
+            $subcategorySelectElement.val($subcategorySelectElement.find('option.empty').val());
+
+            $subcategorySelectElement.children('option:not(.empty)').addClass('hidden');
+            const categoryId = $categorySelectElement.val();
+
+            $.each(contents_subcategories_data, function(key, object) {
+                if (object.content_category_id == categoryId) {
+                    $subcategoryOptionElements.each(function() {
+                        const $subcategoryOptionElement = $(this);
+                        if ($subcategoryOptionElement.val() == object.id) {
+                            $subcategoryOptionElement.removeClass('hidden');
+                        }
+                    });
+                }
+            });
+        });
     }
 </script>

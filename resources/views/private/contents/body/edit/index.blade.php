@@ -297,7 +297,7 @@
                                             $index = $key;
                                             $name = $column;
                                             $value = null;
-                                            $selectdata = [];
+                                            $selectdata = $contents_subcategories_data->pluck('view', 'id')->toArray();
                                         @endphp
                                         <x-materials.input-field :type="$type" :name="$name"
                                             :value="$value" :selectdata="$selectdata">

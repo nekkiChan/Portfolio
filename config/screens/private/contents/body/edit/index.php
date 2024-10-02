@@ -77,6 +77,11 @@ return [
                     'column' => 'title',
                     'alias' => 'title',
                 ],
+                [
+                    'table' => 'd101',
+                    'column' => 'content_subcategory_id',
+                    'alias' => 'content_subcategory_id',
+                ],
             ],
             'order' => [
                 [
