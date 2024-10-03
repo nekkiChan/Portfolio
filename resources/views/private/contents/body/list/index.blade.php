@@ -25,7 +25,7 @@
                         @foreach ($content_bodies_data as $key => $content_body_data)
                             @php
                                 $routeurl = route(str_replace('list', 'edit', $route_path), [
-                                    'id' => $content_body_data->id,
+                                    'body' => $content_body_data->id,
                                 ]);
                             @endphp
                             <x-materials.card-field :routeurl="$routeurl">
@@ -34,7 +34,7 @@
                                         @php
                                             $type = null;
                                             $name = $content_body_data->name;
-                                            $value = $content_body_data->view;
+                                            $value = $content_body_data->title;
                                         @endphp
                                         <x-materials.input-field :type="$type" :name="$name" :value="$value">
                                         </x-materials.input-field>

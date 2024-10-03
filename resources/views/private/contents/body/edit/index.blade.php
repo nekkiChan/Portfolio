@@ -112,7 +112,7 @@
                                     <div class="card_row">
                                         <div class="card_row_body">
                                             @php
-                                                $type = 'text';
+                                                $type = 'ckeditor';
                                                 $index = $key;
                                                 $name = $column;
                                                 $value = $content_body_data->$column;
@@ -299,7 +299,7 @@
                                             $value = null;
                                             $selectdata = $contents_subcategories_data->pluck('view', 'id')->toArray();
                                         @endphp
-                                        <x-materials.input-field :type="$type" :name="$name"
+                                        <x-materials.input-field :type="$type" :name="$name" :index="$index"
                                             :value="$value" :selectdata="$selectdata">
                                         </x-materials.input-field>
                                     </div>
