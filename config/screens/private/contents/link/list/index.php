@@ -1,19 +1,19 @@
 <?php
-use App\Models\screens\private\contents\body\edit\PrivateContentBodiesEditModel;
+use App\Models\screens\private\contents\link\list\PrivateContentLinkListModel;
 
 return [
     // title
     'pagetitle' => [
-        'main' => 'ContentsMenu',
-        'view' => 'コンテンツ編集',
-        'transition' => 'コンテンツ追加',
+        'main' => 'ContentLinkMenu',
+        'view' => 'コンテンツリンク一覧',
+        'transition' => 'コンテンツリンク一覧',
     ],
     // path
-    'routepath' => 'private.contents.body.edit.index',
-    'jspath' => 'private.contents.body.edit.javascript',
-    'csspath' => 'private/contents/body/edit/index/',
+    'routepath' => 'private.contents.link.list.index',
+    'jspath' => 'private.contents.link.list.javascript',
+    'csspath' => 'private/contents/body/list/index/',
     // model
-    'model' => PrivateContentBodiesEditModel::class,
+    'model' => PrivateContentLinkListModel::class,
     // querydata
     'querydata' => [
         // content_bodies_data
@@ -74,39 +74,92 @@ return [
                     'column' => 'content_subcategory_id',
                     'alias' => 'content_subcategory_id',
                 ],
+            ],
+            'order' => [
+                [
+                    'table' => 'm101',
+                    'column' => 'sort',
+                    'order' => 'asc',
+                ],
                 [
                     'table' => 'm102',
-                    'column' => 'content_category_id',
-                    'alias' => 'content_category_id',
-                ],
-            ],
-        ],
-        // content_bodies_sumdata
-        'content_bodies_sumdata' => [
-            'basetable' => [
-                'table' => 'd101_content_bodies',
-                'alias' => 'd101',
-            ],
-            'select' => [
-                [
-                    'table' => 'd101',
-                    'column' => 'id',
-                    'alias' => 'id',
+                    'column' => 'sort',
+                    'order' => 'asc',
                 ],
                 [
                     'table' => 'd101',
                     'column' => 'sort',
-                    'alias' => 'sort',
+                    'order' => 'asc',
+                ],
+            ],
+        ],
+        // service_links_data
+        'service_links_data' => [
+            'basetable' => [
+                'table' => 'd201_service_links',
+                'alias' => 'd201',
+            ],
+            'join' => [
+                [
+                    'table' => 'm201_service_categories',
+                    'alias' => 'm201',
+                    'column' => 'id',
+                    'basetable' => 'd201',
+                    'basetable_column' => 'service_category_id',
                 ],
                 [
-                    'table' => 'd101',
-                    'column' => 'title',
-                    'alias' => 'title',
+                    'table' => 'd101_content_bodies',
+                    'alias' => 'd101',
+                    'column' => 'id',
+                    'basetable' => 'd201',
+                    'basetable_column' => 'content_body_id',
+                ],
+            ],
+            'select' => [
+                [
+                    'table' => 'd201',
+                    'column' => 'id',
+                    'alias' => 'id',
                 ],
                 [
-                    'table' => 'd101',
-                    'column' => 'content_subcategory_id',
-                    'alias' => 'content_subcategory_id',
+                    'table' => 'm201',
+                    'column' => 'name',
+                    'alias' => 'name',
+                ],
+                [
+                    'table' => 'm201',
+                    'column' => 'view',
+                    'alias' => 'view',
+                ],
+                [
+                    'table' => 'd201',
+                    'column' => 'link_path',
+                    'alias' => 'link_path',
+                ],
+                [
+                    'table' => 'd201',
+                    'column' => 'file_path',
+                    'alias' => 'file_path',
+                ],
+                [
+                    'table' => 'd201',
+                    'column' => 'is_admin',
+                    'alias' => 'is_admin',
+                ],
+                [
+                    'table' => 'm201',
+                    'column' => 'icon_image_path',
+                    'alias' => 'icon_image_path',
+                ],
+                [
+                    'table' => 'd201',
+                    'column' => 'service_category_id',
+                    'alias' => 'service_category_id',
+                ],
+                [
+                    'table' => 'd201',
+                    'column' => 'content_body_id',
+                    'alias' => 'content_body_id',
                 ],
             ],
             'order' => [
@@ -115,55 +168,17 @@ return [
                     'column' => 'sort',
                     'order' => 'asc',
                 ],
-            ],
-        ],
-        // contents_category_data
-        'contents_categories_data' => [
-            'basetable' => [
-                'table' => 'm101_content_categories',
-                'alias' => 'm101',
-            ],
-            'select' => [
                 [
-                    'table' => 'm101',
-                    'column' => 'id',
-                    'alias' => 'id',
-                ],
-                [
-                    'table' => 'm101',
-                    'column' => 'view',
-                    'alias' => 'view',
-                ],
-            ],
-        ],
-        // contents_subcategory_data
-        'contents_subcategories_data' => [
-            'basetable' => [
-                'table' => 'm102_content_subcategories',
-                'alias' => 'm102',
-            ],
-            'select' => [
-                [
-                    'table' => 'm102',
-                    'column' => 'id',
-                    'alias' => 'id',
-                ],
-                [
-                    'table' => 'm102',
-                    'column' => 'content_category_id',
-                    'alias' => 'content_category_id',
-                ],
-                [
-                    'table' => 'm102',
-                    'column' => 'view',
-                    'alias' => 'view',
+                    'table' => 'm201',
+                    'column' => 'sort',
+                    'order' => 'asc',
                 ],
             ],
         ],
     ],
     // routequerydata
     'routequerydata' => [
-        'body' => [
+        'content' => [
             'required' => true,
             'data' => [
                 'content_bodies_data' => [
@@ -171,14 +186,9 @@ return [
                     'column' => 'id',
                     'function' => '=',
                 ],
-            ],
-        ],
-        'subcategory' => [
-            'required' => false,
-            'data' => [
-                'content_bodies_sumdata' => [
-                    'table' => 'd101',
-                    'column' => 'content_subcategory_id',
+                'service_links_data' => [
+                    'table' => 'd201',
+                    'column' => 'content_body_id',
                     'function' => '=',
                 ],
             ],

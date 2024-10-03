@@ -300,7 +300,24 @@ class ScreenModel
         }
 
         $view = $this->config_data['backpath'];
-        return redirect()->route($view);
+
+        $view_config_data = config("screens.$view");
+        $routequerydata = [];
+        if (in_array('routequerydata', array_keys($view_config_data))) {
+            $routequerydata = $view_config_data['routequerydata'];
+            foreach (array_keys($this->route_query_data) as $column) {
+                if (!in_array($column, array_keys($routequerydata))) {
+                    unset($this->route_query_data[$column]);
+                    continue;
+                }
+                if (!$routequerydata[$column]['required']) {
+                    unset($this->route_query_data[$column]);
+                    continue;
+                }
+            }
+        }
+        
+        return redirect()->route($view, $this->route_query_data);
     }
 
     /**

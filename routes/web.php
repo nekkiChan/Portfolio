@@ -29,6 +29,8 @@ use App\Http\Controllers\private\owner\OwnerEditController;
 use App\Http\Controllers\private\contents\menu\ContentsMenuController;
 use App\Http\Controllers\private\contents\body\ContentBodiesListController;
 use App\Http\Controllers\private\contents\body\ContentBodiesEditController;
+use App\Http\Controllers\private\contents\link\ContentLinkListController;
+use App\Http\Controllers\private\contents\link\ContentLinkEditController;
 use App\Http\Controllers\private\contents\category\ContentsCategoryListController;
 use App\Http\Controllers\private\contents\category\ContentsCategoryEditController;
 use App\Http\Controllers\private\contents\subcategory\ContentsSubCategoryListController;
@@ -67,6 +69,19 @@ Route::middleware(['auth'])->prefix('/private')->name('private.')->group(functio
             Route::prefix('/edit')->name('edit.')->group(function (): void {
                 Route::get('/', [ContentBodiesEditController::class, 'index'])->name('index');
                 Route::post('/action', [ContentBodiesEditController::class, 'action'])->name('action');
+            });
+        });
+        // link
+        Route::prefix('/link')->name('link.')->group(function (): void {
+            // list
+            Route::prefix('/list')->name('list.')->group(function (): void {
+                Route::get('/', [ContentLinkListController::class, 'index'])->name('index');
+                Route::post('/action', [ContentLinkListController::class, 'action'])->name('action');
+            });
+            // edit
+            Route::prefix('/edit')->name('edit.')->group(function (): void {
+                Route::get('/', [ContentLinkEditController::class, 'index'])->name('index');
+                Route::post('/action', [ContentLinkEditController::class, 'action'])->name('action');
             });
         });
         // category

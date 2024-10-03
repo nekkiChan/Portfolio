@@ -29,6 +29,19 @@
                                 ]);
                             @endphp
                             <x-materials.card-field :routeurl="$routeurl">
+
+                                @php
+                                    $class = 'link';
+                                    $icon_path = 'link.svg';
+                                    $link_path = route('private.contents.link.list.index', [
+                                        'content' => $content_body_data->id,
+                                    ]);
+                                    $count = 0;
+                                @endphp
+                                <x-materials.icon-field :class="$class" :iconpath="$icon_path" :linkpath="$link_path"
+                                    :count="$count">
+                                </x-materials.icon-field>
+
                                 <x-materials.card-header-field>
                                     <div class="card_row">
                                         @php

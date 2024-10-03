@@ -190,6 +190,13 @@ form .form_footer {
     left: 0;
 }
 
+.button_field.add {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #962222;
+}
+
 /* container */
 main .container {
     margin: var(--basic-margin) auto;
@@ -295,7 +302,7 @@ main .container .content_field .content_body {
     border-right: 1px #999 solid;
 }
 
-.card_field:has(.card_header_field) .card_row .card_row_title{
+.card_field:has(.card_header_field) .card_row .card_row_title {
     border-right: none;
 }
 
@@ -394,6 +401,27 @@ main .container .content_field .content_body {
     pointer-events: none;
 }
 
+/* icon_field */
+.icon_field {
+    width: var(--basic-icon-size);
+    height: var(--basic-icon-size);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.icon_field:hover {
+    border-color: var(--icon-hover-color);
+}
+
+.icon_field img {
+    width: 80%;
+    height: 80%;
+}
+
 /* input_field */
 .input_field {
     width: 100%;
@@ -430,7 +458,7 @@ main .container .content_field .content_body {
 }
 
 .input_field:has(.ck-editor),
-.input_field .text_field:has(.ck-editor){
+.input_field .text_field:has(.ck-editor) {
     height: auto;
 }
 

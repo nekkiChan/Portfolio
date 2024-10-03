@@ -15,8 +15,8 @@ class D201ServiceLink extends Model
 
     // 複数代入を許可するフィールド
     protected $fillable = [
-        'name',
-        'view',
+        'link_path',
+        'file_path',
         'service_category_id',
         'content_body_id',
         'is_admin',

@@ -1,19 +1,19 @@
 <?php
-use App\Models\screens\private\contents\body\list\PrivateContentBodiesListModel;
+use App\Models\screens\private\contents\link\edit\PrivateContentLinkEditModel;
 
 return [
     // title
     'pagetitle' => [
-        'main' => 'ContentsCategoryMenu',
-        'view' => 'コンテンツ一覧',
-        'transition' => 'コンテンツ一覧',
+        'main' => 'ContentLinkMenu',
+        'view' => 'コンテンツリンク編集',
+        'transition' => 'コンテンツリンク追加',
     ],
     // path
-    'routepath' => 'private.contents.body.list.index',
-    'jspath' => 'private.contents.body.list.javascript',
-    'csspath' => 'private/contents/body/list/index/',
+    'routepath' => 'private.contents.link.edit.index',
+    'jspath' => 'private.contents.link.edit.javascript',
+    'csspath' => 'private/contents/link/edit/index/',
     // model
-    'model' => PrivateContentBodiesListModel::class,
+    'model' => PrivateContentLinkEditModel::class,
     // querydata
     'querydata' => [
         // content_bodies_data
@@ -53,6 +53,26 @@ return [
                     'table' => 'd101',
                     'column' => 'title',
                     'alias' => 'title',
+                ],
+                [
+                    'table' => 'm101',
+                    'column' => 'name',
+                    'alias' => 'category_name',
+                ],
+                [
+                    'table' => 'm101',
+                    'column' => 'view',
+                    'alias' => 'category_view',
+                ],
+                [
+                    'table' => 'm102',
+                    'column' => 'name',
+                    'alias' => 'subcategory_name',
+                ],
+                [
+                    'table' => 'm102',
+                    'column' => 'view',
+                    'alias' => 'subcategory_view',
                 ],
                 [
                     'table' => 'd101',
@@ -156,6 +176,11 @@ return [
                     'column' => 'content_body_id',
                     'alias' => 'content_body_id',
                 ],
+                [
+                    'table' => 'd201',
+                    'column' => 'is_admin',
+                    'alias' => 'is_admin',
+                ],
             ],
             'order' => [
                 [
@@ -167,6 +192,70 @@ return [
                     'table' => 'm201',
                     'column' => 'sort',
                     'order' => 'asc',
+                ],
+            ],
+        ],
+        // service_categories_sumdata
+        'service_categories_sumdata' => [
+            'basetable' => [
+                'table' => 'm201_service_categories',
+                'alias' => 'm201',
+            ],
+            'select' => [
+                [
+                    'table' => 'm201',
+                    'column' => 'id',
+                    'alias' => 'id',
+                ],
+                [
+                    'table' => 'm201',
+                    'column' => 'name',
+                    'alias' => 'name',
+                ],
+                [
+                    'table' => 'm201',
+                    'column' => 'view',
+                    'alias' => 'view',
+                ],
+                [
+                    'table' => 'm201',
+                    'column' => 'icon_image_path',
+                    'alias' => 'icon_image_path',
+                ],
+            ],
+            'order' => [
+                [
+                    'table' => 'm201',
+                    'column' => 'sort',
+                    'order' => 'asc',
+                ],
+            ],
+        ],
+    ],
+    // routequerydata
+    'routequerydata' => [
+        'content' => [
+            'required' => true,
+            'data' => [
+                'content_bodies_data' => [
+                    'table' => 'd101',
+                    'column' => 'id',
+                    'function' => '=',
+                ],
+                'service_links_data' => [
+                    'table' => 'd201',
+                    'column' => 'content_body_id',
+                    'function' => '=',
+                ],
+            ],
+        ],
+        'link' => [
+            'required' => true,
+            'data' => [
+                'service_links_data' => [
+                    'table' => 'd201',
+                    'column' => 'id',
+                    'function' => '=',
                 ],
             ],
         ],

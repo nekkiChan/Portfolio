@@ -34,12 +34,16 @@
     @endphp
 @endisset
 
-@empty($classlist)
+@if (empty($classlist))
     <div class="button_field">
+        {{ $value }}
+    </div>
+@elseif (!empty($linkpath))
+    <div class="button_field {{ implode(' ', $classlist) }}" onclick="location.href='{{ $linkpath }}'">
         {{ $value }}
     </div>
 @else
     <div class="button_field {{ implode(' ', $classlist) }}">
         {{ $value }}
     </div>
-@endempty
+@endif

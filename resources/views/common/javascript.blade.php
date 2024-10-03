@@ -28,6 +28,7 @@
         initializeFiles();
         initializeCKEditor();
         initializeATag();
+        initializeOnClick();
     }
 
     /**
@@ -282,6 +283,40 @@
         const $aLinkElements = $('a');
         $aLinkElements.prop({
             tabindex: -1,
+        });
+    }
+
+    /**
+     * onclickに関するメソッ
+     */
+    function initializeOnClick() {
+        const $onclickElements = $('[onclick]');
+
+        $onclickElements.each(function() {
+
+            const $onclickElement = $(this);
+
+            // onclick属性の内容を取得
+            const onclickAttr = $onclickElement.attr('onclick');
+
+            // location.hrefの部分を抽出する
+            if (onclickAttr && onclickAttr.includes('location.href')) {
+                // 正規表現でURL部分を抽出する
+                const urlMatch = onclickAttr.match(/location\.href=['"]([^'"]+)['"]/);
+
+                if (urlMatch && urlMatch[1]) {
+                    const url = urlMatch[1]; // 抽出したURL
+
+                    // onclick属性を削除
+                    $onclickElement.removeAttr('onclick');
+
+                    // クリックイベントを追加
+                    $onclickElement.on('click', function(event) {
+                        event.preventDefault(); // デフォルトの動作を防止（必要であれば）
+                        window.location.href = url; // クリックされたときにURLに遷移
+                    });
+                } 
+            }
         });
     }
 </script>
