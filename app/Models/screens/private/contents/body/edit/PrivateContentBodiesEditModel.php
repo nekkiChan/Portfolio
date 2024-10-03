@@ -5,6 +5,7 @@ namespace App\Models\screens\private\contents\body\edit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\screens\ScreenModel;
+use Illuminate\Database\Eloquent\Collection;
 
 class PrivateContentBodiesEditModel extends ScreenModel
 {
@@ -50,14 +51,31 @@ class PrivateContentBodiesEditModel extends ScreenModel
                     if ($initdata->count() > 0) {
                         continue 2;
                     }
-                    $initdata = $tablemodel::where('id', '=', $request->input('id')[$key])->first();
+
+                    $initdata = $tablemodel::where('id', '=', $request->input('id')[$key])
+                        ->where('content_subcategory_id', '=', $request->input('content_subcategory_id')[$key])
+                        ->first();
+                    $initsort = $tablemodel::all()->sortByDesc('sort')->first()->sort + 1;
+                    if (!empty($initdata)) {
+                        $initsort = $initdata->sort;
+                    }
                     $replacedata = $tablemodel::where($column, '=', $inputData)->first();
 
-                    if ($replacedata->sort < $initdata->sort) {
-                        $tablemodel::where($column, '<', $initdata->sort)->increment($column);
+                    if ($replacedata->sort < $initsort) {
+                        // dd(   $tablemodel::where($column, '>', $replacedata->sort)
+                        // ->where($column, '<', $initsort)->get());
+                        $tablemodel::where($column, '>', $replacedata->sort)
+                            ->where($column, '<', $initsort)
+                            ->increment($column);
+                        $inputData += 1;
                     } else {
-                        $tablemodel::where($column, '>', $initdata->sort)->decrement($column);
+                        // dd(  $initsort,  $replacedata->sort,$tablemodel::where($column, '>', $initsort)
+                        // ->where($column, '<=', $replacedata->sort)->get());
+                        $tablemodel::where($column, '>', $initsort)
+                            ->where($column, '<=', $replacedata->sort)
+                            ->decrement($column);
                     }
+
                     break;
             }
 
