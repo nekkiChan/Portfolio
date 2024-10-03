@@ -57,6 +57,77 @@
                                 </x-materials.card-body-field>
                             </x-materials.card-field>
 
+                            {{-- content_category_id --}}
+                            @php
+                                $column = 'content_category_id';
+                            @endphp
+                            <x-materials.card-field>
+                                <x-materials.card-header-field>
+                                    <div class="card_row">
+                                        @php
+                                            $type = null;
+                                            $name = $column;
+                                            $value = 'カテゴリ';
+                                        @endphp
+                                        <x-materials.input-field :type="$type" :name="$name" :value="$value">
+                                        </x-materials.input-field>
+                                    </div>
+                                </x-materials.card-header-field>
+                                <x-materials.card-body-field>
+                                    <div class="card_row">
+                                        <div class="card_row_body">
+                                            @php
+                                                $type = 'select';
+                                                $index = $key;
+                                                $name = $column;
+                                                $value = $content_body_data->$column;
+                                                $selectdata = $contents_categories_data->pluck('view', 'id')->toArray();
+                                            @endphp
+                                            <x-materials.input-field :type="$type" :name="$name"
+                                                :value="$value" :selectdata="$selectdata">
+                                            </x-materials.input-field>
+                                        </div>
+                                    </div>
+                                </x-materials.card-body-field>
+                            </x-materials.card-field>
+
+                            {{-- content_subcategory_id --}}
+                            @php
+                                $column = 'content_subcategory_id';
+                            @endphp
+                            <x-materials.card-field>
+                                <x-materials.card-header-field>
+                                    <div class="card_row">
+                                        @php
+                                            $type = null;
+                                            $name = $column;
+                                            $value = 'サブカテゴリ';
+                                        @endphp
+                                        <x-materials.input-field :type="$type" :name="$name"
+                                            :value="$value">
+                                        </x-materials.input-field>
+                                    </div>
+                                </x-materials.card-header-field>
+                                <x-materials.card-body-field>
+                                    <div class="card_row">
+                                        <div class="card_row_body">
+                                            @php
+                                                $type = 'select';
+                                                $index = $key;
+                                                $name = $column;
+                                                $value = $content_body_data->$column;
+                                                $selectdata = $contents_subcategories_data
+                                                    ->pluck('view', 'id')
+                                                    ->toArray();
+                                            @endphp
+                                            <x-materials.input-field :type="$type" :name="$name"
+                                                :index="$index" :value="$value" :selectdata="$selectdata">
+                                            </x-materials.input-field>
+                                        </div>
+                                    </div>
+                                </x-materials.card-body-field>
+                            </x-materials.card-field>
+
                             {{-- title --}}
                             @php
                                 $column = 'title';
@@ -69,7 +140,8 @@
                                             $name = $column;
                                             $value = 'タイトル';
                                         @endphp
-                                        <x-materials.input-field :type="$type" :name="$name" :value="$value">
+                                        <x-materials.input-field :type="$type" :name="$name"
+                                            :value="$value">
                                         </x-materials.input-field>
                                     </div>
                                 </x-materials.card-header-field>
@@ -174,7 +246,7 @@
                                         @php
                                             $type = null;
                                             $name = $column;
-                                            $value = '表示順';
+                                            $value = '表示順（表示項目の次に配置）';
                                         @endphp
                                         <x-materials.input-field :type="$type" :name="$name"
                                             :value="$value">
@@ -185,14 +257,26 @@
                                     <div class="card_row">
                                         <div class="card_row_body">
                                             @php
-                                                $type = 'number';
+                                                $next_smaller_data = $content_bodies_sumdata
+                                                    ->where(
+                                                        'content_subcategory_id',
+                                                        $content_body_data->content_subcategory_id,
+                                                    ) // content_subcategory_idが一致するものをフィルタ
+                                                    ->where($column, '<', $content_body_data->sort) // sortが現在のものより小さいものをフィルタ
+                                                    ->sortByDesc($column) // sortの値で降順にソート
+                                                    ->first(); // 最初の要素を取得（次に小さい値）
+                                                $type = 'select';
                                                 $index = $key;
                                                 $name = $column;
-                                                $value = $content_body_data->$column;
-                                                $placeholder = '表示順';
+                                                $value = $next_smaller_data = $next_smaller_data
+                                                    ? $next_smaller_data->sort
+                                                    : null;
+                                                $selectdata = $content_bodies_sumdata
+                                                    ->pluck('title', 'sort')
+                                                    ->toArray();
                                             @endphp
                                             <x-materials.input-field :type="$type" :name="$name"
-                                                :index="$index" :value="$value" :placeholder="$placeholder">
+                                                :index="$index" :value="$value" :selectdata="$selectdata">
                                             </x-materials.input-field>
                                         </div>
                                     </div>
@@ -283,7 +367,7 @@
                                     @php
                                         $type = null;
                                         $name = $column;
-                                        $value = 'カテゴリ';
+                                        $value = 'サブカテゴリ';
                                     @endphp
                                     <x-materials.input-field :type="$type" :name="$name" :value="$value">
                                     </x-materials.input-field>
@@ -299,8 +383,8 @@
                                             $value = null;
                                             $selectdata = $contents_subcategories_data->pluck('view', 'id')->toArray();
                                         @endphp
-                                        <x-materials.input-field :type="$type" :name="$name" :index="$index"
-                                            :value="$value" :selectdata="$selectdata">
+                                        <x-materials.input-field :type="$type" :name="$name"
+                                            :index="$index" :value="$value" :selectdata="$selectdata">
                                         </x-materials.input-field>
                                     </div>
                                 </div>
@@ -422,9 +506,10 @@
                                     @php
                                         $type = null;
                                         $name = $column;
-                                        $value = '表示順';
+                                        $value = '表示順（表示項目の次に配置）';
                                     @endphp
-                                    <x-materials.input-field :type="$type" :name="$name" :value="$value">
+                                    <x-materials.input-field :type="$type" :name="$name"
+                                        :value="$value">
                                     </x-materials.input-field>
                                 </div>
                             </x-materials.card-header-field>
@@ -432,14 +517,14 @@
                                 <div class="card_row">
                                     <div class="card_row_body">
                                         @php
-                                            $type = 'number';
+                                            $type = 'select';
                                             $index = $key;
                                             $name = $column;
-                                            $value = $content_bodies_sumdata->count();
-                                            $placeholder = '表示順';
+                                            $value = 0;
+                                            $selectdata = $content_bodies_sumdata->pluck('title', 'sort')->toArray();
                                         @endphp
                                         <x-materials.input-field :type="$type" :name="$name"
-                                            :index="$index" :value="$value" :placeholder="$placeholder">
+                                            :index="$index" :value="$value" :selectdata="$selectdata">
                                         </x-materials.input-field>
                                     </div>
                                 </div>

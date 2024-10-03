@@ -35,6 +35,12 @@ return [
             'password',
         ],
     ],
+    // nullable
+    'nullable' => [
+        'column' => [
+            'password',
+        ],
+    ],
     // upsert
     'upsert' => [
         'dbdata' => [

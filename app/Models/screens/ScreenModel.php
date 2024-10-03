@@ -208,7 +208,7 @@ class ScreenModel
 
                         }
 
-                        if ($route_query_subdata['required'] && empty($query_data['where'])&& $is_exist_routequery) {
+                        if ($route_query_subdata['required'] && empty($query_data['where']) && $is_exist_routequery) {
                             $query_data['where'][] = [
                                 'table' => $data['table'],
                                 'column' => $data['column'],
@@ -428,7 +428,7 @@ class ScreenModel
      * @param array $ids IDリスト
      * @return array 更新データ
      */
-    private function prepareDataForUpdate(Request $request, $key, $savedFiles)
+    protected function prepareDataForUpdate(Request $request, $key, $savedFiles)
     {
         $data = [
             'id' => $request->input('id')[$key],
@@ -437,12 +437,16 @@ class ScreenModel
         ];
 
         $updatecolumn = $this->config_data["update"]["column"];
+        $nullablecolumn = $this->config_data["nullable"]["column"];
 
         foreach ($updatecolumn as $column) {
             if (isset($data[$column]))
                 continue;
+
             $inputData = $request->input($column)[$key] ?? null;
-            $data[$column] = $this->processColumnData($column, $inputData);
+            if (in_array($column, $nullablecolumn))
+                if ($inputData == null)
+                    continue;
 
             switch ($column) {
                 case 'password':
@@ -544,7 +548,7 @@ class ScreenModel
      * - 特定のカラム（例: 'name'）では、前後の空白が削除された文字列。
      * - その他の場合は、そのままのデータ。
      */
-    private function processColumnData($column, $data)
+    protected function processColumnData($column, $data)
     {
         // 例: 日付カラムの場合、日付形式に変換
         switch ($column) {

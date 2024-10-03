@@ -22,6 +22,22 @@ return [
                 'table' => 'd101_content_bodies',
                 'alias' => 'd101',
             ],
+            'join' => [
+                [
+                    'table' => 'm102_content_subcategories',
+                    'alias' => 'm102',
+                    'column' => 'id',
+                    'basetable' => 'd101',
+                    'basetable_column' => 'content_subcategory_id',
+                ],
+                [
+                    'table' => 'm101_content_categories',
+                    'alias' => 'm101',
+                    'column' => 'id',
+                    'basetable' => 'm102',
+                    'basetable_column' => 'content_category_id',
+                ],
+            ],
             'select' => [
                 [
                     'table' => 'd101',
@@ -58,6 +74,11 @@ return [
                     'column' => 'content_subcategory_id',
                     'alias' => 'content_subcategory_id',
                 ],
+                [
+                    'table' => 'm102',
+                    'column' => 'content_category_id',
+                    'alias' => 'content_category_id',
+                ],
             ],
         ],
         // content_bodies_sumdata
@@ -74,6 +95,11 @@ return [
                 ],
                 [
                     'table' => 'd101',
+                    'column' => 'sort',
+                    'alias' => 'sort',
+                ],
+                [
+                    'table' => 'd101',
                     'column' => 'title',
                     'alias' => 'title',
                 ],
@@ -86,7 +112,7 @@ return [
             'order' => [
                 [
                     'table' => 'd101',
-                    'column' => 'id',
+                    'column' => 'sort',
                     'order' => 'asc',
                 ],
             ],
@@ -148,7 +174,7 @@ return [
             ],
         ],
         'subcategory' => [
-            'required' => true,
+            'required' => false,
             'data' => [
                 'content_bodies_sumdata' => [
                     'table' => 'd101',
