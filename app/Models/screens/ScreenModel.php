@@ -41,6 +41,13 @@ class ScreenModel
     protected $route_path;
 
     /**
+     * ルートクエリ
+     *
+     * @var array
+     */
+    protected $route_query_data;
+
+    /**
      * コモンモデル
      *
      * @var \App\Models\common\CommonModel
@@ -57,7 +64,7 @@ class ScreenModel
     /**
      * クエリデータ
      *
-     * @var array
+     * @var object
      */
     protected $query_data;
 
@@ -84,6 +91,11 @@ class ScreenModel
     public function __construct(Request $request)
     {
         $path = $request->getRequestUri();
+        $this->route_query_data = [];
+        if (!empty($request->query())) {
+            $path = explode('?', $path)[0];
+            $this->route_query_data = $request->query();
+        }
         $this->config_path = config("screens.path.$path");
         $this->config_data = config("screens.$this->config_path");
         $this->route_path = config("screens.$this->config_path.routepath");
@@ -164,7 +176,49 @@ class ScreenModel
     {
         if (!empty($this->config_data['querydata'])) {
             $base_query_data = $this->config_data['querydata'];
+
             foreach ($base_query_data as $table => $query_data) {
+
+                if (!empty($this->config_data['routequerydata'])) {
+                    $route_query_data = $this->config_data['routequerydata'];
+
+                    foreach ($route_query_data as $column => $route_query_subdata) {
+                        foreach ($route_query_subdata['data'] as $name => $data) {
+
+                            $is_exist_routequery = true;
+                            if ($name != $table) {
+                                $is_exist_routequery = false;
+                                continue;
+                            }
+
+                            if ($data['table'] != $query_data['basetable']['alias']) {
+                                continue;
+                            }
+
+                            if (!in_array($column, array_keys($this->route_query_data))) {
+                                continue;
+                            }
+
+                            $query_data['where'][] = [
+                                'table' => $data['table'],
+                                'column' => $data['column'],
+                                'function' => $data['function'],
+                                'value' => $this->route_query_data[$column],
+                            ];
+
+                        }
+
+                        if ($route_query_subdata['required'] && empty($query_data['where']) && $is_exist_routequery) {
+                            $query_data['where'][] = [
+                                'table' => $data['table'],
+                                'column' => $data['column'],
+                                'function' => $data['function'],
+                                'value' => 'none',
+                            ];
+                        }
+                    }
+                }
+
                 $this->query_data[$table] = $this->query_model->getQueryData($query_data);
             }
         }
@@ -230,7 +284,7 @@ class ScreenModel
         }
 
         $view = $this->config_data['nextpath'];
-        return redirect()->route($view)->with('validate_success', true);
+        return redirect()->route($view, $this->route_query_data)->with('validate_success', true);
     }
 
     /**
@@ -246,7 +300,24 @@ class ScreenModel
         }
 
         $view = $this->config_data['backpath'];
-        return redirect()->route($view);
+
+        $view_config_data = config("screens.$view");
+        $routequerydata = [];
+        if (in_array('routequerydata', array_keys($view_config_data))) {
+            $routequerydata = $view_config_data['routequerydata'];
+            foreach (array_keys($this->route_query_data) as $column) {
+                if (!in_array($column, array_keys($routequerydata))) {
+                    unset($this->route_query_data[$column]);
+                    continue;
+                }
+                if (!$routequerydata[$column]['required']) {
+                    unset($this->route_query_data[$column]);
+                    continue;
+                }
+            }
+        }
+        
+        return redirect()->route($view, $this->route_query_data);
     }
 
     /**
@@ -374,7 +445,7 @@ class ScreenModel
      * @param array $ids IDリスト
      * @return array 更新データ
      */
-    private function prepareDataForUpdate(Request $request, $key, $savedFiles)
+    protected function prepareDataForUpdate(Request $request, $key, $savedFiles)
     {
         $data = [
             'id' => $request->input('id')[$key],
@@ -383,12 +454,16 @@ class ScreenModel
         ];
 
         $updatecolumn = $this->config_data["update"]["column"];
+        $nullablecolumn = $this->config_data["nullable"]["column"];
 
         foreach ($updatecolumn as $column) {
             if (isset($data[$column]))
                 continue;
+
             $inputData = $request->input($column)[$key] ?? null;
-            $data[$column] = $this->processColumnData($column, $inputData);
+            if (in_array($column, $nullablecolumn))
+                if ($inputData == null)
+                    continue;
 
             switch ($column) {
                 case 'password':
@@ -490,7 +565,7 @@ class ScreenModel
      * - 特定のカラム（例: 'name'）では、前後の空白が削除された文字列。
      * - その他の場合は、そのままのデータ。
      */
-    private function processColumnData($column, $data)
+    protected function processColumnData($column, $data)
     {
         // 例: 日付カラムの場合、日付形式に変換
         switch ($column) {

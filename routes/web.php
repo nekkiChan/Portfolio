@@ -26,6 +26,15 @@ Route::prefix('/')->name('public.')->group(function (): void {
 
 use App\Http\Controllers\private\profile\ProfileEditController;
 use App\Http\Controllers\private\owner\OwnerEditController;
+use App\Http\Controllers\private\contents\menu\ContentsMenuController;
+use App\Http\Controllers\private\contents\body\ContentBodiesListController;
+use App\Http\Controllers\private\contents\body\ContentBodiesEditController;
+use App\Http\Controllers\private\contents\link\ContentLinkListController;
+use App\Http\Controllers\private\contents\link\ContentLinkEditController;
+use App\Http\Controllers\private\contents\category\ContentsCategoryListController;
+use App\Http\Controllers\private\contents\category\ContentsCategoryEditController;
+use App\Http\Controllers\private\contents\subcategory\ContentsSubCategoryListController;
+use App\Http\Controllers\private\contents\subcategory\ContentsSubCategoryEditController;
 
 Route::middleware(['auth'])->prefix('/private')->name('private.')->group(function (): void {
     // profile
@@ -40,6 +49,66 @@ Route::middleware(['auth'])->prefix('/private')->name('private.')->group(functio
         Route::prefix('/edit')->name('edit.')->group(function (): void {
             Route::get('/', [OwnerEditController::class, 'index'])->name('index');
             Route::post('/action', [OwnerEditController::class, 'action'])->name('action');
+        });
+    });
+    // contents
+    Route::prefix('/contents')->name('contents.')->group(function (): void {
+        // menu
+        Route::prefix('/menu')->name('menu.')->group(function (): void {
+            Route::get('/', [ContentsMenuController::class, 'index'])->name('index');
+            Route::post('/action', [ContentsMenuController::class, 'action'])->name('action');
+        });
+        // body
+        Route::prefix('/body')->name('body.')->group(function (): void {
+            // list
+            Route::prefix('/list')->name('list.')->group(function (): void {
+                Route::get('/', [ContentBodiesListController::class, 'index'])->name('index');
+                Route::post('/action', [ContentBodiesListController::class, 'action'])->name('action');
+            });
+            // edit
+            Route::prefix('/edit')->name('edit.')->group(function (): void {
+                Route::get('/', [ContentBodiesEditController::class, 'index'])->name('index');
+                Route::post('/action', [ContentBodiesEditController::class, 'action'])->name('action');
+            });
+        });
+        // link
+        Route::prefix('/link')->name('link.')->group(function (): void {
+            // list
+            Route::prefix('/list')->name('list.')->group(function (): void {
+                Route::get('/', [ContentLinkListController::class, 'index'])->name('index');
+                Route::post('/action', [ContentLinkListController::class, 'action'])->name('action');
+            });
+            // edit
+            Route::prefix('/edit')->name('edit.')->group(function (): void {
+                Route::get('/', [ContentLinkEditController::class, 'index'])->name('index');
+                Route::post('/action', [ContentLinkEditController::class, 'action'])->name('action');
+            });
+        });
+        // category
+        Route::prefix('/category')->name('category.')->group(function (): void {
+            // list
+            Route::prefix('/list')->name('list.')->group(function (): void {
+                Route::get('/', [ContentsCategoryListController::class, 'index'])->name('index');
+                Route::post('/action', [ContentsCategoryListController::class, 'action'])->name('action');
+            });
+            // edit
+            Route::prefix('/edit')->name('edit.')->group(function (): void {
+                Route::get('/', [ContentsCategoryEditController::class, 'index'])->name('index');
+                Route::post('/action', [ContentsCategoryEditController::class, 'action'])->name('action');
+            });
+        });
+        // subcategory
+        Route::prefix('/subcategory')->name('subcategory.')->group(function (): void {
+            // list
+            Route::prefix('/list')->name('list.')->group(function (): void {
+                Route::get('/', [ContentsSubCategoryListController::class, 'index'])->name('index');
+                Route::post('/action', [ContentsSubCategoryListController::class, 'action'])->name('action');
+            });
+            // edit
+            Route::prefix('/edit')->name('edit.')->group(function (): void {
+                Route::get('/', [ContentsSubCategoryEditController::class, 'index'])->name('index');
+                Route::post('/action', [ContentsSubCategoryEditController::class, 'action'])->name('action');
+            });
         });
     });
 });

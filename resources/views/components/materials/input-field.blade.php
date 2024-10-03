@@ -59,6 +59,11 @@
                         @case('select')
                             @isset($selectdata)
                                 <select class="{{ $name }}" name="{{ "{$name}[{$index}]" }}">
+                                    @if (empty($value))
+                                        <option value="" class="empty" selected>
+                                            {{ ' - ' }}
+                                        </option>
+                                    @endif
                                     @foreach ($selectdata as $key => $option)
                                         <option value="{{ $key }}" {{ $key == $value ? 'selected' : '' }}>
                                             {{ $option }}
@@ -94,6 +99,11 @@
                         @case('select')
                             @isset($selectdata)
                                 <select class="{{ $name }}" name="{{ "{$name}" }}">
+                                    @if (empty($value))
+                                        <option value="" class="empty" selected>
+                                            {{ ' - ' }}
+                                        </option>
+                                    @endif
                                     @foreach ($selectdata as $key => $option)
                                         <option value="{{ $key }}" {{ $key == $value ? 'selected' : '' }}>
                                             {{ $option }}
@@ -125,6 +135,11 @@
                     @case('select')
                         @isset($selectdata)
                             <select class="{{ $name }}">
+                                @if (empty($value))
+                                    <option value="" class="empty" selected>
+                                        {{ ' - ' }}
+                                    </option>
+                                @endif
                                 @foreach ($selectdata as $key => $option)
                                     <option value="{{ $key }}" {{ $key == $value ? 'selected' : '' }}>
                                         {{ $option }}

@@ -48,7 +48,13 @@
 </body>
 
 <footer>
-    @include('common.javascript')
+    @includeIf('common.javascript')
+    @if (session('config_path'))
+        @php
+            $config_path = session('config_path');
+        @endphp
+        @includeIf(config("screens.$config_path.jspath"))
+    @endif
 </footer>
 
 </html>

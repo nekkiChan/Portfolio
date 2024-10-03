@@ -28,6 +28,7 @@
         initializeFiles();
         initializeCKEditor();
         initializeATag();
+        initializeOnClick();
     }
 
     /**
@@ -218,27 +219,60 @@
     /**
      * CKEditorに関するメソッド
      */
+    /**
+     * CKEditorに関するメソッド
+     */
     function initializeCKEditor() {
-
         const $ckEditorElements = $('.ckeditor');
 
         $ckEditorElements.each(function() {
-            const $elementName = $(this).attr('name');
+            const $element = $(this);
 
             // CKEditorのインスタンスを初期化
-            CKEDITOR.replace($elementName);
+            ClassicEditor
+                .create($element[0], {
+                    language: 'ja' // 日本語に設定
+                })
+                .then(editor => {
+                    let previousData = editor.getData(); // 前のデータを保存
 
-            // CKEditorが完全に初期化された後に、テキストから \r\n を削除
-            CKEDITOR.on('instanceReady', function(event) {
-                const editor = event.editor;
+                    // CKEditorが完全に初期化された後に、テキストから \r\n を削除
+                    editor.model.document.on('change:data', () => {
+                        const data = editor.getData();
+                    });
 
-                // 入力中に \r\n を削除
-                editor.on('change', function() {
-                    const data = editor.getData();
-                    const cleanedData = data.replace(/\r\n/g, ''); // \r\n を削除
-                    editor.setData(cleanedData);
+                    // 入力中のエンターキーを制御
+                    editor.editing.view.document.on('keydown', (evt) => {
+                        if (evt.key === 'Enter') {
+                            const data = editor.getData();
+                            // 空の状態でエンターが押された場合、処理を中止
+                            if (data.trim() === '') {
+                                evt.preventDefault(); // デフォルトのエンター動作を防ぐ
+                                return;
+                            }
+
+                            // デフォルトのエンター動作を防ぎ、カスタムで改行を追加
+                            evt.preventDefault();
+
+                            // モデルに新しい段落を追加
+                            const model = editor.model;
+                            model.change(writer => {
+                                const insertPosition = model.document.selection
+                                    .getFirstPosition();
+                                const newParagraph = writer.createElement('paragraph');
+
+                                // 新しい段落を挿入
+                                writer.insert(newParagraph, insertPosition);
+
+                                // 新しい段落にカーソルを移動
+                                writer.setSelection(newParagraph, 'in');
+                            });
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
                 });
-            });
         });
     }
 
@@ -249,6 +283,40 @@
         const $aLinkElements = $('a');
         $aLinkElements.prop({
             tabindex: -1,
+        });
+    }
+
+    /**
+     * onclickに関するメソッ
+     */
+    function initializeOnClick() {
+        const $onclickElements = $('[onclick]');
+
+        $onclickElements.each(function() {
+
+            const $onclickElement = $(this);
+
+            // onclick属性の内容を取得
+            const onclickAttr = $onclickElement.attr('onclick');
+
+            // location.hrefの部分を抽出する
+            if (onclickAttr && onclickAttr.includes('location.href')) {
+                // 正規表現でURL部分を抽出する
+                const urlMatch = onclickAttr.match(/location\.href=['"]([^'"]+)['"]/);
+
+                if (urlMatch && urlMatch[1]) {
+                    const url = urlMatch[1]; // 抽出したURL
+
+                    // onclick属性を削除
+                    $onclickElement.removeAttr('onclick');
+
+                    // クリックイベントを追加
+                    $onclickElement.on('click', function(event) {
+                        event.preventDefault(); // デフォルトの動作を防止（必要であれば）
+                        window.location.href = url; // クリックされたときにURLに遷移
+                    });
+                } 
+            }
         });
     }
 </script>

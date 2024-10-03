@@ -61,7 +61,7 @@
                 </div>
             </x-materials.content-field>
         @endif
-
+        
         @foreach ($content_categories_data as $content_category_data)
             @if (!Auth::check())
                 @continue($content_category_data->is_admin)
@@ -79,4 +79,5 @@
             </x-materials.content-field>
         @endforeach
     </x-materials.container>
+
 </x-app-layout>

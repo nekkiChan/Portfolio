@@ -11,7 +11,7 @@ return [
     ],
     // path
     'routepath' => 'private.owner.edit.index',
-    'jspath' => 'private/owner/edit/index/',
+    'jspath' => 'private.owner.edit.javascript',
     'csspath' => 'private/owner/edit/index/',
     // model
     'model' => PrivateOwnerModel::class,

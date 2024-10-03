@@ -12,12 +12,9 @@ export default defineConfig({
         }),
     ],
     server: {
-        proxy: {
-            '/': {
-                target: 'http://localhost', // LaravelサーバーのURL
-                changeOrigin: true,
-                secure: false,
-            },
+        hmr: {
+            host: 'localhost',
+            clientPort: 5173, // Viteのポートに合わせる
         },
     },
 });

@@ -10,7 +10,7 @@ return [
     ],
     // path
     'routepath' => 'auth.origin.login.index',
-    'jspath' => 'auth/origin/login/',
+    'jspath' => 'auth.origin.login.javascript',
     'csspath' => 'public/login/index/',
     // model
     'model' => PublicLoginModel::class,
