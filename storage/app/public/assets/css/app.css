@@ -20,6 +20,8 @@
     /* card */
     --card-row-padding: 1px;
     --card-row-height: 15px;
+    --card-icon-items: 5;
+    --card-icon-size: 25px;
     /* input select */
     --input-field-height: 50px;
     --input-field-padding: 5px;
@@ -323,17 +325,17 @@ main .container .content_field .content_body {
 /* card-icon */
 .content_body:has(.card_icon_field) {
     width: 100%;
-    height: calc(var(--basic-icon-size)*2);
+    height: calc(var(--card-icon-size)*2);
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
 }
 
 .card_field:has(.card_icon_field) {
-    margin-right: 5%;
+    margin-right: 2%;
     margin-bottom: var(--basic-margin);
-    width: 30%;
-    height: calc(var(--basic-icon-size)*2);
+    width: calc((100% - calc(2% * calc(var(--card-icon-items) - 1))) / var(--card-icon-items));
+    height: calc(var(--card-icon-size)*2);
     border: 2px solid #000;
     border-radius: 5px;
     box-sizing: border-box;
@@ -357,8 +359,8 @@ main .container .content_field .content_body {
 
 .card_field .card_icon_field img {
     margin: auto;
-    width: var(--basic-icon-size);
-    height: var(--basic-icon-size);
+    width: calc(var(--card-icon-size));
+    height: calc(var(--card-icon-size));
 }
 
 .card_field .card_icon_field:has(.icon_text_field) {

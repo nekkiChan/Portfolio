@@ -362,7 +362,9 @@
 
     function initializeCardIconField() {
         const $cardFieldParentElements = $('.card_field').parent();
-        const rowitems = 3;
+        const rowitems = parseInt(getComputedStyle(document.documentElement)
+            .getPropertyValue('--card-icon-items'), 10);
+            console.log(rowitems);
         // CSSのカスタムプロパティ（--basic-margin）の値を取得
         const basicmargin = parseInt(getComputedStyle(document.documentElement)
             .getPropertyValue('--basic-margin'), 10);

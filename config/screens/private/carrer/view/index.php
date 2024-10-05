@@ -9,9 +9,9 @@ return [
         'transition' => '経歴',
     ],
     // path
-    'routepath' => 'private.profile.view.index',
-    'jspath' => 'private.profile.view.javascript',
-    'csspath' => 'private/profile/view/index/',
+    'routepath' => 'private.carrer.view.index',
+    'jspath' => 'private.carrer.view.javascript',
+    'csspath' => 'private/carrer/view/index/',
     // model
     'model' => PrivateCarrerViewModel::class,
     // querydata

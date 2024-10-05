@@ -9,9 +9,9 @@ return [
         'transition' => '実績',
     ],
     // path
-    'routepath' => 'private.profile.view.index',
-    'jspath' => 'private.profile.view.javascript',
-    'csspath' => 'private/profile/view/index/',
+    'routepath' => 'private.works.view.index',
+    'jspath' => 'private.works.view.javascript',
+    'csspath' => 'private/works/view/index/',
     // model
     'model' => PrivateWorksViewModel::class,
     // querydata
