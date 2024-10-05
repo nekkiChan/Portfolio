@@ -24,7 +24,8 @@ Route::prefix('/')->name('public.')->group(function (): void {
 });
 
 
-use App\Http\Controllers\private\profile\ProfileEditController;
+use App\Http\Controllers\private\profile\view\ProfileViewController;
+use App\Http\Controllers\private\profile\edit\ProfileEditController;
 use App\Http\Controllers\private\owner\OwnerEditController;
 use App\Http\Controllers\private\contents\menu\ContentsMenuController;
 use App\Http\Controllers\private\contents\body\ContentBodiesListController;
@@ -36,7 +37,26 @@ use App\Http\Controllers\private\contents\category\ContentsCategoryEditControlle
 use App\Http\Controllers\private\contents\subcategory\ContentsSubCategoryListController;
 use App\Http\Controllers\private\contents\subcategory\ContentsSubCategoryEditController;
 
-Route::middleware(['auth'])->prefix('/private')->name('private.')->group(function (): void {
+Route::middleware(['auth'])->prefix('/')->name('private.')->group(function (): void {
+    // profile
+    Route::prefix('/profile')->name('profile.')->group(function (): void {
+        Route::get('/', [ProfileViewController::class, 'index'])->name('index');
+        Route::post('/action', [ProfileViewController::class, 'action'])->name('action');
+    });
+    // // profile
+    // Route::prefix('/profile')->name('profile.')->group(function (): void {
+    //     Route::prefix('/edit')->name('edit.')->group(function (): void {
+    //         Route::get('/', [ProfileEditController::class, 'index'])->name('index');
+    //         Route::post('/action', [ProfileEditController::class, 'action'])->name('action');
+    //     });
+    // });
+    // // profile
+    // Route::prefix('/profile')->name('profile.')->group(function (): void {
+    //     Route::prefix('/edit')->name('edit.')->group(function (): void {
+    //         Route::get('/', [ProfileEditController::class, 'index'])->name('index');
+    //         Route::post('/action', [ProfileEditController::class, 'action'])->name('action');
+    //     });
+    // });
     // profile
     Route::prefix('/profile')->name('profile.')->group(function (): void {
         Route::prefix('/edit')->name('edit.')->group(function (): void {

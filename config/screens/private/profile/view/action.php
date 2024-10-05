@@ -9,9 +9,11 @@ return [
         'transition' => 'プロフィール編集',
     ],
     // path
-    'routepath' => 'private.profile.edit.index',
-    'jspath' => 'private.profile.edit.javascript',
-    'csspath' => 'private/profile/edit/index/',
+    'routepath' => 'private.profile.view.index',
+    'jspath' => 'private/profile/view/index/',
+    'csspath' => 'private/profile/view/index/',
+    'nextpath' => 'private.profile.view.index',
+    'backpath' => 'public.mainmenu.index',
     // model
     'model' => PrivateProfileEditModel::class,
     // querydata
