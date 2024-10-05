@@ -4,9 +4,9 @@ use App\Models\screens\private\profile\edit\PrivateProfileEditModel;
 return [
     // title
     'pagetitle' => [
-        'main' => 'Profile',
-        'view' => 'プロフィール',
-        'transition' => 'プロフィール',
+        'main' => 'Works',
+        'view' => '実績',
+        'transition' => '実績',
     ],
     // path
     'routepath' => 'private.profile.view.index',

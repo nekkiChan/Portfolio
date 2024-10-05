@@ -25,6 +25,8 @@ Route::prefix('/')->name('public.')->group(function (): void {
 
 
 use App\Http\Controllers\private\profile\view\ProfileViewController;
+use App\Http\Controllers\private\carrer\view\CarrerViewController;
+use App\Http\Controllers\private\works\view\WorksViewController;
 use App\Http\Controllers\private\profile\edit\ProfileEditController;
 use App\Http\Controllers\private\owner\OwnerEditController;
 use App\Http\Controllers\private\contents\menu\ContentsMenuController;
@@ -40,23 +42,25 @@ use App\Http\Controllers\private\contents\subcategory\ContentsSubCategoryEditCon
 Route::middleware(['auth'])->prefix('/')->name('private.')->group(function (): void {
     // profile
     Route::prefix('/profile')->name('profile.')->group(function (): void {
-        Route::get('/', [ProfileViewController::class, 'index'])->name('index');
-        Route::post('/action', [ProfileViewController::class, 'action'])->name('action');
+        Route::prefix('/')->name('view.')->group(function (): void {
+            Route::get('/', [ProfileViewController::class, 'index'])->name('index');
+            Route::post('/action', [ProfileViewController::class, 'action'])->name('action');
+        });
     });
-    // // profile
-    // Route::prefix('/profile')->name('profile.')->group(function (): void {
-    //     Route::prefix('/edit')->name('edit.')->group(function (): void {
-    //         Route::get('/', [ProfileEditController::class, 'index'])->name('index');
-    //         Route::post('/action', [ProfileEditController::class, 'action'])->name('action');
-    //     });
-    // });
-    // // profile
-    // Route::prefix('/profile')->name('profile.')->group(function (): void {
-    //     Route::prefix('/edit')->name('edit.')->group(function (): void {
-    //         Route::get('/', [ProfileEditController::class, 'index'])->name('index');
-    //         Route::post('/action', [ProfileEditController::class, 'action'])->name('action');
-    //     });
-    // });
+    // carrer
+    Route::prefix('/carrer')->name('carrer.')->group(function (): void {
+        Route::prefix('/')->name('view.')->group(function (): void {
+            Route::get('/', [CarrerViewController::class, 'index'])->name('index');
+            Route::post('/action', [CarrerViewController::class, 'action'])->name('action');
+        });
+    });
+    // works
+    Route::prefix('/works')->name('works.')->group(function (): void {
+        Route::prefix('/')->name('view.')->group(function (): void {
+            Route::get('/', [WorksViewController::class, 'index'])->name('index');
+            Route::post('/action', [WorksViewController::class, 'action'])->name('action');
+        });
+    });
     // profile
     Route::prefix('/profile')->name('profile.')->group(function (): void {
         Route::prefix('/edit')->name('edit.')->group(function (): void {

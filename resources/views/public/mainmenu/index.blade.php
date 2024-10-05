@@ -161,15 +161,12 @@
                         $content_category_id = $content_subcategory_data->content_category_id;
                         foreach ($content_category_config_data as $id => $data) {
                             if ($content_category_id == $id + 1) {
-                                switch ($data['name']) {
+                                $dataname = $data['name'];
+                                switch ($dataname) {
                                     case 'profile':
-                                        $linkpath = route('public.mainmenu.index', ['id' => $id]);
-                                        break;
                                     case 'carrer':
-                                        $linkpath = route('public.mainmenu.index', ['id' => $id]);
-                                        break;
                                     case 'works':
-                                        $linkpath = route('public.mainmenu.index', ['id' => $id]);
+                                        $linkpath = route("private.$dataname.view.index");
                                         break;
                                     default:
                                         break;

@@ -3,6 +3,7 @@
     @php
         $csspath = 'storage/assets/css/' . config("screens.$config_path.csspath") . 'app.css';
         $login_user = session('login_user');
+        $form_action_url = route(str_replace('index', 'action', $route_path));
     @endphp
     <link href="{{ asset($csspath) }}?v={{ time() }}" rel="stylesheet">
 
