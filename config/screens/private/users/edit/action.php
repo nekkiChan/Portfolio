@@ -28,7 +28,10 @@ return [
     'update' => [
         'column' => [
             'name',
+            'email',
+            'role_id',
             'password',
+            'is_disable',
         ],
     ],
     // nullable
@@ -42,7 +45,10 @@ return [
         'dbdata' => [
             S001User::class => [
                 'name',
+                'email',
+                'role_id',
                 'password',
+                'is_disable',
             ],
         ],
     ],
@@ -57,11 +63,16 @@ return [
                 'nullable',
                 'string',
             ],
+            'email.*' => [
+                'nullable',
+                'email',
+            ],
         ],
         'messages' => [
             'name.*.required' => 'ユーザー名は必須です。',
             'name.*.string' => 'ユーザー名は文字列でなければなりません。',
             'password.*.string' => 'パスワードは文字列でなければなりません。',
+            'email.*.email' => 'メールアドレスを正しく入力してください。',
         ],
     ],
 ];

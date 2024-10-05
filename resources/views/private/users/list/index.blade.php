@@ -21,10 +21,10 @@
             <x-materials.content-field>
 
                 <div class="content_body">
-                    @foreach ($contents_subcategories_data as $key => $contents_subcategory_data)
+                    @foreach ($users_data as $key => $user_data)
                         @php
                             $routeurl = route(str_replace('list', 'edit', $route_path), [
-                                'id' => $contents_subcategory_data->id,
+                                'user' => $user_data->id,
                             ]);
                         @endphp
                         <x-materials.card-field :routeurl="$routeurl">
@@ -32,17 +32,17 @@
                                 <div class="card_row">
                                     @php
                                         $type = null;
-                                        $name = $contents_subcategory_data->name;
-                                        $value = $contents_subcategory_data->view;
+                                        $name = "name";
+                                        $value = $user_data->name;
                                     @endphp
                                     <x-materials.input-field :type="$type" :name="$name" :value="$value">
                                     </x-materials.input-field>
                                 </div>
                             </x-materials.card-header-field>
 
-                            {{-- is_admin --}}
+                            {{-- is_disable --}}
                             @php
-                                $column = 'is_admin';
+                                $column = 'is_disable';
                             @endphp
                             <x-materials.card-body-field>
                                 <div class="card_row">
@@ -50,7 +50,7 @@
                                         @php
                                             $type = null;
                                             $name = $column;
-                                            $value = '一般公開';
+                                            $value = '状態';
                                         @endphp
                                         <x-materials.input-field :type="$type" :name="$name" :value="$value">
                                         </x-materials.input-field>
@@ -59,7 +59,7 @@
                                         @php
                                             $type = null;
                                             $name = $column;
-                                            $value = $contents_subcategory_data->$column ? '不可' : '可';
+                                            $value = $user_data->$column ? '無効' : '有効';
                                         @endphp
                                         <x-materials.input-field :type="$type" :name="$name" :value="$value">
                                         </x-materials.input-field>

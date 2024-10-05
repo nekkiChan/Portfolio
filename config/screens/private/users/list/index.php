@@ -35,8 +35,8 @@ return [
                 ],
                 [
                     'table' => 's001',
-                    'column' => 'disable',
-                    'alias' => 'disable',
+                    'column' => 'is_disable',
+                    'alias' => 'is_disable',
                 ],
             ],
             'order' => [

@@ -45,14 +45,50 @@ return [
                 ],
                 [
                     'table' => 's001',
-                    'column' => 'disable',
-                    'alias' => 'disable',
+                    'column' => 'role_id',
+                    'alias' => 'role_id',
+                ],
+                [
+                    'table' => 's001',
+                    'column' => 'is_disable',
+                    'alias' => 'is_disable',
                 ],
             ],
             'order' => [
                 [
                     'table' => 's001',
                     'column' => 'id',
+                    'order' => 'asc',
+                ],
+            ],
+        ],
+        // roles_data
+        'roles_data' => [
+            'basetable' => [
+                'table' => 's002_roles',
+                'alias' => 's002',
+            ],
+            'select' => [
+                [
+                    'table' => 's002',
+                    'column' => 'id',
+                    'alias' => 'id',
+                ],
+                [
+                    'table' => 's002',
+                    'column' => 'name',
+                    'alias' => 'name',
+                ],
+                [
+                    'table' => 's002',
+                    'column' => 'level',
+                    'alias' => 'level',
+                ],
+            ],
+            'order' => [
+                [
+                    'table' => 's001',
+                    'column' => 'level',
                     'order' => 'asc',
                 ],
             ],
