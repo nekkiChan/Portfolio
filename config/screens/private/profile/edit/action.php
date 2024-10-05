@@ -1,5 +1,5 @@
 <?php
-use App\Models\screens\private\profile\PrivateProfileModel;
+use App\Models\screens\private\profile\edit\PrivateProfileEditModel;
 use App\Models\dbtables\S001User;
 use App\Models\dbtables\D201ServiceLink;
 
@@ -17,7 +17,7 @@ return [
     'nextpath' => 'private.profile.edit.index',
     'backpath' => 'public.mainmenu.index',
     // model
-    'model' => PrivateProfileModel::class,
+    'model' => PrivateProfileEditModel::class,
     // table
     'table' => S001User::class,
     // querydata

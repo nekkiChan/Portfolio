@@ -43,9 +43,6 @@ class InitM201Seeder extends Seeder
                         $data = $value['data'];
                         $insertdata[$column] = $this->query_model->getReferenceId($tableclass, $data);
                         break;
-                    case 'icon_image_path':
-                        $insertdata[$column] = asset($value);
-                        break;
                     default:
                         $insertdata[$column] = $value;
                         break;

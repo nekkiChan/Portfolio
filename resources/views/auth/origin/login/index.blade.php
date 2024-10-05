@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-app-layout>
 
     @php
         $csspath = 'storage/assets/css/' . config("screens.$config_path.csspath") . 'app.css';
@@ -96,4 +96,4 @@
 
         </x-materials.content-field>
     </x-materials.container>
-</x-guest-layout>
+</x-app-layout>

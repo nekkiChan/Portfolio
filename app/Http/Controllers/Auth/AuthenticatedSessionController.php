@@ -45,7 +45,7 @@ class AuthenticatedSessionController extends Controller
             Auth::login($user);
             $request->session()->regenerate();
 
-            return redirect()->route('public.mainmenu.index');
+            return redirect()->intended(route('public.mainmenu.index'));
         }
 
         $messages = [

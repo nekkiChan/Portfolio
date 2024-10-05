@@ -23,6 +23,12 @@ return [
             'view' => config('screens.public.mainmenu.index.pagetitle.transition'),
             'level' => 1,
         ],
+        'users_menu' => [
+            'routepath' => 'private.users.menu.index',
+            'configpath' => 'private.users.menu.index',
+            'view' => config('screens.private.users.menu.index.pagetitle.transition'),
+            'level' => 999,
+        ],
         'profile_edit' => [
             'routepath' => 'private.profile.edit.index',
             'configpath' => 'private.profile.edit.index',

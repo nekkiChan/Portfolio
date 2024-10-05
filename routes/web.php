@@ -24,7 +24,13 @@ Route::prefix('/')->name('public.')->group(function (): void {
 });
 
 
-use App\Http\Controllers\private\profile\ProfileEditController;
+use App\Http\Controllers\private\profile\view\ProfileViewController;
+use App\Http\Controllers\private\carrer\view\CarrerViewController;
+use App\Http\Controllers\private\works\view\WorksViewController;
+use App\Http\Controllers\private\users\UsersMenuController;
+use App\Http\Controllers\private\users\UsersEditController;
+use App\Http\Controllers\private\users\UsersListController;
+use App\Http\Controllers\private\profile\edit\ProfileEditController;
 use App\Http\Controllers\private\owner\OwnerEditController;
 use App\Http\Controllers\private\contents\menu\ContentsMenuController;
 use App\Http\Controllers\private\contents\body\ContentBodiesListController;
@@ -36,7 +42,46 @@ use App\Http\Controllers\private\contents\category\ContentsCategoryEditControlle
 use App\Http\Controllers\private\contents\subcategory\ContentsSubCategoryListController;
 use App\Http\Controllers\private\contents\subcategory\ContentsSubCategoryEditController;
 
-Route::middleware(['auth'])->prefix('/private')->name('private.')->group(function (): void {
+Route::middleware(['auth'])->prefix('/')->name('private.')->group(function (): void {
+    // profile
+    Route::prefix('/profile')->name('profile.')->group(function (): void {
+        Route::prefix('/')->name('view.')->group(function (): void {
+            Route::get('/', [ProfileViewController::class, 'index'])->name('index');
+            Route::post('/action', [ProfileViewController::class, 'action'])->name('action');
+        });
+    });
+    // carrer
+    Route::prefix('/carrer')->name('carrer.')->group(function (): void {
+        Route::prefix('/')->name('view.')->group(function (): void {
+            Route::get('/', [CarrerViewController::class, 'index'])->name('index');
+            Route::post('/action', [CarrerViewController::class, 'action'])->name('action');
+        });
+    });
+    // works
+    Route::prefix('/works')->name('works.')->group(function (): void {
+        Route::prefix('/')->name('view.')->group(function (): void {
+            Route::get('/', [WorksViewController::class, 'index'])->name('index');
+            Route::post('/action', [WorksViewController::class, 'action'])->name('action');
+        });
+    });
+    // users
+    Route::prefix('/users')->name('users.')->group(function (): void {
+        // menu
+        Route::prefix('/menu')->name('menu.')->group(function (): void {
+            Route::get('/', [UsersMenuController::class, 'index'])->name('index');
+            Route::post('/action', [UsersMenuController::class, 'action'])->name('action');
+        });
+        // list
+        Route::prefix('/list')->name('list.')->group(function (): void {
+            Route::get('/', [UsersListController::class, 'index'])->name('index');
+            Route::post('/action', [UsersListController::class, 'action'])->name('action');
+        });
+        // edit
+        Route::prefix('/edit')->name('edit.')->group(function (): void {
+            Route::get('/', [UsersEditController::class, 'index'])->name('index');
+            Route::post('/action', [UsersEditController::class, 'action'])->name('action');
+        });
+    });
     // profile
     Route::prefix('/profile')->name('profile.')->group(function (): void {
         Route::prefix('/edit')->name('edit.')->group(function (): void {

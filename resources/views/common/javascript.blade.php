@@ -29,6 +29,7 @@
         initializeCKEditor();
         initializeATag();
         initializeOnClick();
+        initializeCardIconField();
     }
 
     /**
@@ -284,6 +285,40 @@
         $aLinkElements.prop({
             tabindex: -1,
         });
+
+        // アンカーリンククリック時のスクロール位置調整を追加
+        $aLinkElements.on('click', function(event) {
+            const target = this.hash; // #以降のIDを取得
+
+            if (target) {
+                event.preventDefault(); // デフォルトの動作（即座のスクロール）を防止
+
+                setTimeout(function() {
+                    adjustScrollPosition(target); // スクロール位置の調整
+                }, 5); // クリック後に少し遅延させて位置を調整
+            }
+
+            /**
+             * スクロール位置を調整する関数
+             */
+            function adjustScrollPosition(target) {
+                // CSSのカスタムプロパティ（--header-height）の値を取得
+                const scrollOffset = parseInt(getComputedStyle(document.documentElement)
+                    .getPropertyValue('--header-height'), 10);
+
+                // ターゲットの要素が存在する場合にスクロール位置を調整
+                const $targetElement = $(target);
+                if ($targetElement.length) {
+                    const elementPosition = $targetElement.offset().top; // 要素の位置を取得
+                    const offsetPosition = elementPosition - scrollOffset; // オフセットを適用
+
+                    // スムーズにスクロール
+                    $('html, body').animate({
+                        scrollTop: offsetPosition
+                    }, 500); // 500ミリ秒でスムーズにスクロール
+                }
+            }
+        });
     }
 
     /**
@@ -295,6 +330,7 @@
         $onclickElements.each(function() {
 
             const $onclickElement = $(this);
+            const isBlank = $onclickElement.hasClass('blank');
 
             // onclick属性の内容を取得
             const onclickAttr = $onclickElement.attr('onclick');
@@ -313,10 +349,40 @@
                     // クリックイベントを追加
                     $onclickElement.on('click', function(event) {
                         event.preventDefault(); // デフォルトの動作を防止（必要であれば）
-                        window.location.href = url; // クリックされたときにURLに遷移
+                        if (isBlank) {
+                            window.open(url, '_blank'); // URLを新しいタブで開く
+                        } else {
+                            window.location.href = url; // クリックされたときにURLに遷移
+                        }
                     });
-                } 
+                }
             }
+        });
+    }
+
+    function initializeCardIconField() {
+        const $cardFieldParentElements = $('.card_field').parent();
+        const rowitems = parseInt(getComputedStyle(document.documentElement)
+            .getPropertyValue('--card-icon-items'), 10);
+            console.log(rowitems);
+        // CSSのカスタムプロパティ（--basic-margin）の値を取得
+        const basicmargin = parseInt(getComputedStyle(document.documentElement)
+            .getPropertyValue('--basic-margin'), 10);
+
+        $cardFieldParentElements.each(function() {
+            const $cardFieldParentElement = $(this);
+            const $cardFieldHasIconElements = $cardFieldParentElement.children(
+                '.card_field:has(.card_icon_field)');
+            $cardFieldHasIconElements.each(function(index) {
+                const $cardFieldHasIconElement = $(this);
+                if (index >= 0 && index < rowitems) {
+                    $cardFieldHasIconElement.css('margin-top', basicmargin);
+                }
+                if ((index + 1) % rowitems === 0 && $cardFieldHasIconElement.find('.card_icon_field')
+                    .length > 0) {
+                    $cardFieldHasIconElement.css('margin-right', '0');
+                }
+            });
         });
     }
 </script>
