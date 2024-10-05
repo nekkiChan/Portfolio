@@ -12,6 +12,13 @@ return [
     '/carrer/action' => 'private.carrer.view.action',
     '/works' => 'private.works.view.index',
     '/works/action' => 'private.works.view.action',
+    // users
+    '/users/menu' => 'private.users.menu.index',
+    '/users/menu/action' => 'private.users.menu.action',
+    '/users/list' => 'private.users.list.index',
+    '/users/list/action' => 'private.users.list.action',
+    '/users/edit' => 'private.users.edit.index',
+    '/users/edit/action' => 'private.users.edit.action',
     // profile
     '/profile/edit' => 'private.profile.edit.index',
     '/profile/edit/action' => 'private.profile.edit.action',
