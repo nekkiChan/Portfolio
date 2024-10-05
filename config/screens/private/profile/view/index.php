@@ -1,5 +1,5 @@
 <?php
-use App\Models\screens\private\profile\edit\PrivateProfileEditModel;
+use App\Models\screens\private\profile\view\PrivateProfileViewModel;
 
 return [
     // title
@@ -13,7 +13,7 @@ return [
     'jspath' => 'private.profile.view.javascript',
     'csspath' => 'private/profile/view/index/',
     // model
-    'model' => PrivateProfileEditModel::class,
+    'model' => PrivateProfileViewModel::class,
     // querydata
     'querydata' => [
         // content_bodies_data
@@ -112,14 +112,6 @@ return [
                     'order' => 'asc',
                 ],
             ],
-            'where' => [
-                [
-                    'table' => 'm102',
-                    'column' => 'is_admin',
-                    'function' => '=',
-                    'value' => false,
-                ],
-            ],
         ],
         // service_links_data
         'service_links_data' => [
@@ -212,14 +204,6 @@ return [
                     'table' => 'm201',
                     'column' => 'sort',
                     'order' => 'asc',
-                ],
-            ],
-            'where' => [
-                [
-                    'table' => 'm102',
-                    'column' => 'is_admin',
-                    'function' => '=',
-                    'value' => false,
                 ],
             ],
         ],

@@ -1,5 +1,5 @@
 <?php
-use App\Models\screens\private\profile\edit\PrivateProfileEditModel;
+use App\Models\screens\private\carrer\view\PrivateCarrerViewModel;
 
 return [
     // title
@@ -15,7 +15,7 @@ return [
     'nextpath' => 'private.profile.view.index',
     'backpath' => 'public.mainmenu.index',
     // model
-    'model' => PrivateProfileEditModel::class,
+    'model' => PrivateCarrerViewModel::class,
     // querydata
     'querydata' => [
     ],

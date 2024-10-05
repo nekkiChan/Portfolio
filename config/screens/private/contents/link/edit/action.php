@@ -37,7 +37,6 @@ return [
     ],
     'nullable' => [
         'column' => [
-            'link_path',
             'file_path',
             'sort',
         ],

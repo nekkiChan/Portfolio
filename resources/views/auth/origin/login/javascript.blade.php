@@ -12,6 +12,12 @@
             'bar' => asset('storage/assets/img/gray/bar.svg'),
         ],
     ];
+    /**
+     * データ
+     */
+    $content_bodies_data = session('content_bodies_data');
+    $contents_subcategories_data = session('contents_subcategories_data');
+    $content_bodies_sumdata = session('content_bodies_sumdata');
 @endphp
 
 <script>
@@ -30,16 +36,14 @@
      * 半角英数字専用入力欄メソッド
      */
     function initializeHalfCharInputElements() {
-
-        const $halfCharInputElements = $('input.link_path');
+        const $halfCharInputElements = $('input.name');
         $halfCharInputElements.each(function() {
             const $halfCharInputElement = $(this);
 
             // 半角英数字用にIMEのinputmodeを設定
             $halfCharInputElement.prop('inputmode', 'latin'); // ここでinputmodeをセット
-            $halfCharInputElement.attr('autocomplete', 'off'); // 自動補完をオフにする
+            $halfCharInputElement.attr('autocomplete', 'off'); // 自動補完をオフにする（必要に応じて）
             $halfCharInputElement.css('ime-mode', 'disabled'); // IME制御（古いブラウザ向け）
-
 
             // 全角文字を制限する
             $halfCharInputElement.on('input', function() {
@@ -47,6 +51,7 @@
                 const sanitizedValue = $halfCharInputElement.val().replace(/[^\x00-\x7F]/g, '');
                 $halfCharInputElement.val(sanitizedValue);
             });
+
         });
     }
 </script>

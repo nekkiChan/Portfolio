@@ -1,5 +1,5 @@
 <?php
-use App\Models\screens\private\profile\edit\PrivateProfileEditModel;
+use App\Models\screens\private\works\view\PrivateWorksViewModel;
 
 return [
     // title
@@ -13,7 +13,7 @@ return [
     'jspath' => 'private.profile.view.javascript',
     'csspath' => 'private/profile/view/index/',
     // model
-    'model' => PrivateProfileEditModel::class,
+    'model' => PrivateWorksViewModel::class,
     // querydata
     'querydata' => [
         // content_bodies_data

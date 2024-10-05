@@ -145,7 +145,11 @@
                                     $iconpath = $service_link_data->icon_image_path;
                                     $linkpath = $service_link_data->link_path;
                                     $filepath = $service_link_data->file_path;
-                                    $class = "$service_link_data->name blank link";
+                                    if (!empty($linkpath)) {
+                                        $class = "$service_link_data->name blank link";
+                                    } else {
+                                        $class = "$service_link_data->name blank image";
+                                    }
                                     $name = $service_link_data->view;
                                 @endphp
                                 <x-materials.card-icon-field :iconpath="$iconpath" :linkpath="$linkpath" :filepath="$filepath"

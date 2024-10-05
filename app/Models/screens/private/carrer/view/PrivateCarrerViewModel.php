@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Models\screens\private\profile\view;
+namespace App\Models\screens\private\carrer\view;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\screens\ScreenModel;
 
-class PrivateProfileViewModel extends ScreenModel
+class PrivateCarrerViewModel extends ScreenModel
 {
     public function __construct(Request $request)
     {
         parent::__construct($request);
     }
+
 
     /**
      * クエリデータの設定
@@ -24,7 +25,7 @@ class PrivateProfileViewModel extends ScreenModel
         $content_category_id = null;
         foreach ($content_category_config_data as $id => $data) {
             $dataname = $data['name'];
-            if ($dataname == 'profile') {
+            if ($dataname == 'carrer') {
                 $content_category_id = $id + 1;
             }
         }
@@ -101,5 +102,4 @@ class PrivateProfileViewModel extends ScreenModel
             }
         }
     }
-
 }

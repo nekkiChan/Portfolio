@@ -343,14 +343,6 @@ main .container .content_field .content_body {
     border-color: var(--icon-hover-color);
 }
 
-.card_field:has(.card_icon_field):nth-child(3n) {
-    margin-right: 0;
-}
-
-.card_field:has(.card_icon_field):nth-child(3n+1) {
-    clear: left;
-}
-
 .card_field .card_icon_field {
     width: 100%;
     height: 100%;

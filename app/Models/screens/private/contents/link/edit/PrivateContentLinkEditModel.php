@@ -62,8 +62,6 @@ class PrivateContentLinkEditModel extends ScreenModel
                     $replacedata = $tablemodel::where($column, '=', $inputData)->first();
 
                     if ($replacedata->sort < $initsort) {
-                        // dd(   $tablemodel::where($column, '>', $replacedata->sort)
-                        // ->where($column, '<', $initsort)->get());
                         $tablemodel::where($column, '>', $replacedata->sort)
                             ->where($column, '<', $initsort)
                             ->increment($column);
