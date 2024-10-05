@@ -295,6 +295,8 @@
         $onclickElements.each(function() {
 
             const $onclickElement = $(this);
+            const isBlank = $onclickElement.hasClass('blank');
+            console.log(isBlank);
 
             // onclick属性の内容を取得
             const onclickAttr = $onclickElement.attr('onclick');
@@ -313,9 +315,13 @@
                     // クリックイベントを追加
                     $onclickElement.on('click', function(event) {
                         event.preventDefault(); // デフォルトの動作を防止（必要であれば）
-                        window.location.href = url; // クリックされたときにURLに遷移
+                        if (isBlank) {
+                            window.open(url, '_blank'); // URLを新しいタブで開く
+                        } else {
+                            window.location.href = url; // クリックされたときにURLに遷移
+                        }
                     });
-                } 
+                }
             }
         });
     }

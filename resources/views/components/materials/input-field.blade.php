@@ -13,6 +13,9 @@
 <div class="input_field">
     <div class="text_field">
         @if (isset($type))
+            @php
+                // name属性あり
+            @endphp
             @if (isset($index))
                 @if ($index != 'once')
                     @switch($type)
@@ -114,6 +117,9 @@
                         @break
                     @endswitch
                 @endif
+                @php
+                    // name属性なし
+                @endphp
             @else
                 @switch($type)
                     @case('text')
@@ -147,6 +153,12 @@
                                 @endforeach
                             </select>
                         @endisset
+                    @break
+
+                    @case('dom')
+                        <div class="dom_field">
+                            {!! $value !!}
+                        </div>
                     @break
                 @endswitch
             @endif

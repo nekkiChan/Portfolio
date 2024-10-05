@@ -9,7 +9,7 @@ return [
         0 => [
             'name' => 'this_site',
             'view' => '本サービス',
-            'icon_image_path' => 'storage/assets/img/gray/home.svg',
+            'icon_image_path' => 'home.svg',
             'created_by' => [
                 'table' => S001User::class,
                 'data' => [
@@ -22,7 +22,7 @@ return [
         1 => [
             'name' => 'twitter',
             'view' => 'X（旧Twitter）',
-            'icon_image_path' => 'storage/assets/img/gray/twitter.svg',
+            'icon_image_path' => 'twitter.svg',
             'created_by' => [
                 'table' => S001User::class,
                 'data' => [
@@ -35,7 +35,7 @@ return [
         2 => [
             'name' => 'instagram',
             'view' => 'instagram',
-            'icon_image_path' => 'storage/assets/img/gray/instagram.svg',
+            'icon_image_path' => 'instagram.svg',
             'created_by' => [
                 'table' => S001User::class,
                 'data' => [
@@ -48,7 +48,7 @@ return [
         3 => [
             'name' => 'github',
             'view' => 'github',
-            'icon_image_path' => 'storage/assets/img/gray/github.svg',
+            'icon_image_path' => 'github.svg',
             'created_by' => [
                 'table' => S001User::class,
                 'data' => [
@@ -61,7 +61,7 @@ return [
         4 => [
             'name' => 'current_site',
             'view' => '該当サイト',
-            'icon_image_path' => 'storage/assets/img/gray/link.svg',
+            'icon_image_path' => 'link.svg',
             'created_by' => [
                 'table' => S001User::class,
                 'data' => [
