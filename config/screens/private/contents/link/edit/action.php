@@ -37,8 +37,6 @@ return [
     ],
     'nullable' => [
         'column' => [
-            'file_path',
-            'sort',
         ],
     ],
     // upsert

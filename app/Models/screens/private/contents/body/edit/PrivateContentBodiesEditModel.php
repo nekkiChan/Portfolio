@@ -39,6 +39,7 @@ class PrivateContentBodiesEditModel extends ScreenModel
                 continue;
 
             $inputData = $request->input($column)[$key] ?? null;
+
             if (in_array($column, $nullablecolumn))
                 if ($inputData == null)
                     continue;
@@ -46,13 +47,20 @@ class PrivateContentBodiesEditModel extends ScreenModel
             switch ($column) {
                 case 'sort':
                     $tablemodel = $this->config_data['table'];
-                    $initdata = $tablemodel::where('id', '=', $request->input('id')[$key])
+                    $initId = $request->input('id')[$key];
+
+                    if($initId == null){
+                        $inputData = $tablemodel::count() + 1;
+                        break;
+                    }
+
+                    $initdata = $tablemodel::where('id', '=', $initId)
                         ->where($column, '=', $inputData + 1)->get();
                     if ($initdata->count() > 0) {
                         continue 2;
                     }
 
-                    $initdata = $tablemodel::where('id', '=', $request->input('id')[$key])
+                    $initdata = $tablemodel::where('id', '=', $initId)
                         ->where('content_subcategory_id', '=', $request->input('content_subcategory_id')[$key])
                         ->first();
                     $initsort = $tablemodel::all()->sortByDesc('sort')->first()->sort + 1;
