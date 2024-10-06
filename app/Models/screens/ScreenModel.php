@@ -231,17 +231,21 @@ class ScreenModel
 
                     }
 
+                    if (!$route_query_subdata['required']) {
+                        continue;
+                    }
+
                     $is_none_pattern_a = empty($query_data['where']);
                     $is_none_pattern_a = $is_none_pattern_a && $is_exist_routequery;
 
-                    $is_none_pattern_b = $route_query_subdata['required'];
                     if (!in_array('value', array_keys($route_query_data[$column]))) {
                         continue;
                     }
-                    $is_none_pattern_b = $is_none_pattern_b && $route_query_data[$column]['value'] == null;
+                    $is_none_pattern_b = $route_query_data[$column]['value'] == null;
                     $is_none_pattern_b = $is_none_pattern_b && $is_exist_routequery;
 
                     $is_none = $is_none_pattern_a || $is_none_pattern_b;
+
                     if ($is_none) {
                         $query_data['where'][] = [
                             'table' => $data['table'],

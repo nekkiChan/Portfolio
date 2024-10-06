@@ -60,7 +60,7 @@ return [
             'data' => [
                 'contents_subcategories_data' => [
                     'table' => 'm102',
-                    'column' => 'category_id',
+                    'column' => 'content_category_id',
                     'function' => '=',
                 ],
             ],
