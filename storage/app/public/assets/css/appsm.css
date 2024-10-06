@@ -171,4 +171,16 @@
         justify-content: left;
         align-items: center;
     }
+
+    /* crad_icon */
+    .card_field .card_icon_field .icon_text_field {
+        position: absolute;
+        width: 100%;
+        height: var(--basic-font-size);
+        font-size: 0.5em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        bottom: 0.2em;
+    }
 }
