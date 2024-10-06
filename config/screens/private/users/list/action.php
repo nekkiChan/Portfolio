@@ -11,7 +11,7 @@ return [
     'jspath' => 'private/users/list/index/',
     'csspath' => 'private/users/list/index/',
     'nextpath' => 'private.users.list.index',
-    'backpath' => 'private/users/menu/index/',
+    'backpath' => 'private.users.menu.index',
     // model
     'model' => PrivateContentBodiesListModel::class,
     // table
