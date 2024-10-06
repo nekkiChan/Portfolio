@@ -1,5 +1,5 @@
 @if (!isset($value))
-    @if ($type == 'select' && ($value == 0))
+    @if ($type == 'select' && $value == 0)
         @php
             $value = 0;
         @endphp
