@@ -511,3 +511,26 @@ input::placeholder {
 input:focus {
     border-color: var(--input-focus-color);
 }
+
+/* password */
+.password_viewer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-left:1px solid #000;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* unique_alert */
+div.unique_alert {
+    position: absolute;
+    top: -100%;
+    right: 0;
+    color: var(--basic-red-color);
+}

@@ -10,6 +10,12 @@
     @endphp
 @endif
 
+@if (!isset($initSelectValue))
+    @php
+        $initSelectValue = ' - ';
+    @endphp
+@endif
+
 <div class="input_field">
     <div class="text_field">
         @if (isset($type))
@@ -18,109 +24,83 @@
             @endphp
             @if (isset($index))
                 @if ($index != 'once')
-                    @switch($type)
-                        @case('text')
-                            <input type="{{ $type }}" class="{{ $name }}" name="{{ "{$name}[{$index}]" }}"
-                                value="{{ $value }}" placeholder="{{ $placeholder }}">
-                        @break
-
-                        @case('number')
-                            <input type="{{ $type }}" class="{{ $name }}" name="{{ "{$name}[{$index}]" }}"
-                                value="{{ $value }}" placeholder="{{ $placeholder }}">
-                        @break
-
-                        @case('file')
-                            <input type="hidden" class="{{ $name }}_flag flag" name="{{ "{$name}_flag[{$index}]" }}"
-                                value="{{ $value }}">
-                            <input type="{{ $type }}" class="{{ $name }} file"
-                                name="{{ "{$name}[{$index}]" }}">
-                            @empty($value)
-                                <div class="file close hidden">
-                                    <img src="{{ asset('storage/assets/img/gray/close.svg') }}" alt="close">
-                                </div>
-                            @else
-                                <div class="file image">
-                                    <img src="{{ asset('storage/assets/img/gray/image.svg') }}" alt="image">
-                                </div>
-                                <div class="file delete">
-                                    <img src="{{ asset('storage/assets/img/gray/delete.svg') }}" alt="delete">
-                                </div>
-                            @endempty
-                        @break
-
-                        @case('password')
-                            <input type="{{ $type }}" class="{{ $name }}" name="{{ "{$name}[{$index}]" }}"
-                                value="{{ $value }}" placeholder="{{ $placeholder }}">
-                        @break
-
-                        @case('ckeditor')
-                            <textarea class="ckeditor {{ $name }}" name="{{ "{$name}[{$index}]" }}">
-                            {{ $value }}
-                        </textarea>
-                        @break
-
-                        @case('select')
-                            @isset($selectdata)
-                                <select class="{{ $name }}" name="{{ "{$name}[{$index}]" }}">
-                                    @if (empty($value))
-                                        <option value="" class="empty" selected>
-                                            {{ ' - ' }}
-                                        </option>
-                                    @endif
-                                    @foreach ($selectdata as $key => $option)
-                                        <option value="{{ $key }}" {{ $key == $value ? 'selected' : '' }}>
-                                            {{ $option }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            @endisset
-                        @break
-                    @endswitch
+                    @php
+                        $nameval = "{$name}[{$index}]";
+                        $nameflagval = "{$name}_flag[{$index}]";
+                    @endphp
                 @else
-                    @switch($type)
-                        @case('text')
-                            <input type="{{ $type }}" class="{{ $name }}" name="{{ "{$name}" }}"
-                                value="{{ $value }}" placeholder="{{ $placeholder }}">
-                        @break
-
-                        @case('number')
-                            <input type="{{ $type }}" class="{{ $name }}" name="{{ "{$name}" }}"
-                                value="{{ $value }}" placeholder="{{ $placeholder }}">
-                        @break
-
-                        @case('ckeditor')
-                            <textarea class="ckeditor {{ $name }}" name="{{ "{$name}" }}">
-                            {{ $value }}
-                        </textarea>
-                        @break
-
-                        @case('password')
-                            <input type="{{ $type }}" class="{{ $name }}" name="{{ "{$name}" }}"
-                                value="{{ $value }}" placeholder="{{ $placeholder }}">
-                        @break
-
-                        @case('select')
-                            @isset($selectdata)
-                                <select class="{{ $name }}" name="{{ "{$name}" }}">
-                                    @if (empty($value))
-                                        <option value="" class="empty" selected>
-                                            {{ ' - ' }}
-                                        </option>
-                                    @endif
-                                    @foreach ($selectdata as $key => $option)
-                                        <option value="{{ $key }}" {{ $key == $value ? 'selected' : '' }}>
-                                            {{ $option }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            @endisset
-                        @break
-                    @endswitch
+                    @php
+                        $nameval = "{$name}";
+                        $nameflagval = "{$name}_flag";
+                    @endphp
                 @endif
+
+                @switch($type)
+                    @case('text')
+                        <input type="{{ $type }}" class="{{ $name }}" name="{{ $nameval }}"
+                            value="{{ $value }}" placeholder="{{ $placeholder }}">
+                    @break
+
+                    @case('number')
+                        <input type="{{ $type }}" class="{{ $name }}" name="{{ $nameval }}"
+                            value="{{ $value }}" placeholder="{{ $placeholder }}">
+                    @break
+
+                    @case('email')
+                        <input type="{{ $type }}" class="{{ $name }}" name="{{ $nameval }}"
+                            value="{{ $value }}" placeholder="{{ $placeholder }}">
+                    @break
+
+                    @case('file')
+                        <input type="hidden" class="{{ $name }}_flag flag" name="{{ $nameflagval }}"
+                            value="{{ $value }}">
+                        <input type="{{ $type }}" class="{{ $name }} file" name="{{ $nameval }}">
+                        @empty($value)
+                            <div class="file close hidden">
+                                <img src="{{ asset('storage/assets/img/gray/close.svg') }}" alt="close">
+                            </div>
+                        @else
+                            <div class="file image">
+                                <img src="{{ asset('storage/assets/img/gray/image.svg') }}" alt="image">
+                            </div>
+                            <div class="file delete">
+                                <img src="{{ asset('storage/assets/img/gray/delete.svg') }}" alt="delete">
+                            </div>
+                        @endempty
+                    @break
+
+                    @case('password')
+                        <input type="{{ $type }}" class="{{ $name }}" name="{{ $nameval }}"
+                            value="" placeholder="{{ $placeholder }}">
+                    @break
+
+                    @case('ckeditor')
+                        <textarea class="ckeditor {{ $name }}" name="{{ $nameval }}">
+                    {{ $value }}
+                </textarea>
+                    @break
+
+                    @case('select')
+                        @isset($selectdata)
+                            <select class="{{ $name }}" name="{{ "{$name}[{$index}]" }}">
+                                @if (empty($value))
+                                    <option value="" class="empty" selected>
+                                        {{ $initSelectValue }}
+                                    </option>
+                                @endif
+                                @foreach ($selectdata as $key => $option)
+                                    <option value="{{ $key }}" {{ $key == $value ? 'selected' : '' }}>
+                                        {{ $option }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        @endisset
+                    @break
+                @endswitch
+            @else
                 @php
                     // name属性なし
                 @endphp
-            @else
                 @switch($type)
                     @case('text')
                         <input type="{{ $type }}" class="{{ $name }}" value="{{ $value }}"
@@ -143,7 +123,7 @@
                             <select class="{{ $name }}">
                                 @if (empty($value))
                                     <option value="" class="empty" selected>
-                                        {{ ' - ' }}
+                                        {{ $initSelectValue }}
                                     </option>
                                 @endif
                                 @foreach ($selectdata as $key => $option)

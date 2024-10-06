@@ -15,5 +15,10 @@ return [
             'level' => 1,
             'created_by' => 1,
         ],
+        2 => [
+            'name' => '利用者',
+            'level' => 2,
+            'created_by' => 1,
+        ],
     ],
 ];

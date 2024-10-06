@@ -18,11 +18,10 @@
                 @include('common.content-row-errors')
 
                 <div class="content_body">
-                    @if ($contents_subcategories_data->count() > 0)
+                    @if ($users_data->count() > 0)
 
-                        @foreach ($contents_subcategories_data as $key => $contents_subcategory_data)
-                            <input type="hidden" name="id[{{ $key }}]"
-                                value="{{ $contents_subcategory_data->id }}">
+                        @foreach ($users_data as $key => $user_data)
+                            <input type="hidden" name="id[{{ $key }}]" value="{{ $user_data->id }}">
 
                             {{-- name --}}
                             @php
@@ -34,7 +33,7 @@
                                         @php
                                             $type = null;
                                             $name = $column;
-                                            $value = 'カテゴリ名';
+                                            $value = 'ユーザー名';
                                         @endphp
                                         <x-materials.input-field :type="$type" :name="$name" :value="$value">
                                         </x-materials.input-field>
@@ -47,8 +46,8 @@
                                                 $type = 'text';
                                                 $index = $key;
                                                 $name = $column;
-                                                $value = $contents_subcategory_data->$column;
-                                                $placeholder = 'カテゴリ名';
+                                                $value = $user_data->$column;
+                                                $placeholder = 'ユーザー名';
                                             @endphp
                                             <x-materials.input-field :type="$type" :name="$name"
                                                 :index="$index" :value="$value" :placeholder="$placeholder">
@@ -58,9 +57,9 @@
                                 </x-materials.card-body-field>
                             </x-materials.card-field>
 
-                            {{-- view --}}
+                            {{-- email --}}
                             @php
-                                $column = 'view';
+                                $column = 'email';
                             @endphp
                             <x-materials.card-field>
                                 <x-materials.card-header-field>
@@ -68,7 +67,7 @@
                                         @php
                                             $type = null;
                                             $name = $column;
-                                            $value = 'カテゴリ名（表示）';
+                                            $value = 'メールアドレス';
                                         @endphp
                                         <x-materials.input-field :type="$type" :name="$name" :value="$value">
                                         </x-materials.input-field>
@@ -78,11 +77,11 @@
                                     <div class="card_row">
                                         <div class="card_row_body">
                                             @php
-                                                $type = 'text';
+                                                $type = 'email';
                                                 $index = $key;
                                                 $name = $column;
-                                                $value = $contents_subcategory_data->$column;
-                                                $placeholder = 'カテゴリ名（表示）';
+                                                $value = $user_data->$column;
+                                                $placeholder = 'メールアドレス';
                                             @endphp
                                             <x-materials.input-field :type="$type" :name="$name"
                                                 :index="$index" :value="$value" :placeholder="$placeholder">
@@ -92,9 +91,9 @@
                                 </x-materials.card-body-field>
                             </x-materials.card-field>
 
-                            {{-- content_category_id --}}
+                            {{-- password --}}
                             @php
-                                $column = 'content_category_id';
+                                $column = 'password';
                             @endphp
                             <x-materials.card-field>
                                 <x-materials.card-header-field>
@@ -102,7 +101,42 @@
                                         @php
                                             $type = null;
                                             $name = $column;
-                                            $value = '親カテゴリ';
+                                            $value = 'パスワード';
+                                        @endphp
+                                        <x-materials.input-field :type="$type" :name="$name"
+                                            :value="$value">
+                                        </x-materials.input-field>
+                                    </div>
+                                </x-materials.card-header-field>
+                                <x-materials.card-body-field>
+                                    <div class="card_row">
+                                        <div class="card_row_body">
+                                            @php
+                                                $type = 'password';
+                                                $index = $key;
+                                                $name = $column;
+                                                $value = $user_data->$column;
+                                                $placeholder = 'パスワード';
+                                            @endphp
+                                            <x-materials.input-field :type="$type" :name="$name"
+                                                :index="$index" :value="$value" :placeholder="$placeholder">
+                                            </x-materials.input-field>
+                                        </div>
+                                    </div>
+                                </x-materials.card-body-field>
+                            </x-materials.card-field>
+
+                            {{-- role_id --}}
+                            @php
+                                $column = 'role_id';
+                            @endphp
+                            <x-materials.card-field>
+                                <x-materials.card-header-field>
+                                    <div class="card_row">
+                                        @php
+                                            $type = null;
+                                            $name = $column;
+                                            $value = '権限';
                                         @endphp
                                         <x-materials.input-field :type="$type" :name="$name"
                                             :value="$value">
@@ -116,8 +150,8 @@
                                                 $type = 'select';
                                                 $index = $key;
                                                 $name = $column;
-                                                $value = $contents_subcategory_data->$column;
-                                                $selectdata = $contents_categories_data->pluck('view', 'id')->toArray();
+                                                $value = $user_data->$column;
+                                                $selectdata = $roles_data->pluck('name', 'id')->toArray();
                                             @endphp
                                             <x-materials.input-field :type="$type" :name="$name"
                                                 :index="$index" :value="$value" :selectdata="$selectdata">
@@ -127,9 +161,9 @@
                                 </x-materials.card-body-field>
                             </x-materials.card-field>
 
-                            {{-- is_admin --}}
+                            {{-- is_disable --}}
                             @php
-                                $column = 'is_admin';
+                                $column = 'is_disable';
                             @endphp
                             <x-materials.card-field>
                                 <x-materials.card-header-field>
@@ -137,7 +171,7 @@
                                         @php
                                             $type = null;
                                             $name = $column;
-                                            $value = '公開範囲';
+                                            $value = '状態';
                                         @endphp
                                         <x-materials.input-field :type="$type" :name="$name"
                                             :value="$value">
@@ -151,49 +185,14 @@
                                                 $type = 'select';
                                                 $index = $key;
                                                 $name = $column;
-                                                $value = $contents_subcategory_data->$column;
+                                                $value = $user_data->$column;
                                                 $selectdata = [
-                                                    0 => '一般公開',
-                                                    1 => '限定公開',
+                                                    0 => '有効',
+                                                    1 => '無効',
                                                 ];
                                             @endphp
                                             <x-materials.input-field :type="$type" :name="$name"
                                                 :index="$index" :value="$value" :selectdata="$selectdata">
-                                            </x-materials.input-field>
-                                        </div>
-                                    </div>
-                                </x-materials.card-body-field>
-                            </x-materials.card-field>
-
-                            {{-- sort --}}
-                            @php
-                                $column = 'sort';
-                            @endphp
-                            <x-materials.card-field>
-                                <x-materials.card-header-field>
-                                    <div class="card_row">
-                                        @php
-                                            $type = null;
-                                            $name = $column;
-                                            $value = '表示順';
-                                        @endphp
-                                        <x-materials.input-field :type="$type" :name="$name"
-                                            :value="$value">
-                                        </x-materials.input-field>
-                                    </div>
-                                </x-materials.card-header-field>
-                                <x-materials.card-body-field>
-                                    <div class="card_row">
-                                        <div class="card_row_body">
-                                            @php
-                                                $type = 'number';
-                                                $index = $key;
-                                                $name = $column;
-                                                $value = $contents_subcategory_data->$column;
-                                                $placeholder = '表示順';
-                                            @endphp
-                                            <x-materials.input-field :type="$type" :name="$name"
-                                                :index="$index" :value="$value" :placeholder="$placeholder">
                                             </x-materials.input-field>
                                         </div>
                                     </div>
@@ -216,7 +215,7 @@
                                     @php
                                         $type = null;
                                         $name = $column;
-                                        $value = 'カテゴリ名';
+                                        $value = 'ユーザー名';
                                     @endphp
                                     <x-materials.input-field :type="$type" :name="$name" :value="$value">
                                     </x-materials.input-field>
@@ -229,8 +228,8 @@
                                             $type = 'text';
                                             $index = $key;
                                             $name = $column;
-                                            $value = '';
-                                            $placeholder = 'カテゴリ名';
+                                            $value = null;
+                                            $placeholder = 'ユーザー名';
                                         @endphp
                                         <x-materials.input-field :type="$type" :name="$name"
                                             :index="$index" :value="$value" :placeholder="$placeholder">
@@ -240,9 +239,9 @@
                             </x-materials.card-body-field>
                         </x-materials.card-field>
 
-                        {{-- view --}}
+                        {{-- email --}}
                         @php
-                            $column = 'view';
+                            $column = 'email';
                         @endphp
                         <x-materials.card-field>
                             <x-materials.card-header-field>
@@ -250,7 +249,7 @@
                                     @php
                                         $type = null;
                                         $name = $column;
-                                        $value = 'カテゴリ名（表示）';
+                                        $value = 'メールアドレス';
                                     @endphp
                                     <x-materials.input-field :type="$type" :name="$name" :value="$value">
                                     </x-materials.input-field>
@@ -260,11 +259,11 @@
                                 <div class="card_row">
                                     <div class="card_row_body">
                                         @php
-                                            $type = 'text';
+                                            $type = 'email';
                                             $index = $key;
                                             $name = $column;
-                                            $value = '';
-                                            $placeholder = 'カテゴリ名（表示）';
+                                            $value = null;
+                                            $placeholder = 'メールアドレス';
                                         @endphp
                                         <x-materials.input-field :type="$type" :name="$name"
                                             :index="$index" :value="$value" :placeholder="$placeholder">
@@ -274,9 +273,9 @@
                             </x-materials.card-body-field>
                         </x-materials.card-field>
 
-                        {{-- content_category_id --}}
+                        {{-- password --}}
                         @php
-                            $column = 'content_category_id';
+                            $column = 'password';
                         @endphp
                         <x-materials.card-field>
                             <x-materials.card-header-field>
@@ -284,7 +283,41 @@
                                     @php
                                         $type = null;
                                         $name = $column;
-                                        $value = '親カテゴリ';
+                                        $value = 'パスワード';
+                                    @endphp
+                                    <x-materials.input-field :type="$type" :name="$name" :value="$value">
+                                    </x-materials.input-field>
+                                </div>
+                            </x-materials.card-header-field>
+                            <x-materials.card-body-field>
+                                <div class="card_row">
+                                    <div class="card_row_body">
+                                        @php
+                                            $type = 'password';
+                                            $index = $key;
+                                            $name = $column;
+                                            $value = null;
+                                            $placeholder = 'パスワード';
+                                        @endphp
+                                        <x-materials.input-field :type="$type" :name="$name"
+                                            :index="$index" :value="$value" :placeholder="$placeholder">
+                                        </x-materials.input-field>
+                                    </div>
+                                </div>
+                            </x-materials.card-body-field>
+                        </x-materials.card-field>
+
+                        {{-- role_id --}}
+                        @php
+                            $column = 'role_id';
+                        @endphp
+                        <x-materials.card-field>
+                            <x-materials.card-header-field>
+                                <div class="card_row">
+                                    @php
+                                        $type = null;
+                                        $name = $column;
+                                        $value = '権限';
                                     @endphp
                                     <x-materials.input-field :type="$type" :name="$name" :value="$value">
                                     </x-materials.input-field>
@@ -297,8 +330,8 @@
                                             $type = 'select';
                                             $index = $key;
                                             $name = $column;
-                                            $value = 0;
-                                            $selectdata = $contents_categories_data->pluck('view', 'id')->toArray();
+                                            $value = null;
+                                            $selectdata = $roles_data->pluck('name', 'id')->toArray();
                                         @endphp
                                         <x-materials.input-field :type="$type" :name="$name"
                                             :index="$index" :value="$value" :selectdata="$selectdata">
@@ -308,9 +341,9 @@
                             </x-materials.card-body-field>
                         </x-materials.card-field>
 
-                        {{-- is_admin --}}
+                        {{-- is_disable --}}
                         @php
-                            $column = 'is_admin';
+                            $column = 'is_disable';
                         @endphp
                         <x-materials.card-field>
                             <x-materials.card-header-field>
@@ -318,7 +351,7 @@
                                     @php
                                         $type = null;
                                         $name = $column;
-                                        $value = '公開範囲';
+                                        $value = '状態';
                                     @endphp
                                     <x-materials.input-field :type="$type" :name="$name" :value="$value">
                                     </x-materials.input-field>
@@ -331,48 +364,14 @@
                                             $type = 'select';
                                             $index = $key;
                                             $name = $column;
-                                            $value = 0;
+                                            $value = 1;
                                             $selectdata = [
-                                                0 => '一般公開',
-                                                1 => '限定公開',
+                                                0 => '有効',
+                                                1 => '無効',
                                             ];
                                         @endphp
                                         <x-materials.input-field :type="$type" :name="$name"
                                             :index="$index" :value="$value" :selectdata="$selectdata">
-                                        </x-materials.input-field>
-                                    </div>
-                                </div>
-                            </x-materials.card-body-field>
-                        </x-materials.card-field>
-
-                        {{-- sort --}}
-                        @php
-                            $column = 'sort';
-                        @endphp
-                        <x-materials.card-field>
-                            <x-materials.card-header-field>
-                                <div class="card_row">
-                                    @php
-                                        $type = null;
-                                        $name = $column;
-                                        $value = '表示順';
-                                    @endphp
-                                    <x-materials.input-field :type="$type" :name="$name" :value="$value">
-                                    </x-materials.input-field>
-                                </div>
-                            </x-materials.card-header-field>
-                            <x-materials.card-body-field>
-                                <div class="card_row">
-                                    <div class="card_row_body">
-                                        @php
-                                            $type = 'number';
-                                            $index = $key;
-                                            $name = $column;
-                                            $value = $contents_subcategories_sumdata->count();
-                                            $placeholder = '表示順';
-                                        @endphp
-                                        <x-materials.input-field :type="$type" :name="$name"
-                                            :index="$index" :value="$value" :placeholder="$placeholder">
                                         </x-materials.input-field>
                                     </div>
                                 </div>

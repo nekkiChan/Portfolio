@@ -9,6 +9,8 @@ return [
         'view' => 'ユーザーメニュー',
         'transition' => 'ユーザーメニュー',
     ],
+    // rolelevel
+    'rolelevel' => 999,
     // path
     'routepath' => 'private.users.menu.index',
     'jspath' => 'private.users.menu.javascript',

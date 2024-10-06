@@ -8,6 +8,8 @@ return [
         'view' => '実績',
         'transition' => '実績',
     ],
+    // rolelevel
+    'rolelevel' => 1,
     // path
     'routepath' => 'private.works.view.index',
     'jspath' => 'private.works.view.javascript',

@@ -14,6 +14,8 @@ return [
     'csspath' => 'private/profile/view/index/',
     // model
     'model' => PrivateProfileViewModel::class,
+    // rolelevel
+    'rolelevel' => 1,
     // querydata
     'querydata' => [
         // content_bodies_data

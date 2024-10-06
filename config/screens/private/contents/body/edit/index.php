@@ -8,6 +8,8 @@ return [
         'view' => 'コンテンツ編集',
         'transition' => 'コンテンツ追加',
     ],
+    // rolelevel
+    'rolelevel' => 999,
     // path
     'routepath' => 'private.contents.body.edit.index',
     'jspath' => 'private.contents.body.edit.javascript',

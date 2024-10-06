@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
 
 abstract class Controller
 {
@@ -31,6 +34,7 @@ abstract class Controller
     {
         if (!empty($this->config_data['model'])) {
             $this->screen_model = app($this->config_data['model'], ['request', $request]);
+
             $this->query_data = $this->screen_model->getQueryData();
             foreach ($this->query_data as $name => $data) {
                 session()->flash($name, $data);
@@ -52,6 +56,22 @@ abstract class Controller
                 ->with('route_path', $this->route_path)
                 ->with('config_path', $this->config_path);
         }
+    }
+
+    /**
+     * 画面表示
+     */
+    public function index(Request $request)
+    {
+        if ($this->screen_model->redirectByRoleLevel()) {
+            return $this->screen_model->redirectByRoleLevel();
+        }
+
+        foreach ($this->query_data as $name => $data) {
+            $this->view_data->with($name, $data);
+        }
+
+        return $this->view_data;
     }
 
     /**

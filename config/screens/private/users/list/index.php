@@ -8,6 +8,8 @@ return [
         'view' => 'ユーザー一覧',
         'transition' => 'ユーザー一覧',
     ],
+    // rolelevel
+    'rolelevel' => 999,
     // path
     'routepath' => 'private.users.list.index',
     'jspath' => 'private.users.list.javascript',

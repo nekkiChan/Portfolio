@@ -14,16 +14,4 @@ class ContentLinkEditController extends Controller
     {
         parent::__construct($request);
     }
-
-    /**
-     * 画面表示
-     */
-    public function index(Request $request): View
-    {
-        foreach ($this->query_data as $name => $data) {
-            $this->view_data->with($name, $data);
-        }
-
-        return $this->view_data;
-    }
 }

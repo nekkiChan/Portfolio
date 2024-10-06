@@ -9,6 +9,8 @@ return [
         'view' => 'コンテンツ情報',
         'transition' => 'コンテンツ情報',
     ],
+    // rolelevel
+    'rolelevel' => 999,
     // path
     'routepath' => 'private.contents.menu.index',
     'jspath' => 'private.contents.menu.javascript',
