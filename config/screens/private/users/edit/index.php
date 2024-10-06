@@ -8,6 +8,21 @@ return [
         'view' => 'ユーザー編集',
         'transition' => 'ユーザー追加',
     ],
+    // unique
+    'unique' => [
+        'name' => [
+            'class' => 'name',
+            'table' => 's001_users',
+            'column' => 'name',
+        ],
+        'email' => [
+            'class' => 'email',
+            'table' => 's001_users',
+            'column' => 'email',
+        ],
+    ],
+    // rolelevel
+    'rolelevel' => 999,
     // path
     'routepath' => 'private.users.edit.index',
     'jspath' => 'private.users.edit.javascript',
@@ -87,7 +102,7 @@ return [
             ],
             'order' => [
                 [
-                    'table' => 's001',
+                    'table' => 's002',
                     'column' => 'level',
                     'order' => 'asc',
                 ],

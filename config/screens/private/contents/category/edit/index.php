@@ -8,6 +8,8 @@ return [
         'view' => 'コンテンツカテゴリ追加',
         'transition' => 'コンテンツカテゴリ追加',
     ],
+    // rolelevel
+    'rolelevel' => 999,
     // path
     'routepath' => 'private.contents.category.edit.index',
     'jspath' => 'private.contents.category.edit.javascript',

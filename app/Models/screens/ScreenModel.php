@@ -168,6 +168,26 @@ class ScreenModel
     }
 
     /**
+     * 権限レベルによるリダイレクト処理
+     *
+     *
+     */
+    public function redirectByRoleLevel()
+    {
+        // rolelevel
+        if (isset($this->config_data['rolelevel'])) {
+            if (Auth::check()) {
+                $screen_rolelevel = $this->config_data['rolelevel'];
+                $user_rolelevel = $this->login_user->level;
+                if ($screen_rolelevel > $user_rolelevel) {
+                    return redirect()->route('public.mainmenu.index');
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
      * クエリデータの設定
      *
      * @return void
@@ -476,6 +496,8 @@ class ScreenModel
             if (in_array($column, $nullablecolumn))
                 if ($inputData == null)
                     continue;
+
+            $data[$column] = $this->processColumnData($column, $inputData);
 
             switch ($column) {
                 case 'password':

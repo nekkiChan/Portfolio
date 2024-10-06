@@ -1,7 +1,12 @@
 <?php
 
+use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+Route::prefix('/')->group(function (): void {
+    Route::post('/checkuniquedata', [AjaxController::class, 'checkUniqueData'])->name('checkUniqueData');
+});
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

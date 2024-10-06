@@ -9,6 +9,8 @@ return [
         'view' => 'サイトデータ編集',
         'transition' => 'サイトデータ編集',
     ],
+    // rolelevel
+    'rolelevel' => 999,
     // path
     'routepath' => 'private.owner.edit.index',
     'jspath' => 'private.owner.edit.javascript',

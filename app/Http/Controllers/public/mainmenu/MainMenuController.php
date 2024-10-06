@@ -13,15 +13,4 @@ class MainMenuController extends Controller
     {
         parent::__construct($request);
     }
-    /**
-     * Display the user's profile form.
-     */
-    public function index(Request $request): View
-    {
-        foreach ($this->query_data as $name => $data) {
-            $this->view_data->with($name, $data);
-        }
-
-        return $this->view_data;
-    }
 }

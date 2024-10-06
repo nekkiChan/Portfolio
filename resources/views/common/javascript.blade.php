@@ -12,6 +12,15 @@
             'bar' => asset('storage/assets/img/gray/bar.svg'),
         ],
     ];
+    /**
+     * unique_config_data
+     */
+    $unique_config_data = [];
+    $config_path = session('config_path');
+    $config_data = config("screens.{$config_path}");
+    if (in_array('unique', array_keys($config_data))) {
+        $unique_config_data = $config_data['unique'];
+    }
 @endphp
 
 <script>
@@ -28,8 +37,10 @@
         initializeFiles();
         initializeCKEditor();
         initializeATag();
+        initializePasswordField();
         initializeOnClick();
         initializeCardIconField();
+        initializeUniqueValueField();
     }
 
     /**
@@ -134,6 +145,10 @@
                         switch (type) {
                             case 'update':
                                 is_submit = true;
+                                if ($('input[name].unique_alert').length > 0) {
+                                    alert('他に同一のデータが利用されています。他のデータを入力してください。');
+                                    is_submit = false;
+                                }
                                 break;
                             case 'back':
                                 is_submit = true;
@@ -196,7 +211,6 @@
                 // サーバー上では file:// は不要、WebのURL形式で処理
                 const urlPath = "{{ asset('storage/uploads') }}/" + filename;
 
-                console.log(urlPath); // URLパスを確認
                 window.open(urlPath, '_blank');
             });
 
@@ -278,6 +292,44 @@
     }
 
     /**
+     * パスワードに関するメソッド
+     */
+    function initializePasswordField() {
+        const $passwordInputElements = $('input[type=password]');
+
+        $passwordInputElements.each(function() {
+            const $passwordInputElement = $(this);
+
+            const view_message = '表示';
+            const hidden_message = '非表示';
+            const $passwordViewer = $(`<div>${view_message}</div>`);
+            $passwordViewer.addClass('password_viewer');
+
+            if ($passwordInputElement.parent().children('div.password_viewer').length == 0) {
+                $passwordInputElement.parent().css({
+                    position: 'relative',
+                });
+                $passwordInputElement.parent().append($passwordViewer);
+            }
+
+            $passwordViewer.on('click', function() {
+                if ($passwordViewer.text().trim() == view_message) {
+                    $passwordViewer.text(hidden_message);
+                    $passwordInputElement.prop({
+                        type: 'text',
+                    });
+                } else {
+                    $passwordViewer.text(view_message);
+                    $passwordInputElement.prop({
+                        type: 'password',
+                    });
+                }
+            });
+
+        });
+    }
+
+    /**
      * aタグに関するメソッド
      */
     function initializeATag() {
@@ -322,7 +374,7 @@
     }
 
     /**
-     * onclickに関するメソッ
+     * onclickに関するメソッド
      */
     function initializeOnClick() {
         const $onclickElements = $('[onclick]');
@@ -360,11 +412,13 @@
         });
     }
 
+    /**
+     * cardiconに関するメソッド
+     */
     function initializeCardIconField() {
         const $cardFieldParentElements = $('.card_field').parent();
         const rowitems = parseInt(getComputedStyle(document.documentElement)
             .getPropertyValue('--card-icon-items'), 10);
-            console.log(rowitems);
         // CSSのカスタムプロパティ（--basic-margin）の値を取得
         const basicmargin = parseInt(getComputedStyle(document.documentElement)
             .getPropertyValue('--basic-margin'), 10);
@@ -385,4 +439,75 @@
             });
         });
     }
+
+    /**
+     * unique値に関するメソッド
+     */
+    function initializeUniqueValueField() {
+        const unique_config_data = @json($unique_config_data);
+
+        $.each(unique_config_data, function(key, object) {
+            const inputuniqueclass = object.class;
+            const inputuniquetable = object.table;
+            const inputuniquecolumn = object.column;
+            const $uniqueElements = $(`input.${inputuniqueclass}`);
+
+            $uniqueElements.each(function() {
+                const $uniqueElement = $(this);
+
+                const unique_alert_message = "他に同一のデータが利用されています。<br>他のデータを入力してください。";
+                const $alertElement = $(`<div>${unique_alert_message}</div>`);
+                $alertElement.addClass('unique_alert');
+                if ($uniqueElement.parent().children('div.unique_alert').length == 0) {
+                    $uniqueElement.parent().append($alertElement);
+                    $alertElement.addClass('hidden');
+                    $alertElement.parent().css({
+                        position: 'relative',
+                    });
+                }
+
+                const inputuniquevalue = $uniqueElement.val();
+                checkUniqueInputValue(inputuniquetable, inputuniquecolumn, inputuniquevalue,
+                    $uniqueElement);
+
+                $uniqueElement.on('input', function() {
+                    const inputuniquevalue = $uniqueElement.val(); // 現在の値を取得
+                    checkUniqueInputValue(inputuniquetable, inputuniquecolumn,
+                        inputuniquevalue, $uniqueElement);
+                });
+            });
+        });
+
+        function checkUniqueInputValue(table, column, value, $inputElement) {
+            $.ajax({
+                url: '{{ route('checkUniqueData') }}', // ルートを指定
+                method: 'POST',
+                data: {
+                    value: value,
+                    table: table,
+                    column: column,
+                    _token: '{{ csrf_token() }}' // CSRFトークン
+                },
+                success: function(response) {
+                    if (response.exists) {
+                        $inputElement.addClass('unique_alert');
+                        $inputElement.parent().children('div.unique_alert').removeClass('hidden');
+                    } else {
+                        $inputElement.removeClass('unique_alert');
+                        $inputElement.parent().children('div.unique_alert').addClass('hidden');
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error("AJAX request failed:");
+                    console.error("Status: " + textStatus);
+                    console.error("Error: " + errorThrown);
+                    console.error("Response Text: " + jqXHR.responseText);
+                }
+            });
+        }
+    }
+
+    $(document).ready(function() {
+        initializeUniqueValueField(); // ページが読み込まれたときに関数を呼び出す
+    });
 </script>

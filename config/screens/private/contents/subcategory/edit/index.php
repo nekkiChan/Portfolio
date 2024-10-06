@@ -8,6 +8,8 @@ return [
         'view' => 'コンテンツサブカテゴリ追加',
         'transition' => 'コンテンツサブカテゴリ追加',
     ],
+    // rolelevel
+    'rolelevel' => 999,
     // path
     'routepath' => 'private.contents.subcategory.edit.index',
     'jspath' => 'private.contents.subcategory.edit.javascript',

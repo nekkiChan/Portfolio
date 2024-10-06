@@ -33,7 +33,7 @@ return [
             'routepath' => 'private.profile.edit.index',
             'configpath' => 'private.profile.edit.index',
             'view' => config('screens.private.profile.edit.index.pagetitle.transition'),
-            'level' => 999,
+            'level' => 1,
         ],
         'contents' => [
             'routepath' => 'private.contents.menu.index',

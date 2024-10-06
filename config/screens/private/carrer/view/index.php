@@ -8,6 +8,8 @@ return [
         'view' => '経歴',
         'transition' => '経歴',
     ],
+    // rolelevel
+    'rolelevel' => 1,
     // path
     'routepath' => 'private.carrer.view.index',
     'jspath' => 'private.carrer.view.javascript',
