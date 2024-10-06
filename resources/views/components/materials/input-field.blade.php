@@ -1,7 +1,13 @@
 @if (!isset($value))
-    @php
-        $value = '';
-    @endphp
+    @if ($type = 'select' && $value = 0)
+        @php
+            $value = 0;
+        @endphp
+    @else
+        @php
+            $value = '';
+        @endphp
+    @endif
 @endif
 
 @if (!isset($placeholder))
@@ -83,8 +89,12 @@
                     @case('select')
                         @isset($selectdata)
                             <select class="{{ $name }}" name="{{ "{$name}[{$index}]" }}">
-                                @if (empty($value))
+                                @if ($type = 'select' && $value = 0)
                                     <option value="" class="empty" selected>
+                                        {{ $initSelectValue }}
+                                    </option>
+                                @else
+                                    <option value="0" class="empty" selected>
                                         {{ $initSelectValue }}
                                     </option>
                                 @endif

@@ -346,7 +346,7 @@
                                             $type = 'select';
                                             $index = $key;
                                             $name = $column;
-                                            $value = null;
+                                            $value = 0;
                                             $selectdata = $contents_categories_data->pluck('view', 'id')->toArray();
                                         @endphp
                                         <x-materials.input-field :type="$type" :name="$name"
@@ -380,7 +380,7 @@
                                             $type = 'select';
                                             $index = $key;
                                             $name = $column;
-                                            $value = null;
+                                            $value = 0;
                                             $selectdata = $contents_subcategories_data->pluck('view', 'id')->toArray();
                                         @endphp
                                         <x-materials.input-field :type="$type" :name="$name"
