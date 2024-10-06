@@ -1,3 +1,9 @@
+:root {
+    --card-icon-items: 3;
+    --card-icon-size: 50px;
+}
+
+
 .card_field {
     margin-bottom: var(--basic-margin);
     border: 2px solid #000;
@@ -5,14 +11,14 @@
     cursor: pointer;
 }
 
-.card_field:hover{
+.card_field:hover {
     border-color: var(--basic-hover-color);
 }
 
-.card_field .card_row .card_row_title{
+.card_field .card_row .card_row_title {
     width: 30%;
 }
 
-.card_field .card_row .card_row_body{
+.card_field .card_row .card_row_body {
     width: 70%;
 }
