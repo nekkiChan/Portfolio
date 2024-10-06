@@ -60,6 +60,10 @@ class PrivateContentBodiesEditModel extends ScreenModel
                         break;
                     }
 
+                    if ($inputData == null) {
+                        continue 2;
+                    }
+
                     $initdata = $tablemodel::where('id', '=', $initId)
                         ->where('content_subcategory_id', '=', $request->input('content_subcategory_id')[$key])
                         ->first();
