@@ -14,7 +14,7 @@ return [
     'jspath' => 'private/owner/edit/index/',
     'csspath' => 'private/owner/edit/index/',
     'nextpath' => 'private.owner.edit.index',
-    'backpath' => 'private.owner.edit.index',
+    'backpath' => 'public.mainmenu.index',
     // model
     'model' => PrivateOwnerModel::class,
     // table
