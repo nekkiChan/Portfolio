@@ -59,8 +59,34 @@ return [
             ],
         ],
         4 => [
+            'name' => 'googledrive',
+            'view' => 'GoogleDrive',
+            'icon_image_path' => 'googledrive.svg',
+            'created_by' => [
+                'table' => S001User::class,
+                'data' => [
+                    'name' => env("USER_NAME", 'nekkichan'),
+                    'is_disable' => 'false',
+                    'is_delete' => 'false',
+                ],
+            ],
+        ],
+        5 => [
             'name' => 'current_site',
             'view' => '該当サイト',
+            'icon_image_path' => 'link.svg',
+            'created_by' => [
+                'table' => S001User::class,
+                'data' => [
+                    'name' => env("USER_NAME", 'nekkichan'),
+                    'is_disable' => 'false',
+                    'is_delete' => 'false',
+                ],
+            ],
+        ],
+        6 => [
+            'name' => 'other_site',
+            'view' => 'その他',
             'icon_image_path' => 'link.svg',
             'created_by' => [
                 'table' => S001User::class,
