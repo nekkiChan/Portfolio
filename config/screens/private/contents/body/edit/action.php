@@ -37,6 +37,7 @@ return [
     ],
     'nullable' => [
         'column' => [
+            'sort',
         ],
     ],
     // upsert

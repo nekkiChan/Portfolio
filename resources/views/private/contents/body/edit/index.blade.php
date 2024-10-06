@@ -270,7 +270,7 @@
                                                 $name = $column;
                                                 $value = $next_smaller_data = $next_smaller_data
                                                     ? $next_smaller_data->sort
-                                                    : null;
+                                                    : 0;
                                                 $selectdata = $content_bodies_sumdata
                                                     ->pluck('title', 'sort')
                                                     ->toArray();
