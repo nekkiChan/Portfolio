@@ -452,9 +452,14 @@ main .container .content_field .content_body {
     height: auto;
 }
 
-.input_field:has(.ck-editor),
+.input_field:has(.ck-editor) {
+    height: auto;
+}
+
 .input_field .text_field:has(.ck-editor) {
     height: auto;
+    background-color: #fff;
+    border: 1px solid #000;
 }
 
 .input_field .text_field select {
@@ -522,7 +527,7 @@ input:focus {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-left:1px solid #000;
+    border-left: 1px solid #000;
     cursor: pointer;
     user-select: none;
 }
