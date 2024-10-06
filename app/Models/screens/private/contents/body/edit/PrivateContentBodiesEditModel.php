@@ -49,7 +49,7 @@ class PrivateContentBodiesEditModel extends ScreenModel
                     $tablemodel = $this->config_data['table'];
                     $initId = $request->input('id')[$key];
 
-                    if($initId == null){
+                    if ($initId == null) {
                         $inputData = $tablemodel::count() + 1;
                         break;
                     }
@@ -57,7 +57,7 @@ class PrivateContentBodiesEditModel extends ScreenModel
                     $initdata = $tablemodel::where('id', '=', $initId)
                         ->where($column, '=', $inputData + 1)->get();
                     if ($initdata->count() > 0) {
-                        continue 2;
+                        break;
                     }
 
                     $initdata = $tablemodel::where('id', '=', $initId)
