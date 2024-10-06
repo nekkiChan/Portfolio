@@ -482,6 +482,15 @@ main .container .content_field .content_body {
     cursor: pointer;
 }
 
+/* input_field dom_field */
+.input_field .text_field:has(.dom_field) {
+    height: auto;
+}
+
+.input_field:has(.dom_field) {
+    height: auto;
+}
+
 /* input_field file */
 .input_field .text_field:has(input.file) div.file {
     padding: var(--basic-padding);
