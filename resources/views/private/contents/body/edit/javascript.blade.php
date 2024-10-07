@@ -168,8 +168,6 @@
                     if (contentBodySort == object.sort) {
                         return;
                     }
-                    console.log(contentBodySort);
-                    console.log(object.sort);
 
                     // contentBodySort が一致しない場合、新しいオプションを作成
                     const $newOption = $('<option></option>')
@@ -186,7 +184,6 @@
                     }
                     // 新しいオプションを追加
                     $bodySelectElement.append($newOption);
-                    console.log($bodySelectElement.val());
                 }
             });
 
