@@ -157,7 +157,7 @@
             // 最初のオプションを作成
             const $firstOption = $('<option></option>')
                 .addClass('first')
-                .val('0')
+                .val(contentBodySort)
                 .text('最初');
             $bodySelectElement.append($firstOption);
 

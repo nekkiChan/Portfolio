@@ -21,7 +21,7 @@
                     @if ($content_bodies_data->count() > 0)
 
                         @foreach ($content_bodies_data as $key => $content_body_data)
-                            <input type="hidden" name="id[{{ $key }}]" value="{{ $content_body_data->id }}">
+                            <input type="hidden" class="id" name="id[{{ $key }}]" value="{{ $content_body_data->id }}">
 
                             {{-- name --}}
                             @php
@@ -287,7 +287,7 @@
                         @php
                             $key = 0;
                         @endphp
-                        <input type="hidden" name="id[{{ $key }}]" value="">
+                        <input type="hidden" class="id" name="id[{{ $key }}]" value="">
 
                         {{-- name --}}
                         @php
