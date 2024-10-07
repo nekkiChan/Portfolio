@@ -117,11 +117,11 @@
          */
         const content_bodies_sumdata = @json($content_bodies_sumdata);
         const content_bodies_data = @json($content_bodies_data);
-        let contentBodyId = null;
+        let contentBodySort = null;
 
-        // contentBodyId の取得
+        // contentBodySort の取得
         $.each(content_bodies_data, function(key, object) {
-            contentBodyId = object.id;
+            contentBodySort = object.sort;
         });
 
         const $categorySelectElement = $('select.content_category_id');
@@ -142,7 +142,6 @@
 
         function changeBodySelectElement() {
 
-            const categoryId = $categorySelectElement.val();
             const subcategoryId = $subcategorySelectElement.val();
 
             const $emptyOption = $bodySelectElement.find('option.empty');
@@ -155,22 +154,27 @@
             // 既存のオプション（.empty以外）をすべて削除
             $bodySelectElement.children('option:not(.empty)').remove();
 
-            const $newOptions = [];
+            // 最初のオプションを作成
+            const $firstOption = $('<option></option>')
+                .addClass('first')
+                .val('0')
+                .text('最初');
+            $bodySelectElement.append($firstOption);
 
             // 適切なボディオプションを生成して再追加
             $.each(content_bodies_sumdata, function(key, object) {
                 if (object.content_subcategory_id == subcategoryId) {
 
-                    if (contentBodyId == object.sort) {
+                    if (contentBodySort == object.sort) {
                         return;
                     }
 
-                    // contentBodyId が一致しない場合、新しいオプションを作成
+                    // contentBodySort が一致しない場合、新しいオプションを作成
                     const $newOption = $('<option></option>')
                         .val(object.sort)
                         .text(object.title); // object.name はオプションの表示名
 
-                    if (contentBodyId > object.sort) {
+                    if (contentBodySort > object.sort) {
                         $bodySelectElement.children('option').prop({
                             selected: false,
                         });
