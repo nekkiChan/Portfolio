@@ -53,6 +53,13 @@
          * データ
          */
         const contents_subcategories_data = @json($contents_subcategories_data);
+        const content_bodies_data = @json($content_bodies_data);
+        let subcategoryInitId = null;
+
+        // contentBodySort の取得
+        $.each(content_bodies_data, function(key, object) {
+            subcategoryInitId = object.content_subcategory_id;
+        });
 
         const $categorySelectElement = $('select.content_category_id');
         const $subcategorySelectElement = $('select.content_subcategory_id');
@@ -81,6 +88,7 @@
 
             // 新しいオプションを追加する
             $.each(contents_subcategories_data, function(key, object) {
+
                 if (object.content_category_id == categoryId) {
                     // 該当するオプションを生成して追加
                     const $newOption = $('<option></option>')
@@ -98,6 +106,12 @@
                                     selected: true,
                                 });
                             }
+                        }
+                    } else {
+                        if (object.id == subcategoryInitId) {
+                            $newOption.prop({
+                                selected: true,
+                            });
                         }
                     }
 
