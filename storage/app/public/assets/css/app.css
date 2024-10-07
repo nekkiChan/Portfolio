@@ -491,6 +491,17 @@ main .container .content_field .content_body {
     height: auto;
 }
 
+.input_field .text_field .dom_field p {
+    margin-top: var(--basic-row-margin);
+    margin-bottom: var(--basic-row-margin);
+    height: auto;
+    font-size: var(--basic-font-size);
+}
+
+.input_field .text_field .dom_field p:empty {
+    height: var(--basic-font-size);
+}
+
 /* input_field file */
 .input_field .text_field:has(input.file) div.file {
     padding: var(--basic-padding);
