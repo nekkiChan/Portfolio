@@ -16,9 +16,9 @@
     @endphp
 @endif
 
-@if (!isset($initSelectValue))
+@if (!isset($initselectvalue))
     @php
-        $initSelectValue = ' - ';
+        $initselectvalue = ' - ';
     @endphp
 @endif
 
@@ -89,15 +89,17 @@
                     @case('select')
                         @isset($selectdata)
                             <select class="{{ $name }}" name="{{ $nameval }}">
-                                @if ($type == 'select' && $value == 0)
-                                    <option value="" class="empty" selected>
-                                        {{ $initSelectValue }}
-                                    </option>
-                                @else
-                                    <option value="0" class="empty" selected>
-                                        {{ $initSelectValue }}
-                                    </option>
-                                @endif
+                                @isset($isempty)
+                                    @if ($value == 0)
+                                        <option value="0" class="empty" selected>
+                                            {{ $initselectvalue }}
+                                        </option>
+                                    @else
+                                        <option value="" class="empty" selected>
+                                            {{ $initselectvalue }}
+                                        </option>
+                                    @endif
+                                @endisset
                                 @foreach ($selectdata as $key => $option)
                                     <option value="{{ $key }}" {{ $key == $value ? 'selected' : '' }}>
                                         {{ $option }}
@@ -133,7 +135,7 @@
                             <select class="{{ $name }}">
                                 @if (empty($value))
                                     <option value="" class="empty" selected>
-                                        {{ $initSelectValue }}
+                                        {{ $initselectvalue }}
                                     </option>
                                 @endif
                                 @foreach ($selectdata as $key => $option)

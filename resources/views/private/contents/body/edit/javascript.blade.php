@@ -56,7 +56,6 @@
 
         const $categorySelectElement = $('select.content_category_id');
         const $subcategorySelectElement = $('select.content_subcategory_id');
-        const $subcategoryOptionElements = $subcategorySelectElement.children('option:not(.empty)');
 
         changeSubcategorySelectElement();
 
@@ -66,21 +65,43 @@
 
         function changeSubcategorySelectElement() {
 
-            if ($subcategorySelectElement.val() == false) {
-                // subcategorySelectElementの値をoption.emptyにする
-                $subcategorySelectElement.val($subcategorySelectElement.find('option.empty').val());
-            }
-            $subcategorySelectElement.children('option:not(.empty)').addClass('hidden');
-
             const categoryId = $categorySelectElement.val();
+            const subcategoryId = $subcategorySelectElement.val();
+
+            const $emptyOption = $subcategorySelectElement.find('option.empty');
+
+            if (categoryId == false) {
+                // subcategorySelectElementの値をoption.emptyにする
+                $subcategorySelectElement.val($emptyOption.val());
+            }
+
+            // 既存のオプション（.empty 以外）を全て削除
+            $subcategorySelectElement.children('option:not(.empty)').remove();
+            $subcategorySelectElement.val('');
+
+            // 新しいオプションを追加する
             $.each(contents_subcategories_data, function(key, object) {
                 if (object.content_category_id == categoryId) {
-                    $subcategoryOptionElements.each(function() {
-                        const $subcategoryOptionElement = $(this);
-                        if ($subcategoryOptionElement.val() == object.id) {
-                            $subcategoryOptionElement.removeClass('hidden');
+                    // 該当するオプションを生成して追加
+                    const $newOption = $('<option></option>')
+                        .val(object.id)
+                        .text(object.view);
+
+                    if ($subcategorySelectElement.val() == false) {
+                        if (subcategoryId == false) {
+                            $newOption.prop({
+                                selected: true,
+                            });
+                        } else {
+                            if (object.id == subcategoryId) {
+                                $newOption.prop({
+                                    selected: true,
+                                });
+                            }
                         }
-                    });
+                    }
+
+                    $subcategorySelectElement.append($newOption);
                 }
             });
         }
@@ -97,6 +118,8 @@
         const content_bodies_sumdata = @json($content_bodies_sumdata);
         const content_bodies_data = @json($content_bodies_data);
         let contentBodyId = null;
+
+        // contentBodyId の取得
         $.each(content_bodies_data, function(key, object) {
             contentBodyId = object.id;
         });
@@ -104,10 +127,11 @@
         const $categorySelectElement = $('select.content_category_id');
         const $subcategorySelectElement = $('select.content_subcategory_id');
         const $bodySelectElement = $('select.sort');
-        const $bodyOptionElements = $bodySelectElement.children('option:not(.empty)');
 
+        // 初期状態でのボディオプション設定
         changeBodySelectElement();
 
+        // カテゴリとサブカテゴリが変更された際のイベントリスナー
         $categorySelectElement.on('change', function() {
             changeBodySelectElement();
         });
@@ -117,27 +141,48 @@
         });
 
         function changeBodySelectElement() {
-            if ($bodySelectElement.val() == false) {
-                // bodySelectElementの値をoption.emptyにする
-                $bodySelectElement.val($bodySelectElement.find('option.empty')).val();
-            }
 
-            $bodyOptionElements.addClass('hidden');
+            const categoryId = $categorySelectElement.val();
             const subcategoryId = $subcategorySelectElement.val();
 
+            const $emptyOption = $bodySelectElement.find('option.empty');
+
+            if ($bodySelectElement.val() == false) {
+                // bodySelectElementの値をoption.emptyに設定
+                $bodySelectElement.val($emptyOption.val());
+            }
+
+            // 既存のオプション（.empty以外）をすべて削除
+            $bodySelectElement.children('option:not(.empty)').remove();
+
+            const $newOptions = [];
+
+            // 適切なボディオプションを生成して再追加
             $.each(content_bodies_sumdata, function(key, object) {
                 if (object.content_subcategory_id == subcategoryId) {
-                    $bodyOptionElements.each(function() {
-                        if (contentBodyId != null && contentBodyId == object.id) {
-                            return;
-                        }
-                        const $bodyOptionElement = $(this);
-                        if ($bodyOptionElement.val() == object.sort) {
-                            $bodyOptionElement.removeClass('hidden');
-                        }
-                    });
+
+                    if (contentBodyId == object.sort) {
+                        return;
+                    }
+
+                    // contentBodyId が一致しない場合、新しいオプションを作成
+                    const $newOption = $('<option></option>')
+                        .val(object.sort)
+                        .text(object.title); // object.name はオプションの表示名
+
+                    if (contentBodyId > object.sort) {
+                        $bodySelectElement.children('option').prop({
+                            selected: false,
+                        });
+                        $newOption.prop({
+                            selected: true,
+                        });
+                    }
+                    // 新しいオプションを追加
+                    $bodySelectElement.append($newOption);
                 }
             });
+
         }
     }
 </script>

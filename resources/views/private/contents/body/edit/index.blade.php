@@ -521,10 +521,13 @@
                                             $index = $key;
                                             $name = $column;
                                             $value = 0;
+                                            $initSelectValue = '最後';
+                                            $isempty = true;
                                             $selectdata = $content_bodies_sumdata->pluck('title', 'sort')->toArray();
                                         @endphp
                                         <x-materials.input-field :type="$type" :name="$name"
-                                            :index="$index" :value="$value" :selectdata="$selectdata">
+                                            :index="$index" :value="$value" :initselectvalue="$initSelectValue"
+                                            :isempty="$isempty" :selectdata="$selectdata">
                                         </x-materials.input-field>
                                     </div>
                                 </div>
