@@ -95,6 +95,7 @@ class PrivateContentBodiesEditModel extends ScreenModel
                 $data[$filedata['column']] = $filedata['path'];
             }
         }
+
         return $data;
     }
 
