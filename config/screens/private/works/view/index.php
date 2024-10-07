@@ -114,14 +114,6 @@ return [
                     'order' => 'asc',
                 ],
             ],
-            'where' => [
-                [
-                    'table' => 'm102',
-                    'column' => 'is_admin',
-                    'function' => '=',
-                    'value' => false,
-                ],
-            ],
         ],
         // service_links_data
         'service_links_data' => [
