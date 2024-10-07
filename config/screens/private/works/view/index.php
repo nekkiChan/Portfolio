@@ -208,14 +208,6 @@ return [
                     'order' => 'asc',
                 ],
             ],
-            'where' => [
-                [
-                    'table' => 'm102',
-                    'column' => 'is_admin',
-                    'function' => '=',
-                    'value' => false,
-                ],
-            ],
         ],
     ],
 ];
