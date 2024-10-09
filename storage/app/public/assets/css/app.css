@@ -136,12 +136,11 @@ a.row:hover {
 
 /* main */
 main {
+    margin: var(--header-height) 0;
     width: 100%;
     height: auto;
     font-size: var(--basic-font-size);
-    position: absolute;
-    top: var(--header-height);
-    left: 0;
+    position: relative;
     z-index: 0;
 }
 
@@ -202,7 +201,8 @@ form .form_footer {
 
 /* container */
 main .container {
-    margin: var(--basic-margin) auto;
+    margin: 0 auto;
+    padding: var(--basic-padding) 0;
     width: var(--container-width);
 }
 
@@ -214,7 +214,6 @@ main .container .content_field {
 
 main .container .content_field .content_space {
     width: 100%;
-    ;
     height: var(--content-space-height);
     background-color: #fff;
     border: none;

@@ -73,15 +73,10 @@
         width: 100%;
         height: auto;
         font-size: var(--basic-font-size);
-        position: absolute;
-        top: var(--header-height);
-        left: 0;
-        z-index: 0;
     }
 
     /* container */
     main .container {
-        margin: var(--basic-margin) auto;
         width: 90%;
     }
 

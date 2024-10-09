@@ -171,7 +171,7 @@
             // 最初のオプションを作成
             const $firstOption = $('<option></option>')
                 .addClass('first')
-                .val(contentBodySort)
+                .val("0")
                 .text('最初');
             $bodySelectElement.append($firstOption);
 
@@ -200,6 +200,8 @@
                     $bodySelectElement.append($newOption);
                 }
             });
+
+            $emptyOption.val(content_bodies_sumdata.length);
 
         }
     }
