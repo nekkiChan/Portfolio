@@ -13,14 +13,12 @@ class PrivateContentBodiesEditModel extends ScreenModel
     {
         parent::__construct($request);
     }
-
     /**
      * 更新のためのデータ準備
      *
      * @param \Illuminate\Http\Request $request リクエストオブジェクト
      * @param int $key インデックスキー
      * @param array $savedFiles 保存されたファイル情報
-     * @param array $ids IDリスト
      * @return array 更新データ
      */
     protected function prepareDataForUpdate(Request $request, $key, $savedFiles)
@@ -31,63 +29,27 @@ class PrivateContentBodiesEditModel extends ScreenModel
             'updated_by' => $this->login_user->id,
         ];
 
-        $updatecolumn = $this->config_data["update"]["column"];
-        $nullablecolumn = $this->config_data["nullable"]["column"];
+        $updateColumns = $this->config_data["update"]["column"];
+        $nullableColumns = $this->config_data["nullable"]["column"];
 
-        foreach ($updatecolumn as $column) {
-            if (isset($data[$column]))
+        foreach ($updateColumns as $column) {
+            if (isset($data[$column])) {
                 continue;
+            }
 
             $inputData = $request->input($column)[$key] ?? null;
 
-            if (in_array($column, $nullablecolumn))
-                if ($inputData == null)
-                    continue;
+            if (in_array($column, $nullableColumns) && $inputData === null) {
+                continue;
+            }
 
             switch ($column) {
                 case 'sort':
-                    $tablemodel = $this->config_data['table'];
-                    $initId = $request->input('id')[$key];
-
-                    if ($initId == null) {
-                        $inputData = $tablemodel::count() + 1;
-                        break;
-                    }
-
-                    $initdata = $tablemodel::where('id', '=', $initId)
-                        ->where($column, '=', $inputData + 1)->get();
-                    if ($initdata->count() > 0) {
-                        break;
-                    }
-
-                    if ($inputData == null) {
-                        continue 2;
-                    }
-
-                    $initdata = $tablemodel::where('id', '=', $initId)
-                        ->where('content_subcategory_id', '=', $request->input('content_subcategory_id')[$key])
-                        ->first();
-                    $initsort = $tablemodel::all()->sortByDesc('sort')->first()->sort + 1;
-                    if (!empty($initdata)) {
-                        $initsort = $initdata->sort;
-                    }
-                    $replacedata = $tablemodel::where($column, '=', $inputData)->first();
-
-                    if ($replacedata->sort < $initsort) {
-                        $tablemodel::where($column, '>', $replacedata->sort)
-                            ->where($column, '<', $initsort)
-                            ->increment($column);
-                        $inputData += 1;
-                    } else {
-                        $tablemodel::where($column, '>', $initsort)
-                            ->where($column, '<=', $replacedata->sort)
-                            ->decrement($column);
-                    }
-
+                    $this->handleSortColumn($request, $inputData, $key, $data);
                     break;
+                default:
+                    $data[$column] = $this->processColumnData($column, $inputData);
             }
-
-            $data[$column] = $this->processColumnData($column, $inputData);
         }
 
         if (!empty($savedFiles[$key])) {
@@ -97,6 +59,100 @@ class PrivateContentBodiesEditModel extends ScreenModel
         }
 
         return $data;
+    }
+
+    /**
+     * ソートカラムの処理を行う
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param mixed $inputData
+     * @param int $key
+     * @param array &$data
+     * @return void
+     */
+    protected function handleSortColumn(Request $request, $inputData, $key, array &$data)
+    {
+        $tableModel = $this->config_data['table'];
+        $column = 'sort';
+        $inputId = $request->input('id')[$key];
+
+        // 新規データの場合
+        if ($inputId === null) {
+            $dataCount = $tableModel::where('is_disable', false)
+                ->where('is_delete', false)
+                ->count();
+
+            $data[$column] = $inputData == $dataCount ? $dataCount + 1 : $inputData + 1;
+
+            $tableModel::where('sort', '>=', $data[$column])->increment('sort');
+        } else {
+            $initContentSubCategoryId = $request->input('content_subcategory_id')[$key];
+
+            // 既存のデータと同じ場合
+            $subCategoryDataArray = $tableModel::where('content_subcategory_id', '=', $initContentSubCategoryId)
+                ->orderBy('sort', 'asc')
+                ->get();
+
+            $oneBeforeSort = $this->getOneBeforeSort($subCategoryDataArray, $inputData);
+
+            $correctData = $tableModel::where('id', '=', $inputId)
+                ->where('sort', '=', $oneBeforeSort)->get();
+
+            if ($correctData->count() === 0) {
+                $tableModel::where('sort', '>', $inputData)->increment('sort');
+                $tableModel::where('id', $inputId)
+                    ->update(['sort' => $inputData + 1]);
+
+                $this->reorganizeSort($tableModel);
+            }
+        }
+    }
+
+    /**
+     * ソートの前の値を取得する
+     *
+     * @param \Illuminate\Support\Collection $subCategoryDataArray
+     * @param int $inputData
+     * @return int
+     */
+    protected function getOneBeforeSort($subCategoryDataArray, $inputData)
+    {
+        foreach ($subCategoryDataArray as $subCategoryData) {
+            if ($subCategoryData->sort > $inputData) {
+                return $subCategoryData->sort;
+            }
+        }
+
+        return $inputData; // 返すデフォルト値
+    }
+
+    /**
+     * ソートを再整理する
+     *
+     * @param string $tableModel
+     * @return void
+     */
+    protected function reorganizeSort($tableModel)
+    {
+        $subCategoryRecords = DB::table('m102_content_subcategories')
+            ->where('is_disable', false)
+            ->where('is_delete', false)
+            ->orderBy('sort', 'asc')
+            ->get();
+
+        $baseQueryData = $tableModel::where('is_disable', false)
+            ->where('is_delete', false)
+            ->orderBy('sort', 'asc')
+            ->get();
+
+        $count = 0;
+        foreach ($subCategoryRecords as $subCategoryRecord) {
+            $records = $baseQueryData->where('content_subcategory_id', $subCategoryRecord->id);
+            foreach ($records as $record) {
+                $count++;
+                $tableModel::where('id', $record->id)->update(['sort' => $count]);
+            }
+        }
     }
 
     /**

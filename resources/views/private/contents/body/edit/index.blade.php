@@ -520,7 +520,7 @@
                                             $type = 'select';
                                             $index = $key;
                                             $name = $column;
-                                            $value = 0;
+                                            $value = $content_bodies_sumdata->count();
                                             $initSelectValue = '最後';
                                             $isempty = true;
                                             $selectdata = $content_bodies_sumdata->pluck('title', 'sort')->toArray();
