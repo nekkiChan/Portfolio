@@ -27,9 +27,22 @@ class AjaxController extends Controller
             ->where($request->column, $request->value);
 
         if (Auth::check()) {
-            if ($request->table == 's001_users') {
-                $exists = $exists
-                    ->where('id', '!=', Auth::user()->id);
+            // 利用者データ
+            switch ($request->table) {
+                case 's001_users':
+                    switch ($request->column) {
+                        case 'name':
+                            if ($exists->count() > 1) {
+                                return response()->json(['exists' => true]);
+                            } else {
+                                return response()->json(['exists' => false]);
+                            }
+                        case 'email':
+                            $exists = $exists
+                                ->where('email', '!=', '');
+                            break;
+                    }
+                    break;
             }
         }
 
