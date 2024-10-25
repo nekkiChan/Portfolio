@@ -8,8 +8,8 @@ return [
     // view
     '/profile' => 'private.profile.view.index',
     '/profile/action' => 'private.profile.view.action',
-    '/carrer' => 'private.carrer.view.index',
-    '/carrer/action' => 'private.carrer.view.action',
+    '/career' => 'private.career.view.index',
+    '/career/action' => 'private.career.view.action',
     '/works' => 'private.works.view.index',
     '/works/action' => 'private.works.view.action',
     // users

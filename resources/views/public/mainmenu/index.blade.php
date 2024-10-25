@@ -168,7 +168,7 @@
                                 $dataname = $data['name'];
                                 switch ($dataname) {
                                     case 'profile':
-                                    case 'carrer':
+                                    case 'career':
                                     case 'works':
                                         $linkpath = route("private.$dataname.view.index");
                                         break;

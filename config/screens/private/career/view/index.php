@@ -1,21 +1,21 @@
 <?php
-use App\Models\screens\private\carrer\view\PrivateCarrerViewModel;
+use App\Models\screens\private\career\view\PrivateCareerViewModel;
 
 return [
     // title
     'pagetitle' => [
-        'main' => 'Carrer',
+        'main' => 'Career',
         'view' => '経歴',
         'transition' => '経歴',
     ],
     // rolelevel
     'rolelevel' => 1,
     // path
-    'routepath' => 'private.carrer.view.index',
-    'jspath' => 'private.carrer.view.javascript',
-    'csspath' => 'private/carrer/view/index/',
+    'routepath' => 'private.career.view.index',
+    'jspath' => 'private.career.view.javascript',
+    'csspath' => 'private/career/view/index/',
     // model
-    'model' => PrivateCarrerViewModel::class,
+    'model' => PrivateCareerViewModel::class,
     // querydata
     'querydata' => [
         // content_bodies_data
