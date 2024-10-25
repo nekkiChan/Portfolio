@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\private\carrer\view;
+namespace App\Http\Controllers\private\career\view;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -8,7 +8,7 @@ use Illuminate\View\View;
 
 use App\Http\Controllers\Controller;
 
-class CarrerViewController extends Controller
+class CareerViewController extends Controller
 {
     public function __construct(Request $request)
     {

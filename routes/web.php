@@ -30,7 +30,7 @@ Route::prefix('/')->name('public.')->group(function (): void {
 
 
 use App\Http\Controllers\private\profile\view\ProfileViewController;
-use App\Http\Controllers\private\carrer\view\CarrerViewController;
+use App\Http\Controllers\private\career\view\CareerViewController;
 use App\Http\Controllers\private\works\view\WorksViewController;
 use App\Http\Controllers\private\users\UsersMenuController;
 use App\Http\Controllers\private\users\UsersEditController;
@@ -55,11 +55,11 @@ Route::middleware(['auth'])->prefix('/')->name('private.')->group(function (): v
             Route::post('/action', [ProfileViewController::class, 'action'])->name('action');
         });
     });
-    // carrer
-    Route::prefix('/carrer')->name('carrer.')->group(function (): void {
+    // career
+    Route::prefix('/career')->name('career.')->group(function (): void {
         Route::prefix('/')->name('view.')->group(function (): void {
-            Route::get('/', [CarrerViewController::class, 'index'])->name('index');
-            Route::post('/action', [CarrerViewController::class, 'action'])->name('action');
+            Route::get('/', [CareerViewController::class, 'index'])->name('index');
+            Route::post('/action', [CareerViewController::class, 'action'])->name('action');
         });
     });
     // works

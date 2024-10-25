@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models\screens\private\carrer\view;
+namespace App\Models\screens\private\career\view;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\screens\ScreenModel;
 
-class PrivateCarrerViewModel extends ScreenModel
+class PrivateCareerViewModel extends ScreenModel
 {
     public function __construct(Request $request)
     {
@@ -25,7 +25,7 @@ class PrivateCarrerViewModel extends ScreenModel
         $content_category_id = null;
         foreach ($content_category_config_data as $id => $data) {
             $dataname = $data['name'];
-            if ($dataname == 'carrer') {
+            if ($dataname == 'career') {
                 $content_category_id = $id + 1;
             }
         }
