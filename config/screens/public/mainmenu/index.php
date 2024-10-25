@@ -25,6 +25,11 @@ return [
             'select' => [
                 [
                     'table' => 'm101',
+                    'column' => 'id',
+                    'alias' => 'id',
+                ],
+                [
+                    'table' => 'm101',
                     'column' => 'name',
                     'alias' => 'name',
                 ],
@@ -121,14 +126,6 @@ return [
                     'order' => 'asc',
                 ],
             ],
-            'where'=>[
-                [
-                    'table' => 'm102',
-                    'column' => 'is_admin',
-                    'function' => '=',
-                    'value' => false,
-                ],
-            ],
         ],
         // content_bodies_data
         'content_bodies_data' => [
@@ -170,23 +167,28 @@ return [
                 ],
                 [
                     'table' => 'm101',
+                    'column' => 'id',
+                    'alias' => 'content_category_id',
+                ],
+                [
+                    'table' => 'm101',
                     'column' => 'name',
-                    'alias' => 'category_name',
+                    'alias' => 'content_category_name',
                 ],
                 [
                     'table' => 'm101',
                     'column' => 'view',
-                    'alias' => 'category_view',
+                    'alias' => 'content_category_view',
                 ],
                 [
                     'table' => 'm102',
                     'column' => 'name',
-                    'alias' => 'subcategory_name',
+                    'alias' => 'content_subcategory_name',
                 ],
                 [
                     'table' => 'm102',
                     'column' => 'view',
-                    'alias' => 'subcategory_view',
+                    'alias' => 'content_subcategory_view',
                 ],
                 [
                     'table' => 'd101',
@@ -226,14 +228,6 @@ return [
                     'order' => 'asc',
                 ],
             ],
-            'where'=>[
-                [
-                    'table' => 'm102',
-                    'column' => 'is_admin',
-                    'function' => '=',
-                    'value' => false,
-                ],
-            ],
         ],
         // service_links_data
         'service_links_data' => [
@@ -262,6 +256,13 @@ return [
                     'column' => 'id',
                     'basetable' => 'd101',
                     'basetable_column' => 'content_subcategory_id',
+                ],
+                [
+                    'table' => 'm101_content_categories',
+                    'alias' => 'm101',
+                    'column' => 'id',
+                    'basetable' => 'm102',
+                    'basetable_column' => 'content_category_id',
                 ],
             ],
             'select' => [
@@ -296,6 +297,11 @@ return [
                     'alias' => 'icon_image_path',
                 ],
                 [
+                    'table' => 'm101',
+                    'column' => 'id',
+                    'alias' => 'content_category_id',
+                ],
+                [
                     'table' => 'm102',
                     'column' => 'id',
                     'alias' => 'content_subcategory_id',
@@ -326,14 +332,6 @@ return [
                     'table' => 'm201',
                     'column' => 'sort',
                     'order' => 'asc',
-                ],
-            ],
-            'where'=>[
-                [
-                    'table' => 'm102',
-                    'column' => 'is_admin',
-                    'function' => '=',
-                    'value' => false,
                 ],
             ],
         ],

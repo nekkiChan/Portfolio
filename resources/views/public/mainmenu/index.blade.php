@@ -5,7 +5,7 @@
         $content_category_config_data = config('dbtables.m101_content_categories.initdata');
     @endphp
     <link href="{{ asset($csspath) }}?v={{ time() }}" rel="stylesheet">
-
+    {{-- @dd($content_categories_data,$service_links_data) --}}
     <x-materials.container>
         <x-materials.content-field>
             @include('common.content-row-pagetitle')
@@ -63,34 +63,32 @@
             </x-materials.content-field>
         @endif
 
-        @foreach ($content_subcategories_data as $content_subcategory_data)
+        @foreach ($content_categories_data as $content_category_data)
             @php
                 // body
                 $content_bodies_filter_data = $content_bodies_data->where(
-                    'content_subcategory_id',
-                    $content_subcategory_data->id,
-                );
-                // link
-                $service_link_filter_data = $service_links_data->where(
-                    'content_subcategory_id',
-                    $content_subcategory_data->id,
+                    'content_category_id',
+                    $content_category_data->id,
                 );
             @endphp
 
             @continue($content_bodies_filter_data->count() == 0)
 
-            <x-materials.content-field :id="$content_subcategory_data->parent_name">
+            <x-materials.content-field :id="$content_category_data->name">
                 <div class="content_header">
                     <div class="content_row">
-                        {{ $content_subcategory_data->parent_view }}
+                        {{ $content_category_data->view }}
                     </div>
                 </div>
                 <div class="content_body">
 
                     @foreach ($content_bodies_filter_data as $content_body_data)
+                        @if (!Auth::check())
+                            @continue($content_body_data->is_admin)
+                        @endif
                         @php
                             // link
-                            $service_link_filter_data = $service_link_filter_data->where(
+                            $service_link_filter_data = $service_links_data->where(
                                 'content_body_id',
                                 $content_body_data->id,
                             );
@@ -128,11 +126,14 @@
                             </x-materials.card-body-field>
                         </x-materials.card-field>
 
-
                         @continue($service_link_filter_data->count() == 0)
 
                         @foreach ($service_link_filter_data as $service_link_data)
                             @continue($content_body_data->id != $service_link_data->content_body_id)
+
+                            @if (!Auth::check())
+                                @continue($service_link_data->is_admin)
+                            @endif
 
                             @php
                                 $column = 'link';
@@ -143,12 +144,16 @@
 
                                 @php
                                     $iconpath = $service_link_data->icon_image_path;
-                                    $linkpath = $service_link_data->link_path;
-                                    $filepath = $service_link_data->file_path;
-                                    if (!empty($linkpath)) {
+                                    $linkpath = null;
+                                    $filepath = null;
+                                    $class = '';
+                                    if (!empty($service_link_data->link_path)) {
                                         $class = "$service_link_data->name blank link";
-                                    } else {
+                                        $linkpath = $service_link_data->link_path;
+                                    }
+                                    if (!empty($service_link_data->file_path)) {
                                         $class = "$service_link_data->name blank image";
+                                        $filepath = $service_link_data->file_path;
                                     }
                                     $name = $service_link_data->view;
                                 @endphp
@@ -162,7 +167,7 @@
                     @php
                         // more
                         $linkpath = route('public.mainmenu.index');
-                        $content_category_id = $content_subcategory_data->content_category_id;
+                        $content_category_id = $content_category_data->id;
                         foreach ($content_category_config_data as $id => $data) {
                             if ($content_category_id == $id + 1) {
                                 $dataname = $data['name'];
